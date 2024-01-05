@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Sidebar from "../(component)/sidebar";
 
 const metadata: Metadata = {
   title: "EduApp",
@@ -14,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className=" font-poppins bg-brand-gray-5">
         <section className="flex flex-row w-screen h-screen">
-          <aside className="border-r w-[200px] bg-white p-5">sidebar</aside>
+         <Sidebar />
           <div className="flex flex-col h-full"></div>
         </section>
         {children}

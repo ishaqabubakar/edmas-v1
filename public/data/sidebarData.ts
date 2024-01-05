@@ -1,5 +1,5 @@
 type sidebarProps = {
-  icon: String;
+  icon: String|any;
   menu: String;
   sub: {
     path: String;
@@ -7,9 +7,9 @@ type sidebarProps = {
   }[];
 };
 
-const sidebarMenus: sidebarProps[] = [
+export const sidebarMenus: sidebarProps[] = [
   {
-    icon: "",
+    icon: "ph:chalkboard-teacher-light",
     menu: "Teachers",
     sub: [
       { path: "", menus: "Insert Teacher" },
@@ -17,7 +17,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "ph:student",
     menu: "Student",
     sub: [
       { path: "", menus: "Insert Student" },
@@ -25,7 +25,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "ep:data-board",
     menu: "Class",
     sub: [
       { path: "", menus: "Insert Class" },
@@ -33,7 +33,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "material-symbols:subject",
     menu: "Subject",
     sub: [
       { path: "", menus: "Insert Subject" },
@@ -41,7 +41,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "ri:parent-line",
     menu: "Parents",
     sub: [
       { path: "", menus: "Insert Parent" },
@@ -49,7 +49,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "material-symbols:assignment-outline-sharp",
     menu: "Assignment",
     sub: [
       { path: "", menus: "Insert Assignment" },
@@ -57,7 +57,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "ph:newspaper-clipping-light",
     menu: "Exams",
     sub: [
       { path: "", menus: "Insert Exam" },
@@ -65,7 +65,7 @@ const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "",
+    icon: "mdi:report-bar",
     menu: "Results",
     sub: [
       { path: "", menus: "Insert Result" },
