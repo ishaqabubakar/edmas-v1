@@ -9,6 +9,7 @@ const MainMenus = ({}) => {
   const collapse = contextValue?.collapse;
   const setCollapse = contextValue?.setCollapse
   const [openSubmenus, setOpenSubmenus] = useState([]);
+  const router = useRouter()
 
   const handleToggle = (index: number) => {
     const updatedSubmenus = [...openSubmenus] as any;
@@ -32,7 +33,8 @@ const MainMenus = ({}) => {
             {menu.sub.map((sub, subIndex) => (
               <li
                 key={subIndex}
-                className={`text-white flex pl-[15px] flex-row items-center cursor-pointer px-[10px] hover:text-zinc-700 rounded-sm gap-[10px] h-[40px] text-[12px] font-Medium w-full transition-all ease-in-out duration-500 ${!collapse ? 'hidden' : openSubmenus[key] ? 'block pl-[15px] transition-all ease-in-out duration-500' : 'hidden transition-all ease-in-out duration-500'}`}
+                className={`text-white flex ml-[15px] flex-row items-center cursor-pointer px-[10px] hover:text-zinc-700 rounded-sm gap-[10px] h-[40px] text-[12px] font-Medium w-full transition-all ease-in-out duration-500 ${!collapse ? 'hidden' : openSubmenus[key] ? 'block pl-[15px] transition-all ease-in-out duration-500' : 'hidden transition-all ease-in-out duration-500'}`}
+              onClick={()=>router.push(`${sub.path}`)}
               >
                 {sub.menus}
               </li>

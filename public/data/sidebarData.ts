@@ -9,11 +9,27 @@ type sidebarProps = {
 
 export const sidebarMenus: sidebarProps[] = [
   {
+    icon: "ri:school-line",
+    menu: "School",
+    sub: [
+      { path: "/dashboard/School/insert-school", menus: "Insert School" },
+      { path: "/dashboard/School/view-school", menus: "View School" },
+    ],
+  },
+  {
+    icon: "lucide:user-round",
+    menu: "Owner",
+    sub: [
+      { path: "/dashboard/Owner/insert-owner", menus: "Insert Owner" },
+      { path: "/dashboard/Owner/view-owner", menus: "View Owner" },
+    ],
+  },
+  {
     icon: "ph:chalkboard-teacher-light",
     menu: "Teachers",
     sub: [
-      { path: "", menus: "Insert Teacher" },
-      { path: "", menus: "View Teacher" },
+      { path: "/dashboard/Teachers/insert-teacher", menus: "Insert Teacher" },
+      { path: "/dashboard/Teachers/view-teachers", menus: "View Teacher" },
     ],
   },
   {

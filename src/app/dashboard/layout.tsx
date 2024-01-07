@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import type { Metadata } from "next";
 import Sidebar from "../(component)/sidebar";
 import { MenuIcon } from "lucide-react";
 import { useContext } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
+import MainHeader from "../(component)/(Header)/mainHeader";
 
 const metadata: Metadata = {
   title: "EduApp",
@@ -15,22 +16,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  const contextValue = useContext(UserContext)
-  const collapse = contextValue?.collapse
-  const setCollapse=contextValue?.setCollapse
+  const contextValue = useContext(UserContext);
+  const collapse = contextValue?.collapse;
   return (
     <html lang="en">
-      <body className=" font-poppins bg-brand-gray-5">
+      <body className=" font-poppins bg-brand-gray-50">
         <section className="flex flex-row w-screen h-screen">
-         <Sidebar />
-          <div className="flex flex-col h-full w-full">
-            <div className="h-[70px] border-b py-5 flex items-center w-full">
-              <MenuIcon  onClick={()=>setCollapse((prev: any) =>!prev)}/>
-            </div>
+          <Sidebar />
+          <div className="flex flex-col w-full h-full">
+            <MainHeader />
+            {children}
           </div>
         </section>
-        {children}
       </body>
     </html>
   );
