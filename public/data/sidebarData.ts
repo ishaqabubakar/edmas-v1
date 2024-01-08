@@ -25,67 +25,67 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    icon: "ph:chalkboard-teacher-light",
-    menu: "Teachers",
+    icon: "lucide:users-round",
+    menu: "Manage Students",
     sub: [
-      { path: "/dashboard/Teachers/insert-teacher", menus: "Insert Teacher" },
-      { path: "/dashboard/Teachers/view-teachers", menus: "View Teacher" },
+      { path: "/dashboard/Student/insert-student", menus: "Students" },
+      { path: "/dashboard/Student/view-student", menus: "Promote student" },
     ],
   },
   {
-    icon: "ph:student",
-    menu: "Student",
+    icon: "lucide:users-round",
+    menu: "Manage Users",
     sub: [
-      { path: "", menus: "Insert Student" },
-      { path: "", menus: "View Student" },
+      { path: "/dashboard/Teachers/insert-teacher", menus: "Staffs" },
+      { path: "/dashboard/Teachers/view-teachers", menus: "Teachers" },
+      { path: "/dashboard/Teachers/view-teachers", menus: "Parents" },
     ],
   },
+
   {
-    icon: "ep:data-board",
-    menu: "Class",
+    icon: "fluent-emoji-high-contrast:classical-building",
+    menu: "Classes & Subject",
     sub: [
-      { path: "", menus: "Insert Class" },
-      { path: "", menus: "View Class" },
+      { path: "/dashboard/Class/insert-class", menus: "Class" },
+      { path: "/dashboaard/Class/view-class", menus: "Class Section" },
+      { path: "/dashboard/Class/insert-class", menus: "Class Routines" },
+      { path: "/dashboaard/Class/view-class", menus: "Subjects" },
+      { path: "/dashboaard/Class/view-class", menus: "Class Syllabus" },
     ],
   },
   {
     icon: "material-symbols:subject",
-    menu: "Subject",
+    menu: "Examination",
     sub: [
-      { path: "", menus: "Insert Subject" },
-      { path: "", menus: "View Subject" },
-    ],
-  },
-  {
-    icon: "ri:parent-line",
-    menu: "Parents",
-    sub: [
-      { path: "", menus: "Insert Parent" },
-      { path: "", menus: "View Parent" },
+      { path: "/dashboard/Subject/view-subject", menus: "Exams" },
+      { path: "/dashboard/Subject/view-subject", menus: "Exams Report" },
+     
     ],
   },
   {
     icon: "material-symbols:assignment-outline-sharp",
     menu: "Assignment",
     sub: [
-      { path: "", menus: "Insert Assignment" },
-      { path: "", menus: "View Assignment" },
+      { path: "/dashboard/Assignment/insert-assignment", menus: "Insert Assignment" },
+      { path: "/dashboard/Assignment/view-assignment", menus: "View Assignment" },
     ],
   },
   {
-    icon: "ph:newspaper-clipping-light",
-    menu: "Exams",
+    icon: "heroicons:building-office-2",
+    menu: "Manage Office",
     sub: [
-      { path: "", menus: "Insert Exam" },
-      { path: "", menus: "View Exam" },
+      { path: "/dashboard/Parents/insert-parent", menus: "Notice Board" },
+      { path: "/dashboard/Parents/view-parent", menus: "Messages" },
+      { path: "/dashboard/Parents/view-parent", menus: "Holidays & Events" },
     ],
   },
   {
-    icon: "mdi:report-bar",
-    menu: "Results",
+    icon: "material-symbols:payments-outline-sharp",
+    menu: "Payment",
     sub: [
-      { path: "", menus: "Insert Result" },
-      { path: "", menus: "View Result" },
+      { path: "/dashboard/Exams/insert-exam", menus: "Salaries" },
+      { path: "/dashboard/Exams/view-exam", menus: "Fees Payment" },
     ],
   },
+
 ];

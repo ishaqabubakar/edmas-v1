@@ -14,9 +14,9 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen overflow-clip ${
+      className={`h-screen overflow-clip hidden lg:block ${
         collapse
-          ? "w-[230px] transition-all ease-in-out duration-500"
+          ? "w-[270px] transition-all ease-in-out duration-500"
           : "w-[80px] transition-all ease-in-out duration-500"
       } border-r p-5 bg-zinc-800 font-poppins`}
     >
