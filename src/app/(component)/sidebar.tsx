@@ -47,7 +47,10 @@ const Sidebar = () => {
               !collapse &&
               "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
             }`}
-            onClick={()=>router.push('/dashboard/dashboard')}
+            onClick={()=>{
+              router.push('/dashboard/dashboard')
+              setCollapse(true)
+            }}
           >
             <Icon icon="bxs:dashboard" className={`text-white text-[20px] `} />
             <p

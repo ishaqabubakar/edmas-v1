@@ -10,9 +10,9 @@ type sidebarProps = {
 export const sidebarMenus: sidebarProps[] = [
   {
     icon: "ri:school-line",
-    menu: "Schools",
+    menu: "Manage Schools",
     sub: [
-      { path: "/dashboard/School/insert-school", menus: "" },
+      { path: "/dashboard/School/insert-school", menus: "Schools" },
       { path: "/dashboard/School/view-school", menus: "View" },
     ],
   },

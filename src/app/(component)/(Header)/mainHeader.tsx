@@ -5,6 +5,7 @@ import { MenuIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import UserProfile from "../userProfile";
 import MobileSidebar from "../mobileSideView";
+import NotificationCenter from "../Notification";
 
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -20,7 +21,10 @@ const MainHeader = () => {
       <div className="flex items-center w-full justify-between">
      {!isMobile? <MenuIcon onClick={() => setCollapse((prev: any) => !prev)}/> : <MobileSidebar />}
  
-        <UserProfile />
+       <div className="flex gap-2">
+        <NotificationCenter />
+       <UserProfile />
+       </div>
       </div>
     </div>
   );
