@@ -10,10 +10,10 @@ type sidebarProps = {
 export const sidebarMenus: sidebarProps[] = [
   {
     icon: "ri:school-line",
-    menu: "School",
+    menu: "Schools",
     sub: [
-      { path: "/dashboard/School/insert-school", menus: "Insert School" },
-      { path: "/dashboard/School/view-school", menus: "View School" },
+      { path: "/dashboard/School/insert-school", menus: "" },
+      { path: "/dashboard/School/view-school", menus: "View" },
     ],
   },
   {
@@ -28,7 +28,7 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "lucide:users-round",
     menu: "Manage Students",
     sub: [
-      { path: "/dashboard/Student/insert-student", menus: "Students" },
+      { path: "/dashboard/Students", menus: "Students" },
       { path: "/dashboard/Student/view-student", menus: "Promote student" },
     ],
   },
@@ -36,9 +36,9 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "lucide:users-round",
     menu: "Manage Users",
     sub: [
-      { path: "/dashboard/Teachers/insert-teacher", menus: "Staffs" },
-      { path: "/dashboard/Teachers/view-teachers", menus: "Teachers" },
-      { path: "/dashboard/Teachers/view-teachers", menus: "Parents" },
+      { path: "/dashboard/Staffs/", menus: "Staffs" },
+      { path: "/dashboard/Teachers", menus: "Teachers" },
+      { path: "/dashboard/Parent", menus: "Parents" },
     ],
   },
 
@@ -46,11 +46,11 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "fluent-emoji-high-contrast:classical-building",
     menu: "Classes & Subject",
     sub: [
-      { path: "/dashboard/Class/insert-class", menus: "Class" },
-      { path: "/dashboaard/Class/view-class", menus: "Class Section" },
-      { path: "/dashboard/Class/insert-class", menus: "Class Routines" },
+      { path: "/dashboard/Class", menus: "Class" },
+      { path: "/dashboaard/Class-section", menus: "Sections" },
+      { path: "/dashboard/Class/insert-class", menus: "Routines" },
       { path: "/dashboaard/Class/view-class", menus: "Subjects" },
-      { path: "/dashboaard/Class/view-class", menus: "Class Syllabus" },
+      { path: "/dashboaard/Class/view-class", menus: "Syllabuses" },
     ],
   },
   {
@@ -58,7 +58,7 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Examination",
     sub: [
       { path: "/dashboard/Subject/view-subject", menus: "Exams" },
-      { path: "/dashboard/Subject/view-subject", menus: "Exams Report" },
+      { path: "/dashboard/Subject/view-subject", menus: "Report" },
      
     ],
   },
@@ -66,7 +66,7 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "material-symbols:assignment-outline-sharp",
     menu: "Assignment",
     sub: [
-      { path: "/dashboard/Assignment/insert-assignment", menus: "Insert Assignment" },
+      { path: "/dashboard/Assignment/insert-assignment", menus: "Assignment" },
       { path: "/dashboard/Assignment/view-assignment", menus: "View Assignment" },
     ],
   },
