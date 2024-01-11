@@ -1,31 +1,33 @@
-import mongoose, {Schema, model} from 'mongoose'
+import mongoose, { Schema, model } from "mongoose";
 
 const salariesSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
 
-    title:{
-        type: String,
-        required: true
-    },
+  description: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  method: {
+    type: String,
+    required: true,
+  },
+  transactiondate: {
+    type: Date,
+    required: true,
+  },
+});
 
-    description:{
-        type:String,
-        required : true
-    },
-    amount:{
-        type: Number,
-        required : true
-    },
-    method:{
-        type: String,
-        required: true
-    },
-    transactiondate:{
-        type: Date,
-        required: true
-    }
-})
+//const Salaries = model('Salaries',salariesSchema)
 
-const Salaries = model('Salaries',salariesSchema)
+const Salaries = mongoose.models.Salaries
+  ? mongoose.model("Salaries")
+  : mongoose.model("Salaries", salariesSchema);
 
-export default Salaries
-
+export default Salaries;
