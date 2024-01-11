@@ -1,23 +1,20 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from "mongoose";
 
-interface IClass extends Document {
+const classSchema = new mongoose.Schema(
+  {
+    classname: { String, required: true },
+    classalias: { type: String },
+    teacher: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
+      required: true,
+    },
+    size: String,
+  },
+  { timestamps: true }
+);
 
-    classname: String;
-    classalias: String;
-    teacher: Array<{ type: Schema.Types.ObjectId, ref: 'Teacher' }>;
-    size: String;
-}
-
-const classSchema = new Schema<IClass>({
-
-    classname : { String, required: true },
-    classalias : String,
-    teacher :  {type :[{ type: Schema.Types.ObjectId, ref: 'Teacher'}], required: true},
-    size : String
-
-
-},  { timestamps: true })
-
-const Class = model<IClass>("Class", classSchema);
+const Class = mongoose.models.Class
+  ? mongoose.model("Class")
+  : mongoose.model("Class", classSchema);
 
 export default Class;
