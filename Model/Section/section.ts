@@ -18,6 +18,6 @@ const sectionSchema = new Schema<ISection>(
   { timestamps: true }
 );
 
-const Section = model<ISection>("Section", sectionSchema);
+const Section = model("Section", sectionSchema);
 
 export default Section;
