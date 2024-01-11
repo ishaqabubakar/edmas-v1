@@ -1,23 +1,19 @@
-import mongoose, { Document, Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-interface ISection extends Document {
-  name: String;
-  nickname: String;
-  teacher: Array<{ type: Schema.Types.ObjectId; ref: "Teacher" }>;
-}
-
-const sectionSchema = new Schema<ISection>(
+const sectionSchema = new mongoose.Schema(
   {
     name: String,
     nickname: String,
     teacher: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
       required: true,
     },
   },
   { timestamps: true }
 );
 
-const Section = model("Section", sectionSchema);
+const Section = mongoose.models.Section
+  ? mongoose.model("Section")
+  : mongoose.model("Section", sectionSchema);
 
 export default Section;

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 const salariesSchema = new mongoose.Schema({
   title: {
@@ -23,8 +23,6 @@ const salariesSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-//const Salaries = model('Salaries',salariesSchema)
 
 const Salaries = mongoose.models.Salaries
   ? mongoose.model("Salaries")

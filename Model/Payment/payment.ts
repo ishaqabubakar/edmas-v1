@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from "mongoose"
 
-const PaymentSchema = new mongoose.Schema({
+const paymentSchema = new mongoose.Schema({
     class:{
         type: Schema.Types.ObjectId , ref: "Class",
         required:true
@@ -16,10 +16,16 @@ const PaymentSchema = new mongoose.Schema({
 
     description:{
         type: String
+    },
+    status:{
+        type: String,
+        required: true
     }
 
 })
 
-const Payment =  model('Payment',PaymentSchema)
+const Payment = mongoose.models.Payment 
+  ? mongoose.model("Payment")
+  : mongoose.model("Payment ", paymentSchema);
 
 export default Payment 

@@ -1,26 +1,11 @@
-import mongoose, { Document, Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-interface IStudent extends Document {
-  name: string;
-  dob: string;
-  email: string;
-  password: string;
-  address: string;
-  phonenumber: string;
-  gender: string;
-  role: string;
-  class: string;
-  section: string;
-  admissioncode: string;
-  parentname: String;
-}
-
-const studentSchema = new Schema<IStudent>(
+const studentSchema = new mongoose.Schema(
   {
-    name: { String,required: true },
-    dob: { String, required:true},
-    email: {String, required: true},
-    password: { String, required: true},
+    name: { String, required: true },
+    dob: { String, required: true },
+    email: { String, required: true },
+    password: { String, required: true },
     address: String,
     phonenumber: String,
     gender: String,
@@ -33,5 +18,8 @@ const studentSchema = new Schema<IStudent>(
   { timestamps: true }
 );
 
-const Student = model<IStudent>("Student", studentSchema);
+const Student = mongoose.models.Student
+  ? mongoose.model("Student")
+  : mongoose.model("Student", studentSchema);
+
 export default Student;

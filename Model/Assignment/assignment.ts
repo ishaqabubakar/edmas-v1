@@ -1,23 +1,23 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose from "mongoose";
 
-interface IAssignment extends Document{
-
-    title: String ;
-    class: Array<{type: Schema.Types.ObjectId, ref: 'Class'}>;
-    assignedby: Array<{type: Schema.Types.ObjectId, ref: 'Teacher'}>
-    description: String;
-    attachment: String;
-}
-
-const assignmentSchema = new Schema<IAssignment>({
-
+const assignmentSchema = new mongoose.Schema(
+  {
     title: { String, required: true },
-    class: {type : [{type : Schema.Types.ObjectId, ref: 'Class' }], required: true},
-    assignedby: {type: [{type : Schema.Types.ObjectId, ref: 'Teacher'}], required: true},
-    description: String
+    class: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
+      required: true,
+    },
+    assignedby: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
+      required: true,
+    },
+    description: String,
+  },
+  { timestamps: true }
+);
 
-},{timestamps : true})
-
-const Assignment = model<IAssignment>('Assignment',assignmentSchema)
+const Assignment = mongoose.models.Assignment
+  ? mongoose.model("Assignment")
+  : mongoose.model("Assignment", assignmentSchema);
 
 export default Assignment;

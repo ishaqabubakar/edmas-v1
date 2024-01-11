@@ -1,23 +1,17 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose from "mongoose";
 
-interface IGrade extends Document{
-
-    gradename: String;
-    gradepoint: String;
-    markrange: String;
-    comment: String;
-}
-
-const gradeSchema = new Schema<IGrade>({
-
-    gradename: {String, required: true},
-    markrange: {String, required: true},
+const gradeSchema = new mongoose.Schema(
+  {
+    gradename: { String, required: true },
+    markrange: { String, required: true },
     gradepoint: String,
-    comment: String
+    comment: String,
+  },
+  { timestamps: true }
+);
 
-
-}, {timestamps : true})
-
-const Grade = model<IGrade>('Grade', gradeSchema)
+const Grade = mongoose.models.Grade
+  ? mongoose.model("Grade")
+  : mongoose.model("Grade", gradeSchema);
 
 export default Grade;

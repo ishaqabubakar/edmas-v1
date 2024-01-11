@@ -1,26 +1,22 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-interface ISubject extends Document {
-  subjectname: String;
-  class: Array<{ type: Schema.Types.ObjectId; ref: "Class" }>;
-  teacher: Array<{ type: Schema.Types.ObjectId; ref: "Teacher" }>;
-}
-
-const subjectSchema = new Schema<ISubject>(
+const subjectSchema = new mongoose.Schema(
   {
     subjectname: { String, required: true },
     class: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Class" }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
       required: true,
     },
     teacher: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
       required: true,
     },
   },
   { timestamps: true }
 );
 
-const Subject = model<ISubject>("Subject", subjectSchema);
+const Subject = mongoose.models.Subject
+  ? mongoose.model("Subject")
+  : mongoose.model("Subject", subjectSchema);
 
 export default Subject;
