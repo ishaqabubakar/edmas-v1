@@ -27,3 +27,5 @@ const salariesSchema = new mongoose.Schema({
 
 const Salaries = model('Salaries',salariesSchema)
 
+export default Salaries
+
