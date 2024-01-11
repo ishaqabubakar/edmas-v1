@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const noticeboardSchema = new mongoose.Schema({
   title: {
-    type: String,
+    type: {type: String},
     required: true,
   },
   description: String,
