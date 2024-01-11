@@ -12,7 +12,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
               <p className="text-[14px] font-Regular text-brand-icon">
-                Total School
+                Total Schools
               </p>
               <h3 className="text-[35px] font-Medium">180.00k</h3>
             </div>
@@ -28,13 +28,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
               <p className="text-[14px] font-Regular text-brand-icon">
-                Total School
+                Total Students
               </p>
               <h3 className="text-[35px] font-Medium">180.00k</h3>
             </div>
             <div className="flex flex-col item-center leading-6">
               <Icon
-                icon="ri:school-line"
+                icon="lucide:users-round"
                 className="text-[50px] text-[#1a773d]"
               />
             </div>
@@ -44,13 +44,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
               <p className="text-[14px] font-Regular text-brand-icon">
-                Total School
+                Total Parents
               </p>
               <h3 className="text-[35px] font-Medium">180.00k</h3>
             </div>
             <div className="flex flex-col item-center leading-6">
               <Icon
-                icon="ri:school-line"
+                icon="ri:parent-line"
                 className="text-[50px] text-[#7a1a63]"
               />
             </div>
@@ -60,13 +60,13 @@ const Dashboard = () => {
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
               <p className="text-[14px] font-Regular text-brand-icon">
-                Total School
+                Total Teachers
               </p>
               <h3 className="text-[35px] font-Medium">180.00k</h3>
             </div>
             <div className="flex flex-col item-center leading-6">
               <Icon
-                icon="ri:school-line"
+                icon="la:chalkboard-teacher"
                 className="text-[50px] text-[#00c0ef]"
               />
             </div>

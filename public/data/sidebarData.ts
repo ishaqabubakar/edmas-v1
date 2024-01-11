@@ -20,8 +20,7 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "lucide:user-round",
     menu: "Owner",
     sub: [
-      { path: "/dashboard/Owner/insert-owner", menus: "Insert Owner" },
-      { path: "/dashboard/Owner/view-owner", menus: "View Owner" },
+      { path: "/dashboard/Owner/insert-owner", menus: "Owners" },
     ],
   },
   {
@@ -51,10 +50,11 @@ export const sidebarMenus: sidebarProps[] = [
       { path: "/dashboard/Class/insert-class", menus: "Routines" },
       { path: "/dashboaard/Class/view-class", menus: "Subjects" },
       { path: "/dashboaard/Class/view-class", menus: "Syllabuses" },
+      { path: "/dashboaard/Class/view-class", menus: "Materials" },
     ],
   },
   {
-    icon: "material-symbols:subject",
+    icon: "codicon:book",
     menu: "Examination",
     sub: [
       { path: "/dashboard/Subject/view-subject", menus: "Exams" },
@@ -66,17 +66,16 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "material-symbols:assignment-outline-sharp",
     menu: "Assignment",
     sub: [
-      { path: "/dashboard/Assignment/insert-assignment", menus: "Assignment" },
-      { path: "/dashboard/Assignment/view-assignment", menus: "View Assignment" },
+      { path: "/dashboard/Assignment/insert-assignment", menus: "Assignments" },
     ],
   },
   {
     icon: "heroicons:building-office-2",
     menu: "Manage Office",
     sub: [
-      { path: "/dashboard/Parents/insert-parent", menus: "Notice Board" },
+      { path: "/dashboard/Parents/insert-parent", menus: "NoticeBoard" },
       { path: "/dashboard/Parents/view-parent", menus: "Messages" },
-      { path: "/dashboard/Parents/view-parent", menus: "Holidays & Events" },
+      { path: "/dashboard/Parents/view-parent", menus: "Occassions" },
     ],
   },
   {

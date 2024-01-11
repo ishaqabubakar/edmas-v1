@@ -17,7 +17,7 @@ const Dashboard = () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create School</h4>
+          <h4 className="text-[20px] font-Regular">View Schools</h4>
          <Link href={"/dashboard/Schools/create"} ><Button className="rounded-sm">Add School</Button></Link>
         </div>
       </div>

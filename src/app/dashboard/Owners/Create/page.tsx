@@ -15,30 +15,23 @@ const Dashboard = () => {
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Teacher</h4>
-          <Button className="rounded-sm">Add teacher</Button>
+          <h4 className="text-[20px] font-Regular">Create Owner</h4>
+          <Button className="rounded-sm">Add Owner</Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 overflow-y-auto no-scrollbar">
         <div className="w-full bg-white h-fit border rounded-sm ">
           <div className="border-b pb-3 w-full flex items-center h-[60px] p-5">
-            <p className="p-0 font-Regular">Teacher Account</p>
+            <p className="p-0 font-Regular">Owner Account</p>
           </div>
           <form className="flex flex-col gap-5 p-5">
             <div className="flex flex-col gap-5">
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Teacher Name</Label>
+                <Label className="w-[200px]">Full Name</Label>
                 <Input
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
-                  placeholder="Teacher's Name"
-                />
-              </div>
-              <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Username</Label>
-                <Input
-                  className="rounded-sm focus-visible:outline-none"
-                  placeholder="Username"
+                  placeholder="Full Name"
                 />
               </div>
             </div>
@@ -103,20 +96,20 @@ const Dashboard = () => {
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Class</Label>
+                <Label className="w-[200px]">School</Label>
                 <Select>
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
-                      placeholder="Select class"
+                      placeholder="Select School"
                       className="text-[16px] "
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Grade 1">Grade 1</SelectItem>
-                    <SelectItem value="Grade 2">Grade 2</SelectItem>
-                    <SelectItem value="JHS 1">JHS 1</SelectItem>
-                    <SelectItem value="JHS 2">JHS 2</SelectItem>
-                    <SelectItem value="JHS 3">JHS 3</SelectItem>
+                    <SelectItem value="Crown Prince Academy">Crown Prince Academy</SelectItem>
+                    <SelectItem value="Best of the Best">Best of the Best</SelectItem>
+                    <SelectItem value="Nhyiraba Preparatory">Nhyiraba Preparatory</SelectItem>
+                    <SelectItem value="Primus International">Primus International</SelectItem>
+                    <SelectItem value="Best Brain Academy">Best Brain Academy</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

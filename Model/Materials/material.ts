@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 interface IMaterial extends Document {
   materialname: String;
   subject: { type: Schema.Types.ObjectId; ref: "Subject" };
-  title: String;
+  title: String; 
   description: String;
   attachment: String;
 }
