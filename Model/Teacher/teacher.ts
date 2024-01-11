@@ -9,7 +9,7 @@ const teacherSchema = new mongoose.Schema(
     address: String,
     phonenumber: String,
     gender: String,
-    role: String,
+    role: {type: String},
     class: String,
   },
   { timestamps: true }
