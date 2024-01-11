@@ -13,7 +13,6 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Manage Schools",
     sub: [
       { path: "/dashboard/School/insert-school", menus: "Schools" },
-      { path: "/dashboard/School/view-school", menus: "View" },
     ],
   },
   {
@@ -58,7 +57,7 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Examination",
     sub: [
       { path: "/dashboard/Subject/view-subject", menus: "Exams" },
-      { path: "/dashboard/Subject/view-subject", menus: "Report" },
+      { path: "/dashboard/Subject/view-subject", menus: "Grade" },
      
     ],
   },
@@ -83,7 +82,7 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Payment",
     sub: [
       { path: "/dashboard/Exams/insert-exam", menus: "Salaries" },
-      { path: "/dashboard/Exams/view-exam", menus: "Fees Payment" },
+      { path: "/dashboard/Exams/view-exam", menus: "Fees" },
     ],
   },
 
