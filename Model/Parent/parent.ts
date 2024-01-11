@@ -9,6 +9,7 @@ const parentSchema = new mongoose.Schema(
     phonenumber: String,
     gender: String,
     profession: String,
+    role: String,
   },
   { timestamps: true }
 );

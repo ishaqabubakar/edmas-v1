@@ -9,6 +9,7 @@ const classSchema = new mongoose.Schema(
       required: true,
     },
     size: String,
+    
   },
   { timestamps: true }
 );

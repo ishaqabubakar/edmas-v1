@@ -14,6 +14,7 @@ const studentSchema = new mongoose.Schema(
     section: String,
     admissioncode: String,
     parentname: String,
+    
   },
   { timestamps: true }
 );

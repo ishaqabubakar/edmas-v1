@@ -1,8 +1,8 @@
-import mongoose, { Schema, model } from "mongoose"
+import mongoose from "mongoose"
 
 const paymentSchema = new mongoose.Schema({
     class:{
-        type: Schema.Types.ObjectId , ref: "Class",
+        type: mongoose.Schema.Types.ObjectId , ref: "Class",
         required:true
     },
     amount :{
@@ -19,6 +19,11 @@ const paymentSchema = new mongoose.Schema({
     },
     status:{
         type: String,
+        required: true
+    },
+    section: {type: mongoose.Schema.Types.ObjectId, ref: 'Section' },
+    transactiondate:{
+        type: Date,
         required: true
     }
 
