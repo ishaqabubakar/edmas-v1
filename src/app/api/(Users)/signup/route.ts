@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
         name: data.name,
         dob: data.dob,
         email: savedUser.email,
-        password: data.password,
+        password:savedUser.password,
         address: data.address,
         phonenumber: data.phonenumber,
         gender: data.gender,

@@ -73,7 +73,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="h-full w-full flex gap-5">
+      <div className="h-full w-full lg:flex-row flex flex-col gap-5">
         <div className="h-full w-full flex flex-col gap-5">
           <div className="p-3 border-b h-full bg-white rounded-sm border">
             <p className="font-Medium py-3">Notiice Board</p>
@@ -84,7 +84,8 @@ const Dashboard = () => {
                   Today is public holiday!!
                 </h3>
                 <p className="font-Regular text-[12px]">
-                  Published by < span className="font-Medium">School Head Master</span>
+                  Published by{" "}
+                  <span className="font-Medium">School Head Master</span>
                 </p>
               </div>
               <div className="border bg-white h-fit w-[80px] rounded-sm p-2 flex flex-col items-start justify-center">
@@ -102,7 +103,8 @@ const Dashboard = () => {
                   Speech and price given day
                 </h3>
                 <p className="font-Regular text-[12px]">
-                  Published by < span className="font-Medium">School Head Master</span>
+                  Published by{" "}
+                  <span className="font-Medium">School Head Master</span>
                 </p>
               </div>
               <div className="border bg-white h-fit w-[80px] rounded-sm p-2 flex flex-col items-start justify-center">
@@ -111,15 +113,19 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-
-          <div></div>
+          {/* <CalendarDemo /> */}
         </div>
-        <div className="bg-white h-full w-[400px] rounded-sm border">
-          <div className="p-3 border-b">
-            <p className="font-Medium">Student/pagent</p>
+        <div className="h-fit lg:w-[400px] rounded-sm border w-full ">
+          <div className="p-3 border-b bg-white">
+            <p className="font-Medium">Calender</p>
           </div>
-          <div className="p-5 flex flex-col gap-5">
-            <StudentParentStats />
+          <div className=" flex flex-col gap-5 items-center justify-center">
+            <div className="bg-white w-full h-full flex items-center justify-center">
+              <CalendarDemo />
+            </div>
+            <div className="bg-white w-full h-full py-3">
+              <StudentParentStats />
+            </div>
           </div>
         </div>
       </div>

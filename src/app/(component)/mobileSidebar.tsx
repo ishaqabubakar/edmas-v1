@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import { UserContext } from "@/contextAPI/generalContext";
 import { useRouter } from "next/navigation";
 import MobileMainMenus from "./mobileMenus";
+import Image from "next/image";
 
 const MobileSidebar = () => {
   const contextValue = useContext(UserContext);
@@ -18,13 +19,22 @@ const MobileSidebar = () => {
       className={`h-screen overflow-clip w-[270px] transition-all ease-in-out duration-500
        border-r p-5 bg-zinc-800 font-poppins`}
     >
-      <div className={`h-[40px] w-full flex gap-[10px] border mb-[30px] items-center justify-center rounded-sm`}>
-        <h3
-          className={`font-Medium text-white block transition-all ease-in-out duration-500
-          `}
+         <div className={`h-[40px] w-full px-[10px] flex gap-[10px] border mb-[30px] items-center  rounded-sm`}>
+        <div
+          className={`font-Medium text-white flex items-center justify-center transition-all ease-in-out duration-500`}
         >
-          EduComplex
-        </h3>
+        <Image  src={'/Gitcal.svg'} width={30} height={30} alt="logo"/>
+        <p className="ml-[10px]">GitComplex</p>
+        </div>
+        {/* <h3
+          className={`font-Medium text-white ${
+            !collapse
+              ? "block transition-all ease-in-out duration-500"
+              : "hidden transition-all ease-in-out duration-500"
+          }`}
+        >
+         <Image  src={'/Gitcal.svg'} width={25} height={25} alt="logo"/>
+        </h3> */}
       </div>
       <aside className="overflow-y-auto h-full no-scrollbar">
         <ul className="flex flex-col">
