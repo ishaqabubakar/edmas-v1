@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
+    
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     name: { type: String, required: true },
     dob: { type: String, required: true },
     email: { type: String, required: true },

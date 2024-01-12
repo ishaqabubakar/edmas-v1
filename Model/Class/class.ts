@@ -2,6 +2,7 @@ import mongoose, { Schema, model } from "mongoose";
 
 const classSchema = new mongoose.Schema(
   {
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     classname: { type: String, required: true },
     classalias: { type: String },
     teacher: {

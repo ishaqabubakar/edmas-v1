@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 
 const syllabusSchema = new mongoose.Schema(
   {
+    
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     classname: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
       required: true,

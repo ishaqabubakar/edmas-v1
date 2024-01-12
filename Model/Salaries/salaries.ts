@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
 const salariesSchema = new mongoose.Schema({
+  
+  school: {type: mongoose.Schema.ObjectId,ref: 'School'},
   amount: {
     type: Number,
     required: true,

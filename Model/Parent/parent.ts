@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const parentSchema = new mongoose.Schema(
   {
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     name: { String, required: true },
     email: { String, required: true },
     dob: { type: String },

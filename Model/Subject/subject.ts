@@ -2,6 +2,7 @@ import mongoose, { Document, Schema, model } from "mongoose";
 
 const subjectSchema = new mongoose.Schema(
   {
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     subjectname: { type: String, required: true },
     class: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],

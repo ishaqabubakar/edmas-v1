@@ -1,8 +1,7 @@
 import mongoose  from 'mongoose'
 
+const schoolSchema = new mongoose.Schema({
 
-
-const SchoolSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -15,9 +14,13 @@ const SchoolSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-
+    email: {
+        type: String,
+        required: true
+    }
+ 
 })
 
-const School = mongoose.model('School',SchoolSchema)
+const School = mongoose.model('School',schoolSchema)
 
 export default School
