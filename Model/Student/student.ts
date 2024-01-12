@@ -1,37 +1,39 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-interface IStudent extends Document {
-  name: string;
-  dob: string;
-  email: string;
-  password: string;
-  address: string;
-  phonenumber: string;
-  gender: string;
-  role: string;
-  class: string;
-  section: string;
-  admissioncode: string;
-  parentname: String;
-}
-
-const studentSchema = new Schema<IStudent>(
+const studentSchema = new mongoose.Schema(
   {
-    name: { String,required: true },
-    dob: { String, required:true},
-    email: {String, required: true},
-    password: { String, required: true},
-    address: String,
-    phonenumber: String,
-    gender: String,
-    role: String,
-    class: String,
-    section: String,
-    admissioncode: String,
-    parentname: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    name: { type: String },
+    dob: { type: String },
+    email: { type: String },
+    password: { type: String },
+    address: { type: String },
+    phonenumber: { type: String },
+    gender: {
+      type: String,
+    },
+    role: {
+      ttype: String,
+    },
+    class: {
+      type: String,
+    },
+    section: {
+      type: String,
+    },
+    admissioncode: {
+      type: String,
+    },
+    parentname: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
 
-const Student = model<IStudent>("Student", studentSchema);
+const Student =
+  mongoose.models.Student || mongoose.model("Student", studentSchema);
 export default Student;
