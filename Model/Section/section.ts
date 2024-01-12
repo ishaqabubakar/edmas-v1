@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const sectionSchema = new mongoose.Schema(
   {
-    name: String,
-    nickname: String,
+    name: { type: String },
+    nickname: { type: String },
     teacher: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
       required: true,

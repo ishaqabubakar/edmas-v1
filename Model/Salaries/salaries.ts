@@ -6,14 +6,14 @@ const salariesSchema = new mongoose.Schema({
     required: true,
   },
 
-  stafftype: String,
+  stafftype: { type: String },
 
   transactiondate: {
     type: Date,
     required: true,
   },
-  status: String,
-  
+
+  status: { type: String },
 });
 
 const Salaries = mongoose.models.Salaries

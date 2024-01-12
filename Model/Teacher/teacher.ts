@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const teacherSchema = new mongoose.Schema(
   {
-    name: { String, required: true },
-    dob: { String, required: true },
-    email: { String, required: true },
-    password: { String, required: true },
-    address: String,
-    phonenumber: String,
-    gender: String,
-    role: {type: String},
-    class: String,
+    name: { type: String, required: true },
+    dob: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    address: { type: String },
+    phonenumber: { tpe: String },
+    gender: { type: String },
+    role: { type: String },
+    class: { type: String },
   },
   { timestamps: true }
 );

@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const gradeSchema = new mongoose.Schema(
   {
-    gradename: { String, required: true },
-    markrange: { String, required: true },
-    gradepoint: String,
-    comment: String,
+    gradename: { type: String, required: true },
+    markrange: { type: String, required: true },
+    gradepoint: { type: String },
+    comment: { type: String },
   },
   { timestamps: true }
 );

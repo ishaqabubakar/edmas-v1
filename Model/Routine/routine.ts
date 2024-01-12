@@ -11,9 +11,9 @@ const routineSchema = new mongoose.Schema(
     subject: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Subject", required: true },
     ],
-    day: String,
-    begintime: Date,
-    endtime: Date,
+    day: { type: String },
+    begintime: { type: Date },
+    endtime: { type: Date },
   },
   { timestamps: true }
 );

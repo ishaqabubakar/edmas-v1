@@ -6,10 +6,10 @@ const adminSchema = new mongoose.Schema(
     dob: { String, required: true },
     email: { String, required: true },
     password: { String, required: true },
-    address: String,
-    phonenumber: String,
-    gender: String,
-    role: String,
+    address: { type: String },
+    phonenumber: { type: String },
+    gender: { type: String },
+    role: { type: String },
   },
   { timestamps: true }
 );

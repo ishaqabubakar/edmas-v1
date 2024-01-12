@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, model } from "mongoose";
 
 const subjectSchema = new mongoose.Schema(
   {
-    subjectname: { String, required: true },
+    subjectname: { type: String, required: true },
     class: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
       required: true,

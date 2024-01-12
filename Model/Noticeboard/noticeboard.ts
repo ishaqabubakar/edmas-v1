@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const noticeboardSchema = new mongoose.Schema({
   title: {
-    type: {type: String},
+    type: { type: String },
     required: true,
   },
-  description: String,
+  description: { type: String },
   date: {
-    type: Date,
+    type: { type: Date },
     required: true,
   },
 });

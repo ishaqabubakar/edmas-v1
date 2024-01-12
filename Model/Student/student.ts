@@ -2,19 +2,18 @@ import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
-    name: { String, required: true },
-    dob: { String, required: true },
-    email: { String, required: true },
-    password: { String, required: true },
-    address: String,
-    phonenumber: String,
-    gender: String,
-    role: String,
-    class: String,
-    section: String,
-    admissioncode: String,
-    parentname: String,
-    
+    name: { type: String, required: true },
+    dob: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    address: { type: String },
+    phonenumber: { type: String },
+    gender: { type: String },
+    role: { type: String },
+    class: { type: String },
+    section: { type: String },
+    admissioncode: { type: String },
+    parentname: { type: String },
   },
   { timestamps: true }
 );

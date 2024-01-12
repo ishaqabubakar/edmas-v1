@@ -4,12 +4,12 @@ const parentSchema = new mongoose.Schema(
   {
     name: { String, required: true },
     email: { String, required: true },
-    dob: String,
-    address: String,
-    phonenumber: String,
-    gender: String,
-    profession: String,
-    role: String,
+    dob: { type: String },
+    address: { type: String },
+    phonenumber: { type: String },
+    gender: { ype: String },
+    profession: { type: String },
+    role: { type: String },
   },
   { timestamps: true }
 );

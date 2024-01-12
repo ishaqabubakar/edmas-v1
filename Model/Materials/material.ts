@@ -4,9 +4,9 @@ const materialSchema = new mongoose.Schema(
   {
     materialname: { type: String },
     subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
-    title: String,
-    description: String,
-    attachment: String,
+    title: { type: String },
+    description: { type: String },
+    attachment: { type: String },
   },
   { timestamps: true }
 );
