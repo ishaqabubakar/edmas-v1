@@ -2,7 +2,8 @@ import mongoose, { Schema, model } from "mongoose";
 
 const classSchema = new mongoose.Schema(
   {
-    classname: { String, required: true },
+    classname: { type: String, required: true },
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     classalias: { type: String },
     teacher: {
       type: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
@@ -10,6 +11,7 @@ const classSchema = new mongoose.Schema(
     },
     size: String,
   },
+
   { timestamps: true }
 );
 

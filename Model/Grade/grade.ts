@@ -2,11 +2,30 @@ import mongoose from "mongoose";
 
 const gradeSchema = new mongoose.Schema(
   {
-    gradename: { type: String, required: true },
-    markrange: { type: String, required: true },
-    gradepoint: String,
-    comment: String,
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" },
+    title:{
+      type:String
+    },
+    student:{
+      school: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+    },
+    class:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Class"
+    },
+    Section:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"Section"
+    },
+    marks:{
+     type:Number
+    },
+    grade:{
+      type:String
+    }
   },
+
   { timestamps: true }
 );
 

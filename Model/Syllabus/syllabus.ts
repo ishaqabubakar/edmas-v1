@@ -1,14 +1,6 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-interface ISyllabus extends Document {
-  classname: Array<{ type: Schema.Types.ObjectId; ref: "Class" }>;
-  subject: Array<{ type: Schema.Types.ObjectId; ref: "Subject" }>;
-  title: String;
-  description: String;
-  attachment: String;
-}
-
-const syllabusSchema = new Schema<ISyllabus>(
+const syllabusSchema = new mongoose.Schema(
   {
     classname: {
       type: [{ type: Schema.Types.ObjectId, ref: "Class" }],
@@ -19,11 +11,12 @@ const syllabusSchema = new Schema<ISyllabus>(
       required: true,
     },
     title: { String, required: true },
-    attachment: String,
+    attachment: { type: String },
   },
   { timestamps: true }
 );
 
-const Syllabus = model<ISyllabus>("Syllabus", syllabusSchema);
+const Syllabus =
+  mongoose.models.Syllabus || mongoose.model("Syllabus", syllabusSchema);
 
 export default Syllabus;

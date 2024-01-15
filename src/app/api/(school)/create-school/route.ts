@@ -1,11 +1,14 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import School from "../../../../../Model/School/school"; 
+import School from "../../../../../Model/school/school";
+import connectDB from "@/config/connection";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, location, phone } = await req.json();
-    if (!name || !location || !phone) {
+    await connectDB()
+    const {fullname,location,phone } = await req.json();
+
+    if (!fullname || !location || !phone) {
       return NextResponse.json(
         {
           messasge: "Please provide name, location and phone",
@@ -15,7 +18,7 @@ export async function POST(req: NextRequest) {
     }
 
     const newSchool = new School({
-      name,
+      fullname,
       location,
       phone,
     });

@@ -7,10 +7,10 @@ const OwnerSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    name: { String, required: true },
-    dob: { String, required: true },
-    email: { String, required: true },
-    password: { String, required: true },
+    name: { type: String },
+    dob: { type: String },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
     address: {
       type: String,
     },
@@ -26,7 +26,6 @@ const OwnerSchema = new mongoose.Schema(
     school: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "School",
-      required: true,
     },
   },
   { timestamps: true }

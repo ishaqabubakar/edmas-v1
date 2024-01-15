@@ -34,13 +34,6 @@ const Dashboard = () => {
                   placeholder="Teacher's Name"
                 />
               </div>
-              <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Username</Label>
-                <Input
-                  className="rounded-sm focus-visible:outline-none"
-                  placeholder="Username"
-                />
-              </div>
             </div>
             <div className="flex flex-col gap-5">
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">

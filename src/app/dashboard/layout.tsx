@@ -22,13 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(fontSans.variable, 'font-poppins bg-gray-50 no-scrollbar overflow-hidden') }>
-        <section className="flex flex-row w-screen h-screen overflow-clip no-scrollbar">
+        <main className="flex flex-row w-screen h-screen overflow-clip no-scrollbar">
           <Sidebar />
           <div className="flex flex-col w-full h-full">
             <MainHeader />
             {children}
           </div>
-        </section>
+        </main>
       </body>
     </html>
   );

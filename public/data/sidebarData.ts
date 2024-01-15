@@ -17,26 +17,33 @@ export const sidebarMenus: sidebarProps[] = [
   },
   {
     icon: "lucide:user-round",
-    menu: "Owner",
+    menu: "Super Admin",
     sub: [
       { path: "/dashboard/Owner/insert-owner", menus: "Owners" },
     ],
   },
   {
+    icon: "lucide:user-round",
+    menu: "Admin/Master",
+    sub: [
+      { path: "/dashboard/Owner/insert-owner", menus: "Account" },
+    ],
+  },
+  {
     icon: "lucide:users-round",
-    menu: "Manage Students",
+    menu: "Students/Parents",
     sub: [
       { path: "/dashboard/Students", menus: "Students" },
-      { path: "/dashboard/Student/view-student", menus: "Promote student" },
+      // { path: "/dashboard/Student/view-student", menus: "Promote student" },
     ],
   },
   {
     icon: "lucide:users-round",
     menu: "Manage Users",
     sub: [
-      { path: "/dashboard/Staffs/", menus: "Staffs" },
+      // { path: "/dashboard/Staffs/", menus: "Staffs" },
       { path: "/dashboard/Teachers", menus: "Teachers" },
-      { path: "/dashboard/Parent", menus: "Parents" },
+      { path: "/dashboard/", menus: "Others" },
     ],
   },
 
@@ -56,18 +63,18 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "codicon:book",
     menu: "Examination",
     sub: [
-      { path: "/dashboard/Subject/view-subject", menus: "Exams" },
+      // { path: "/dashboard/Subject/view-subject", menus: "Exams" },
       { path: "/dashboard/Subject/view-subject", menus: "Grade" },
      
     ],
   },
-  {
-    icon: "material-symbols:assignment-outline-sharp",
-    menu: "Assignment",
-    sub: [
-      { path: "/dashboard/Assignment/insert-assignment", menus: "Assignments" },
-    ],
-  },
+  // {
+  //   icon: "material-symbols:assignment-outline-sharp",
+  //   menu: "Assignment",
+  //   sub: [
+  //     { path: "/dashboard/Assignment/insert-assignment", menus: "Assignments" },
+  //   ],
+  // },
   {
     icon: "heroicons:building-office-2",
     menu: "Manage Office",

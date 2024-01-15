@@ -6,6 +6,10 @@ const studentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    schoolId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "School",
+    },
     name: { type: String },
     dob: { type: String },
     email: { type: String },
@@ -27,8 +31,19 @@ const studentSchema = new mongoose.Schema(
     admissioncode: {
       type: String,
     },
-    parentname: {
-      type: String,
+    parent: {
+      fullname: {
+        type: String,
+      },
+      proffession: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
+      parentemail: {
+        type: String,
+      },
     },
   },
   { timestamps: true }

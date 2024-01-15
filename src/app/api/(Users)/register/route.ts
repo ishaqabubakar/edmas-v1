@@ -4,13 +4,16 @@ import Admin from "../../../../../Model/Admin/admin";
 import Teacher from "../../../../../Model/Teacher/teacher";
 import Student from "../../../../../Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
+import { hashPassword } from "@/helpers/bycrpt";
+import School from "../../../../../Model/school/school";
+import Owner from "../../../../../Model/Admin/Owner/Owner";
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
     const { data } = await req.json();
     const existingUser = await User.findOne({ email: data.email });
+    const singleSchool = await School.findOne({ fullname: data.school })
 
     if (existingUser) {
       return NextResponse.json(
@@ -32,9 +35,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(data.password, salt);
+    
+    const hashedPassword =await hashPassword(data.password)
     // Create a new user
     const user = new User({
       password: hashedPassword,
@@ -75,7 +77,32 @@ export async function POST(req: NextRequest) {
           message: "User registered successfully",
           userData: {
             user: savedUser,
-            admin: savedAdmin,
+            teacher: savedAdmin,
+          },
+        },
+        { status: 201 }
+      );
+    }
+
+    if (data.role === "owner") {
+      roleSpecificData = {
+        userId: savedUser._id,
+        name: data.name,
+        dob: data.dob,
+        email: savedUser.email,
+        password: savedUser.password,
+        address: data.address,
+        phonenumber: data.phonenumber,
+        gender: data.gender,
+        school:singleSchool._id
+      };
+      const savedOwner = await new Owner(roleSpecificData).save();
+      return NextResponse.json(
+        {
+          message: "User registered successfully",
+          userData: {
+            user: savedUser,
+            Owner: savedOwner,
           },
         },
         { status: 201 }
@@ -94,7 +121,13 @@ export async function POST(req: NextRequest) {
         class: data.class,
         section: data.section,
         admissioncode: data.admissioncode,
-        parentname: data.parentname,
+        schoolId:data.schoolId,
+        parent: {
+            fullname:data.parent.fullname,
+            phone:data.parent.phone,
+            proffession:data.parent.proffession,
+            parentemail:data.parent.parente
+        }
       };
       const savedStudent = await new Student(roleSpecificData).save();
       return NextResponse.json(
@@ -107,7 +140,31 @@ export async function POST(req: NextRequest) {
         },
         { status: 201 }
       );
-    } else {
+    }
+  if(data.role==='teacher'){
+    roleSpecificData = {
+      userId: savedUser._id,
+      name: data.name,
+      dob: data.dob,
+      email: savedUser.email,
+      password: savedUser.password,
+      address: data.address,
+      phonenumber: data.phonenumber,
+      gender: data.gender,
+      class:data.class
+    };
+    const savedTeacher = await new Teacher(roleSpecificData).save();
+    return NextResponse.json(
+      {
+        message: "User registered successfully",
+        userData: {
+          user: savedUser,
+          admin: savedTeacher,
+        },
+      },
+      { status: 201 }
+    );
+  } else {
       return NextResponse.json(
         {
           message: "Invalid role",

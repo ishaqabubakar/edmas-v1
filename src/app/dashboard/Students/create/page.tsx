@@ -20,12 +20,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
-        <div className="w-full bg-white h-fit border rounded-sm ">
-          <div className="border-b pb-3 w-full flex items-center h-[60px] p-5">
-            <p className="p-0 font-Regular">Student Information</p>
-          </div>
-          <form className="flex flex-col gap-5 p-5">
-            <div className="flex flex-col gap-5">
+        <div className="w-full h-fit  rounded-sm ">
+          <form className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 bg-white  rounded-sm border">
+              <div className="border-b pb-3 w-full flex items-center h-[60px] p-5 bg-white">
+                <p className="p-0 font-Regular">Student Information</p>
+              </div>
+              <div className="p-5 w-full flex flex-col gap-5">
               <div className="lg:flex-row flex flex-col gap-5">
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Student Name</Label>
@@ -105,38 +106,86 @@ const Dashboard = () => {
                   />
                 </div>
               </div>
-             <div className="flex gap-5 lg:flex-row flex-col">
-             <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Class</Label>
-                <Select>
-                  <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
-                    <SelectValue
-                      placeholder="Select Class"
-                      className="text-[16px] "
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Class 1">Class 1</SelectItem>
-                    <SelectItem value="Class 2">Class 2</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="flex gap-5 lg:flex-row flex-col">
+                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Class</Label>
+                  <Select>
+                    <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
+                      <SelectValue
+                        placeholder="Select Class"
+                        className="text-[16px] "
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Class 1">Class 1</SelectItem>
+                      <SelectItem value="Class 2">Class 2</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Parent</Label>
+                  <Select>
+                    <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
+                      <SelectValue
+                        placeholder="Select Parent"
+                        className="text-[16px] "
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Mavis Normanyo">
+                        Mavis Normanyo
+                      </SelectItem>
+                      <SelectItem value="Mercy Aboagye">
+                        Mercy Aboagye
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Parent</Label>
-                <Select>
-                  <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
-                    <SelectValue
-                      placeholder="Select Parent"
-                      className="text-[16px] "
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Mavis Normanyo">Mavis Normanyo</SelectItem>
-                    <SelectItem value="Mercy Aboagye">Mercy Aboagye</SelectItem>
-                  </SelectContent>
-                </Select>
+            </div>
+            </div>
+            <div className="flex flex-col gap-5 bg-white rounded-sm border h-fit">
+              <div className="border-b pb-3 w-full flex items-center h-[60px] p-5 bg-white">
+                <p className="p-0 font-Regular">Parent Information</p>
               </div>
-             </div>
+              <div className="flex flex-col p-5 gap-5">
+              <div className=" flex flex-col gap-5">
+              <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Full name</Label>
+                  <Input
+                    type="text"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Full name"
+                  />
+                </div>
+                <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Email</Label>
+                  <Input
+                    type="email"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div className=" flex flex-col gap-5">
+                <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Proffession</Label>
+                  <Input
+                    type="text"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Proffession"
+                  />
+                </div>
+                <div className="flex lg:flex-row gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  <Label className="w-[200px]">Phone</Label>
+                  <Input
+                    type="text"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+              </div>
             </div>
           </form>
         </div>

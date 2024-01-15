@@ -1,15 +1,10 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-interface ISection extends Document {
-  name: String;
-  nickname: String;
-  teacher: Array<{ type: Schema.Types.ObjectId; ref: "Teacher" }>;
-}
-
-const sectionSchema = new Schema<ISection>(
+const sectionSchema = new Schema(
   {
-    name: String,
-    nickname: String,
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    name: { type: String },
+    nickname: { type: String },
     teacher: {
       type: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
       required: true,
@@ -18,6 +13,7 @@ const sectionSchema = new Schema<ISection>(
   { timestamps: true }
 );
 
-const Section = model("Section", sectionSchema);
+const Section =
+  mongoose.models.Section || mongoose.model("Section", sectionSchema);
 
 export default Section;

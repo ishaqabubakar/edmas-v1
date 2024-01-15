@@ -8,6 +8,7 @@ import React, { useState } from "react";
 
 export const Owner = () => {
   const [data, setData] = useState(true);
+  
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">

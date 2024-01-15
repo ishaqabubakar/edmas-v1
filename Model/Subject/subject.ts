@@ -1,13 +1,9 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-interface ISubject extends Document {
-  subjectname: String;
-  class: Array<{ type: Schema.Types.ObjectId; ref: "Class" }>;
-  teacher: Array<{ type: Schema.Types.ObjectId; ref: "Teacher" }>;
-}
 
-const subjectSchema = new Schema<ISubject>(
+const subjectSchema = new mongoose.Schema(
   {
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     subjectname: { String, required: true },
     class: {
       type: [{ type: Schema.Types.ObjectId, ref: "Class" }],
@@ -21,6 +17,6 @@ const subjectSchema = new Schema<ISubject>(
   { timestamps: true }
 );
 
-const Subject = model<ISubject>("Subject", subjectSchema);
+const Subject =mongoose.models.Subject || mongoose.model("Subject", subjectSchema);
 
 export default Subject;
