@@ -1,7 +1,6 @@
 // Import other necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import School from "../../../../../Model/School/school";
 import Section from "../../../../../Model/Section/section";
 import Student from "../../../../../Model/Student/student";
 import Payment from "../../../../../Model/Payment/payment";
@@ -23,13 +22,11 @@ export async function POST(req: NextRequest) {
     }
 
     
-    const amountByOne = await Payment.findOne({amount});
+  
     const studentByOne = await Student.findOne({student})
-    const transactiondateByOne = await Payment.findOne(transactiondate)
-    const schoolByOne = await School.findById(school);
     const sectionByOne =  await Section.findOne({section})
 
-    if (!amountByOne || !schoolByOne || !studentByOne || !transactiondateByOne) {
+    if (!studentByOne) {
       return NextResponse.json(
         {
           message: "Student and their respective details cannot be found.",
@@ -40,9 +37,9 @@ export async function POST(req: NextRequest) {
 
     const newPayment = new Payment({
       classname,
-      school: schoolByOne._id,
+      school: school,
       student: studentByOne._id,
-      section: [sectionByOne._id], // Ensure teacher is an array
+      section: sectionByOne._id, // Ensure teacher is an array
       title,
       description,
       transactiondate,
