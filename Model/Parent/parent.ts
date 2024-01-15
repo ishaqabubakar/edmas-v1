@@ -1,28 +1,22 @@
-import mongoose, { Document, Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-interface IParent extends Document {
-  name: string;
-  dob: string;
-  email: string;
-  address: string;
-  phonenumber: string;
-  gender: string;
-  profession: String;
-}
-
-const parentSchema = new Schema<IParent>(
+const parentSchema = new mongoose.Schema(
   {
+    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
     name: { String, required: true },
     email: { String, required: true },
-    dob: String,
-    address: String,
-    phonenumber: String,
-    gender: String,
-    profession: String,
+    dob: { type: String },
+    address: { type: String },
+    phonenumber: { type: String },
+    gender: { ype: String },
+    profession: { type: String },
+    role: { type: String },
   },
   { timestamps: true }
 );
 
-const Parent = model<IParent>("Parent", parentSchema);
+const Parent = mongoose.models.Parent
+  ? mongoose.model("Parent")
+  : mongoose.model("Parent", parentSchema);
 
 export default Parent;
