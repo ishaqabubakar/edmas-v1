@@ -1,20 +1,25 @@
-import mongoose from "mongoose"
 
-const paymentSchema = new mongoose.Schema({
-    
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
-    class:{
-        type: mongoose.Schema.Types.ObjectId , ref: "Class",
-        required:true
+import mongoose, { Schema, model } from "mongoose";
+
+const PaymentSchema = new mongoose.Schema(
+  {
+    class: {
+      type: Schema.Types.ObjectId,
+      ref: "Class",
+      required: true,
+
     },
-    amount :{
-        type: Number,
-        required:true
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    student: String,
+    amount: {
+      type: Number,
+      required: true,
     },
-    title:{
-        type: String,
-        required:true
+    title: {
+      type: String,
+      required: true,
     },
+
 
     description:{
         type: String
@@ -35,4 +40,14 @@ const Payment = mongoose.models.Payment
   ? mongoose.model("Payment")
   : mongoose.model("Payment ", paymentSchema);
 
-export default Payment 
+    description: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
+
+const Payment =mongoose.models.Payment || mongoose.model("Payment", PaymentSchema);
+
+
+export default Payment;

@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={fontSans.className}>
+      <body className={cn(fontSans.variable, 'font-poppins') }>
         <UserProvider>{children}</UserProvider>
       </body>
     </html>

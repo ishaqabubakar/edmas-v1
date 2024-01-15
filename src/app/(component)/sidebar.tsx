@@ -5,6 +5,7 @@ import MainMenus from "./sidebarList";
 import { Icon } from "@iconify/react";
 import { UserContext } from "@/contextAPI/generalContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Sidebar = () => {
   const contextValue = useContext(UserContext);
@@ -14,22 +15,23 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen overflow-clip ${
+      className={`h-screen overflow-clip hidden lg:block ${
         collapse
-          ? "w-[230px] transition-all ease-in-out duration-500"
+          ? "w-[300px] transition-all ease-in-out duration-500"
           : "w-[80px] transition-all ease-in-out duration-500"
       } border-r p-5 bg-zinc-800 font-poppins`}
     >
-      <div className={`h-[40px] ${!collapse? 'w-[40px]':'w-full'} flex gap-[10px] border mb-[30px] items-center justify-center rounded-sm`}>
-        <h3
-          className={`font-Medium text-white ${
+      <div className={`h-[40px] ${!collapse? 'w-[40px] justify-center flex items-center':'w-full'} px-[10px] flex gap-[10px] border mb-[30px] items-center  rounded-sm`}>
+        <div
+          className={`font-Medium text-white flex  justify-between items-center ${
             !collapse
               ? "hidden transition-all ease-in-out duration-500"
-              : "block transition-all ease-in-out duration-500"
+              : "flex items-center justify-center transition-all ease-in-out duration-500"
           }`}
         >
-          EduComplex
-        </h3>
+        <Image  src={'/Gitcal.svg'} width={30} height={30} alt="logo"/>
+        <p className="ml-[10px]">GitComplex</p>
+        </div>
         <h3
           className={`font-Medium text-white ${
             !collapse
@@ -37,7 +39,7 @@ const Sidebar = () => {
               : "hidden transition-all ease-in-out duration-500"
           }`}
         >
-          E
+         <Image  src={'/Gitcal.svg'} width={25} height={25} alt="logo"/>
         </h3>
       </div>
       <aside className="overflow-y-auto h-full no-scrollbar">
@@ -47,7 +49,10 @@ const Sidebar = () => {
               !collapse &&
               "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
             }`}
-            onClick={()=>router.push('/dashboard/dashboard')}
+            onClick={()=>{
+              router.push('/dashboard/dashboard')
+              setCollapse(true)
+            }}
           >
             <Icon icon="bxs:dashboard" className={`text-white text-[20px] `} />
             <p

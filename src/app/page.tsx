@@ -18,8 +18,9 @@ export default function Home() {
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-50">
         <form className="w-[400px] h-fit  rounded-[10px] flex flex-col items-center bg-white p-5 lg:p-[30px] justify-center">
+         
           <div className="flex flex-col items-center pb-[30px]">
-            <h3 className="text-[25px] font-bold">Sign in</h3>
+          <h2 className="text-[40px]"><span>Ed</span><span className="font-Bold text-orange-700">Mas</span></h2>
             <p className="text-sm text-center">Enter your details to access the account</p>
           </div>
           <div className="w-full flex flex-col">
@@ -27,7 +28,7 @@ export default function Home() {
               {/* <p className="font-poppins text-gray-500 text-sm">
                  Select Access type
                 </p> */}
-              <Select
+              {/* <Select
                 onValueChange={(value) => setAccess(value)}
                 value={access}
               >
@@ -48,7 +49,7 @@ export default function Home() {
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+              </Select> */}
 
               <InputField
                 type="email"

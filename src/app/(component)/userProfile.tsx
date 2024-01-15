@@ -30,7 +30,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-  
+
   export function UserPforile() {
     return (
       <DropdownMenu>

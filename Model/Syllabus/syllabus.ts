@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 
+
+
+
 const syllabusSchema = new mongoose.Schema(
   {
     
@@ -14,13 +17,18 @@ const syllabusSchema = new mongoose.Schema(
       required: true,
     },
     title: { String, required: true },
-    attachment: String,
+    attachment: { type: String },
   },
   { timestamps: true }
 );
 
+
 const Syllabus = mongoose.models.Syllabus
   ? mongoose.model("Syllabus")
   : mongoose.model("Syllabus", syllabusSchema);
+
+const Syllabus =
+  mongoose.models.Syllabus || mongoose.model("Syllabus", syllabusSchema);
+
 
 export default Syllabus;

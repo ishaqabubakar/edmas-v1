@@ -10,82 +10,87 @@ type sidebarProps = {
 export const sidebarMenus: sidebarProps[] = [
   {
     icon: "ri:school-line",
-    menu: "School",
+    menu: "Manage Schools",
     sub: [
-      { path: "/dashboard/School/insert-school", menus: "Insert School" },
-      { path: "/dashboard/School/view-school", menus: "View School" },
+      { path: "/dashboard/School/insert-school", menus: "Schools" },
     ],
   },
   {
     icon: "lucide:user-round",
-    menu: "Owner",
+    menu: "Super Admin",
     sub: [
-      { path: "/dashboard/Owner/insert-owner", menus: "Insert Owner" },
-      { path: "/dashboard/Owner/view-owner", menus: "View Owner" },
+      { path: "/dashboard/Owner/insert-owner", menus: "Owners" },
     ],
   },
   {
-    icon: "ph:chalkboard-teacher-light",
-    menu: "Teachers",
+    icon: "lucide:user-round",
+    menu: "Admin/Master",
     sub: [
-      { path: "/dashboard/Teachers/insert-teacher", menus: "Insert Teacher" },
-      { path: "/dashboard/Teachers/view-teachers", menus: "View Teacher" },
+      { path: "/dashboard/Owner/insert-owner", menus: "Account" },
     ],
   },
   {
-    icon: "ph:student",
-    menu: "Student",
+    icon: "lucide:users-round",
+    menu: "Students/Parents",
     sub: [
-      { path: "", menus: "Insert Student" },
-      { path: "", menus: "View Student" },
+      { path: "/dashboard/Students", menus: "Students" },
+      // { path: "/dashboard/Student/view-student", menus: "Promote student" },
     ],
   },
   {
-    icon: "ep:data-board",
-    menu: "Class",
+    icon: "lucide:users-round",
+    menu: "Manage Users",
     sub: [
-      { path: "", menus: "Insert Class" },
-      { path: "", menus: "View Class" },
+      // { path: "/dashboard/Staffs/", menus: "Staffs" },
+      { path: "/dashboard/Teachers", menus: "Teachers" },
+      { path: "/dashboard/", menus: "Others" },
+    ],
+  },
+
+  {
+    icon: "fluent-emoji-high-contrast:classical-building",
+    menu: "Classes & Subject",
+    sub: [
+      { path: "/dashboard/Class", menus: "Class" },
+      { path: "/dashboaard/Class-section", menus: "Sections" },
+      { path: "/dashboard/Class/insert-class", menus: "Routines" },
+      { path: "/dashboaard/Class/view-class", menus: "Subjects" },
+      { path: "/dashboaard/Class/view-class", menus: "Syllabuses" },
+      { path: "/dashboaard/Class/view-class", menus: "Materials" },
     ],
   },
   {
-    icon: "material-symbols:subject",
-    menu: "Subject",
+    icon: "codicon:book",
+    menu: "Examination",
     sub: [
-      { path: "", menus: "Insert Subject" },
-      { path: "", menus: "View Subject" },
+      // { path: "/dashboard/Subject/view-subject", menus: "Exams" },
+      { path: "/dashboard/Subject/view-subject", menus: "Grade" },
+     
+    ],
+  },
+  // {
+  //   icon: "material-symbols:assignment-outline-sharp",
+  //   menu: "Assignment",
+  //   sub: [
+  //     { path: "/dashboard/Assignment/insert-assignment", menus: "Assignments" },
+  //   ],
+  // },
+  {
+    icon: "heroicons:building-office-2",
+    menu: "Manage Office",
+    sub: [
+      { path: "/dashboard/Parents/insert-parent", menus: "NoticeBoard" },
+      { path: "/dashboard/Parents/view-parent", menus: "Messages" },
+      { path: "/dashboard/Parents/view-parent", menus: "Occassions" },
     ],
   },
   {
-    icon: "ri:parent-line",
-    menu: "Parents",
+    icon: "material-symbols:payments-outline-sharp",
+    menu: "Payment",
     sub: [
-      { path: "", menus: "Insert Parent" },
-      { path: "", menus: "View Parent" },
+      { path: "/dashboard/Exams/insert-exam", menus: "Salaries" },
+      { path: "/dashboard/Exams/view-exam", menus: "Fees" },
     ],
   },
-  {
-    icon: "material-symbols:assignment-outline-sharp",
-    menu: "Assignment",
-    sub: [
-      { path: "", menus: "Insert Assignment" },
-      { path: "", menus: "View Assignment" },
-    ],
-  },
-  {
-    icon: "ph:newspaper-clipping-light",
-    menu: "Exams",
-    sub: [
-      { path: "", menus: "Insert Exam" },
-      { path: "", menus: "View Exam" },
-    ],
-  },
-  {
-    icon: "mdi:report-bar",
-    menu: "Results",
-    sub: [
-      { path: "", menus: "Insert Result" },
-      { path: "", menus: "View Result" },
-    ],
-  },
+
 ];

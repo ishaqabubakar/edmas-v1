@@ -1,19 +1,23 @@
 import mongoose from "mongoose";
 
+
+
 const materialSchema = new mongoose.Schema(
   {
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
-    materialname: { type: String },
-    subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
-    title: { type: String },
-    description: { type: String },
-    attachment: { type: String },
+    materialname: String,
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" },
+    subject: { type: Schema.Types.ObjectId, ref: "Subject" },
+    title: String,
+    description: String,
+    attachment: String,
+
   },
   { timestamps: true }
 );
 
-const Material = mongoose.models.Material
-  ? mongoose.model("Material")
-  : mongoose.model("Material", materialSchema);
 
-export default Material;
+export const Material = mongoose.models.Material || mongoose.model('Material', materialSchema)
+
+export default Material
+
