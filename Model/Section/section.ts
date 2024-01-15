@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
-
 const sectionSchema = new mongoose.Schema(
-  {
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
-
-const sectionSchema = new Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
 
@@ -19,13 +14,7 @@ const sectionSchema = new Schema(
   { timestamps: true }
 );
 
-
-const Section = mongoose.models.Section
-  ? mongoose.model("Section")
-  : mongoose.model("Section", sectionSchema);
-
 const Section =
   mongoose.models.Section || mongoose.model("Section", sectionSchema);
-
 
 export default Section;

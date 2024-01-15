@@ -1,13 +1,11 @@
-
 import mongoose, { Schema, model } from "mongoose";
 
-const PaymentSchema = new mongoose.Schema(
+const paymentSchema = new mongoose.Schema(
   {
     class: {
       type: Schema.Types.ObjectId,
       ref: "Class",
       required: true,
-
     },
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     student: String,
@@ -20,34 +18,23 @@ const PaymentSchema = new mongoose.Schema(
       required: true,
     },
 
-
-    description:{
-        type: String
-    },
-    status:{
-        type: String,
-        required: true
-    },
-    section: {type: mongoose.Schema.Types.ObjectId, ref: 'Section' },
-    transactiondate:{
-        type: Date,
-        required: true
-    }
-
-})
-
-const Payment = mongoose.models.Payment 
-  ? mongoose.model("Payment")
-  : mongoose.model("Payment ", paymentSchema);
-
     description: {
       type: String,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
+    section: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
+    transactiondate: {
+      type: Date,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const Payment =mongoose.models.Payment || mongoose.model("Payment", PaymentSchema);
-
+const Payment =
+  mongoose.models.Payment || mongoose.model("Payment", paymentSchema);
 
 export default Payment;

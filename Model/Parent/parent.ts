@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const parentSchema = new mongoose.Schema(
   {
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
-    name: { String, required: true },
-    email: { String, required: true },
+    school: { type: mongoose.Schema.ObjectId, ref: "School" },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
     dob: { type: String },
     address: { type: String },
     phonenumber: { type: String },
-    gender: { ype: String },
+    gender: { type: String },
     profession: { type: String },
     role: { type: String },
   },

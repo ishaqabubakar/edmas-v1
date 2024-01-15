@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
 
-
-
-
-
 const syllabusSchema = new mongoose.Schema(
   {
-    
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
+    school: { type: mongoose.Schema.ObjectId, ref: "School" },
     classname: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
       required: true,
@@ -22,13 +17,7 @@ const syllabusSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-
-const Syllabus = mongoose.models.Syllabus
-  ? mongoose.model("Syllabus")
-  : mongoose.model("Syllabus", syllabusSchema);
-
 const Syllabus =
   mongoose.models.Syllabus || mongoose.model("Syllabus", syllabusSchema);
-
 
 export default Syllabus;
