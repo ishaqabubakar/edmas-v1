@@ -1,7 +1,6 @@
 // Import other necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Class from "../../../../../Model/Class/class";
 import School from "../../../../../Model/School/school";
 import Section from "../../../../../Model/Section/section";
 import Student from "../../../../../Model/Student/student";
@@ -28,7 +27,7 @@ export async function POST(req: NextRequest) {
     const studentByOne = await Student.findOne({student})
     const transactiondateByOne = await Payment.findOne(transactiondate)
     const schoolByOne = await School.findById(school);
-    const sectionByOne =  await Section.findById(section)
+    const sectionByOne =  await Section.findOne({section})
 
     if (!amountByOne || !schoolByOne || !studentByOne || !transactiondateByOne) {
       return NextResponse.json(
