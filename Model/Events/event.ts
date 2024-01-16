@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-  school: {type: mongoose.Schema.ObjectId,ref: 'School'},
+  school: {type: mongoose.Schema.Types.ObjectId,ref: 'School'},
   title: {
     type: String,
     required: true,
@@ -12,9 +12,6 @@ const eventSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-const Event = mongoose.models.Event
-  ? mongoose.model("Event")
-  : mongoose.model("Event", eventSchema);
+const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
 
 export default Event;

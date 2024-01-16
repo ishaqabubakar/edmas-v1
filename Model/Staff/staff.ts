@@ -22,8 +22,6 @@ const staffSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Staff = mongoose.models.Section
-  ? mongoose.model("Staff")
-  : mongoose.model("Staff", staffSchema);
+const Staff =  mongoose.models.Staff || mongoose.model("Staff", staffSchema);
 
 export default Staff;

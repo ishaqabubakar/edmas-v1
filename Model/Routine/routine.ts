@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const routineSchema = new mongoose.Schema(
   {
-    school: { type: mongoose.Schema.ObjectId, ref: "School" },
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     class: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Class", required: true },
     ],
