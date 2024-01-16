@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
         class: data.class,
         section: data.section,
         admissioncode: data.admissioncode,
-        schoolId:data.schoolId,
+        schoolId:data?.schoolId,
         parent: {
             fullname:data.parent.fullname,
             phone:data.parent.phone,
@@ -151,7 +151,8 @@ export async function POST(req: NextRequest) {
       address: data.address,
       phonenumber: data.phonenumber,
       gender: data.gender,
-      class:data.class
+      class:data.class,
+      school:data?.schoolId,
     };
     const savedTeacher = await new Teacher(roleSpecificData).save();
     return NextResponse.json(
@@ -173,10 +174,10 @@ export async function POST(req: NextRequest) {
         { status: 401 }
       );
     }
-  } catch (error) {
+  } catch (error:any) {
     console.error(error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal Server Error", message:error },
       { status: 500 }
     );
   }

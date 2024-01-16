@@ -1,12 +1,12 @@
 import Teacher from "../../../../../Model/Teacher/teacher";
 import Admin from "../../../../../Model/Admin/admin";
 import Student from "../../../../../Model/Student/student";
-import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import { User } from "../../../../../Model/User/user";
-import School from "../../../../../Model/School/school";
+import { User } from "../../../../../Model/user/user";
+import School from "../../../../../Model/school/school";
 import { comparedPassword } from "@/helpers/bycrpt";
+import Owner from "../../../../../Model/Admin/Owner/Owner";
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,8 +15,9 @@ export async function POST(req: NextRequest) {
     const singleStudent = await Student.findOne({ email });
     const singleTeacher = await Teacher.findOne({ email });
     const singleAdmin = await Admin.findOne({ email });
+    const singleOwner = await Owner.findOne({ email })
     const singleUser = await User.findOne({ email });
-    const userSchool = await School.findOne({ _id: singleStudent.schoolId });
+    const userSchool = await School.findOne({ _id: singleStudent?.schoolId });
 
     if (!email || !password) {
       return NextResponse.json(
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const decodedPasword = comparedPassword(password, singleUser.password);
+    const decodedPasword = await comparedPassword(password, singleUser.password);
 
     if (!decodedPasword) {
       return NextResponse.json(
@@ -53,16 +54,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: singleAdmin,
+          data: [singleUser,singleAdmin],
         },
         { status: 200 }
       );
     }
+
+    if (singleUser.role === "owner") {
+      return NextResponse.json(
+        {
+          message: "login successfully",
+          data: [singleUser,singleOwner],
+        },
+        { status: 200 }
+      );
+    }
+
     if (singleUser.role === "student") {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: [singleStudent, userSchool],
+          data: [singleUser, singleStudent],
         },
         { status: 200 }
       );
@@ -71,7 +83,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: singleTeacher,
+          data: [singleUser,singleTeacher],
         },
         { status: 200 }
       );
