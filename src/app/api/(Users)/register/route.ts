@@ -1,5 +1,5 @@
 import connectDB from "@/config/connection";
-import { User } from "../../../../../Model/User/user";
+import  User from "../../../../../Model/User/user";
 import Admin from "../../../../../Model/Admin/admin";
 import Teacher from "../../../../../Model/Teacher/teacher";
 import Student from "../../../../../Model/Student/student";
