@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const salariesSchema = new mongoose.Schema({
   school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-  staff: { type: String },
+  staffname: { type: String },
   title: {
     type: String,
     required: true,

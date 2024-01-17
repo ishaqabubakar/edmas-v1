@@ -1,7 +1,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import Noticeboard from "../../../../../Model/Noticeboard/noticeboard";
-import School from "../../../../../Model/School/school";
+import Event from "../../../../../Model/Events/event";
 import connectDB from "@/config/connection";
 
 export async function POST(req: NextRequest) {
@@ -9,7 +8,7 @@ export async function POST(req: NextRequest) {
     await connectDB()
     const {school, title, description, date } = await req.json();
 
-    if (!school ||!title || !date || description) {
+    if (!school ||!title || !date || !description) {
       return NextResponse.json(
         {
           messasge: "Please provide name, location and phone",
@@ -18,29 +17,29 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const schoolByOne = await School.findOne({school}) 
+    const eventByOne = await Event.findOne({school}) 
 
-    if (!schoolByOne) {
+    if (!eventByOne) {
         return NextResponse.json(
           {
-            message: "Student and their respective details cannot be found.",
+            message: "Event and their respective details cannot be found.",
           },
           { status: 404 }
         );
       }
-    const newNoticeboard = new Noticeboard({
-      school: school,
+    const newEvent = new Event({
+      school: school._id,
       title,
       date,
       description
     });
 
-    const savedNoticeboard = await newNoticeboard.save();
+    const savedEvent = await newEvent.save();
 
     return NextResponse.json(
       {
-        message: "Noticeboard created",
-        data: savedNoticeboard,
+        message: "Event created",
+        data: savedEvent,
       },
       { status: 200 }
     );
