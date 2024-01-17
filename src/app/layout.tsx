@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import UserProvider from "@/contextAPI/generalContext";
 import { ToastContainer } from "react-toastify";
-
+import { Toaster } from "@/components/ui/toaster"
 export const fontSans = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -23,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(fontSans.variable, 'font-poppins') }>
+        <Toaster />
       <ToastContainer
           position="top-right"
           autoClose={5000}

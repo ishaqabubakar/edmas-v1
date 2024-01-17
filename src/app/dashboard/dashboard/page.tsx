@@ -2,9 +2,12 @@
 import CalendarDemo from "@/app/(component)/Calender/viewCalender";
 import StudentParentStats from "@/app/(component)/chart/studentChart";
 import { Icon } from "@iconify/react";
-import { ChevronRight } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full lg:flex-row flex flex-col gap-5">

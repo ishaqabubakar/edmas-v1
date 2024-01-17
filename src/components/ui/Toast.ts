@@ -30,7 +30,7 @@ import {
     transition: Slide,
   };
   
-   const Toast = (
+ export const Toast = (
     notificationType: string,
     notificationMessage:
       | string

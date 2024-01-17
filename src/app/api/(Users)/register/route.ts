@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
           message: "User registered successfully",
           userData: {
             user: savedUser,
-            teacher: savedAdmin,
+            Admin: savedAdmin,
           },
         },
         { status: 201 }
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
         class: data.class,
         section: data.section,
         admissioncode: data.admissioncode,
-        schoolId:data?.schoolId,
+        school:data?.school,
         parent: {
             fullname:data.parent.fullname,
             phone:data.parent.phone,
@@ -152,7 +152,7 @@ export async function POST(req: NextRequest) {
       phonenumber: data.phonenumber,
       gender: data.gender,
       class:data.class,
-      school:data?.schoolId,
+      school:data?.school,
     };
     const savedTeacher = await new Teacher(roleSpecificData).save();
     return NextResponse.json(
@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
         message: "User registered successfully",
         userData: {
           user: savedUser,
-          admin: savedTeacher,
+          teacher: savedTeacher,
         },
       },
       { status: 201 }
