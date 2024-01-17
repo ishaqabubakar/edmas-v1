@@ -3,9 +3,9 @@ import Staff from "../../../../../Model/Staff/staff";
 
 export async function DELETE(req: NextRequest) {
   try {
-    const { id } = await req.json();
+    const { _id } = await req.json();
 
-    if (!id) {
+    if (!_id) {
       return NextResponse.json(
         {
           messasge: "could not delete staff",
@@ -13,7 +13,7 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
-    const updatedStaff = await Staff.findOneAndDelete(id);
+    const updatedStaff = await Staff.findOneAndDelete({_id});
     return NextResponse.json(
       {
         message: "Staff deleted",

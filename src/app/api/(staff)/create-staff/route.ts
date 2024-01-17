@@ -1,19 +1,17 @@
 import connectDB from "@/config/connection";
-import Staff from "../../../../../Model/Staff/staff";
+import Staff from "../../../../../Model/Staff/staff"
 import { NextRequest, NextResponse } from "next/server";
-
-
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    const { data } = await req.json();
+    const { school, name, dob , phone,  stafftype } = await req.json();
 
-    if (!data.schoolId || !data.name || !data.dob || !data.stafftype) {
+    if (!school || !name || !dob || !stafftype || !stafftype ) {
       return NextResponse.json(
         {
-          message: "Please ensure to fill all fieds",
-          data: [],
+          message: "Please ensure to fill all fieds"
+         
         },
         { status: 400 }
       );
@@ -21,10 +19,10 @@ export async function POST(req: NextRequest) {
 
     const staff = new Staff({
       
-      school: data.school,
-      name: data.name,
-      dob: data.dob,
-      stafftype: data.stafftype
+      school,
+      name,
+      dob,
+      stafftype
     });
     const savedStaff = await staff.save();
     console.log(savedStaff);

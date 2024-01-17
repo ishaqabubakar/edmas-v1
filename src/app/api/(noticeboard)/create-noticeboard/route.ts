@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         );
       }
     const newNoticeboard = new Noticeboard({
-      school: school,
+      school,
       title,
       date,
       description

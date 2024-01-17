@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         );
       }
     const newEvent = new Event({
-      school: school._id,
+      school,
       title,
       date,
       description

@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const newMaterial = new Material({
-      school: school,
+      school,
       materialname,
       teacher,
       subject,

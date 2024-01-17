@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import Staff from "../../../../../Model/Staff/staff";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const { schoolId } = await req.json();
+    const { school } = await req.json();
 
     // Validate schoolId
-    if (!schoolId) {
+    if (!school) {
       return NextResponse.json(
         {
           message: "Invalid request. 'schoolId' is required.",
@@ -15,12 +15,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const staff = await Staff.find({ schoolId });
+    const staff = await Staff.find({ school });
 
     if (!staff) {
       return NextResponse.json(
         {
-          message: `No staff found for schoolId ${schoolId}.`,
+          message: `No staff found for schoolId ${school}.`,
         },
         { status: 404 }
       );

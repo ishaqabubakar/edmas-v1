@@ -9,7 +9,7 @@ const staffSchema = new mongoose.Schema(
       required: true,
     },
     dob: {
-      type: Date,
+      type: String,
       required: true,
     },
     phone: {

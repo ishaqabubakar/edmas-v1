@@ -18,7 +18,7 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(
       {
-        message: "Staff created",
+        message: "Staff updated",
         data: updatedStaff,
       },
       { status: 200 }

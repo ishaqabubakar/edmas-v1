@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     const newPayment = new Payment({
       classname,
-      school: school,
+      school,
       student: studentByOne._id,
       section: sectionByOne._id,
       title,

@@ -3,9 +3,9 @@ import School from "../../../../../Model/School/school";
 
 export async function DELETE(req: NextRequest) {
   try {
-    const { id } = await req.json();
+    const { _id } = await req.json();
 
-    if (!id) {
+    if (!_id) {
       return NextResponse.json(
         {
           messasge: "could not delete school",
@@ -13,7 +13,7 @@ export async function DELETE(req: NextRequest) {
         { status: 400 }
       );
     }
-    const updatedSchool = await School.findOneAndDelete(id);
+    const updatedSchool = await School.findOneAndDelete({_id});
     return NextResponse.json(
       {
         message: "School deletd",
