@@ -20,6 +20,7 @@
     "@tanstack/react-table": "^8.11.3",
     "@types/bcrypt": "^5.0.2",
     "@types/mongoose": "^5.11.97",
+    "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.1",
     "class-variance-authority": "^0.7.0",

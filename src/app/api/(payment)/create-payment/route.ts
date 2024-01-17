@@ -12,7 +12,6 @@ export async function POST(req: NextRequest) {
     
     const { classname, student, school, amount, title, description, section, transactiondate, status  } = await req.json();
     
-    
     if ( !amount || !status || !school || !transactiondate) {
       return NextResponse.json(
         {
@@ -40,12 +39,13 @@ export async function POST(req: NextRequest) {
       classname,
       school: school,
       student: studentByOne._id,
-      section: sectionByOne._id, // Ensure section is an array
+      section: sectionByOne._id,
       title,
       description,
       transactiondate,
       status,
-      amount
+      amount// Ensure teacher is an array
+      
     });
 
     const savedPayment = await newPayment.save();
@@ -58,7 +58,8 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error(error);   
+    console.error(error); // Log the error for debugging
+
     return NextResponse.json(
       {
         message: "Internal server error",
