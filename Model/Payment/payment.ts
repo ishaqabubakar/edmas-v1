@@ -2,13 +2,13 @@ import mongoose, { Schema, model } from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
-    class: {
+    classname: {
       type: Schema.Types.ObjectId,
       ref: "Class",
       required: true,
     },
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    student: String,
+    student: {type: mongoose.Schema.Types.ObjectId, ref: "Student"},
     amount: {
       type: Number,
       required: true,

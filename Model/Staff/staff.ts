@@ -9,7 +9,7 @@ const staffSchema = new mongoose.Schema(
       required: true,
     },
     dob: {
-      type: Date,
+      type: String,
       required: true,
     },
     phone: {
@@ -22,8 +22,6 @@ const staffSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Staff = mongoose.models.Section
-  ? mongoose.model("Staff")
-  : mongoose.model("Staff", staffSchema);
+const Staff =  mongoose.models.Staff || mongoose.model("Staff", staffSchema);
 
 export default Staff;

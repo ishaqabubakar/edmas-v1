@@ -23,7 +23,7 @@ const schoolSchema = new mongoose.Schema({
 })
 
 
-const School =mongoose.models.School ||  mongoose.model('School',schoolSchema)
+const School = mongoose.models.School ||  mongoose.model('School',schoolSchema)
 
 
 export default School

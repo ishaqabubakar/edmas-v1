@@ -1,16 +1,14 @@
 import mongoose from "mongoose";
 
-
-
 const materialSchema = new mongoose.Schema(
   {
-    materialname: String,
+    materialname: {type: String},
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" },
     subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
-    title: String,
-    description: String,
-    attachment: String,
+    title: {type: String},
+    description: {type: String},
+    attachment: {type: String},
 
   },
   { timestamps: true }
