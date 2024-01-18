@@ -28,6 +28,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.2.0",
+    "devextreme": "23.2.3",
+    "devextreme-react": "23.2.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.304.0",

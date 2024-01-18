@@ -1,10 +1,5 @@
-import {
-    ReactElement,
-    JSXElementConstructor,
-    ReactNode,
-    PromiseLikeOfReactNode,
-  } from "react";
-  import { toast, Slide, ToastContentProps } from "react-toastify";
+
+  import { toast, Slide} from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 
   const options:any = {

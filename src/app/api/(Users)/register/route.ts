@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
         userId: savedUser._id,
         name: data.name,
         dob: data.dob,
-        email: savedUser.email,
+        email: savedUser?.email,
         password: savedUser.password,
         address: data.address,
         phonenumber: data.phonenumber,

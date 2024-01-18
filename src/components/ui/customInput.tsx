@@ -70,7 +70,7 @@ import {
             defaultValue={props.defaultValue}
             onChange={handleChange}
             onKeyUp={props.handleSubmit}
-            className="input text-black text-[16px] h-12 w-full py-3 tracking-wide  focus:outline-none placeholder-black font-Medium font-poppins"
+            className="input text-black text-[14px] h-10 w-full py-3 tracking-wide  focus:outline-none  font-Regular font-poppins"
           />
   
           {props.type == "password" && (

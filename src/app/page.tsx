@@ -23,11 +23,12 @@ export default function Home() {
   
   useEffect(()=>{
     setCookie('userSession',userSession,'')
+    console.log('hello there')
   },[userSession])
+
   const handleLogin = async (e: any) => {
     e.preventDefault();
  
-
     try {
       if (!password || !email) {
         return showToast("error", "Invalid email or password");
@@ -40,12 +41,14 @@ export default function Home() {
             const resData = response.data.data;
             const userCredential = resData[0];
             const userSchoolCredential = resData[1];
+            const schoolData = resData[2]
             const userData = {
               email: userCredential?.email,
               role: userCredential?.role,
               schoolId: userSchoolCredential?.school,
               fullname: userCredential?.name,
               initial: userCredential?.initial,
+              name:schoolData.fullname
             };
             router.push("/dashboard/dashboard");
             setCookie("userSession", JSON.stringify(userData), "");
@@ -80,7 +83,7 @@ export default function Home() {
           <div className="w-full flex flex-col gap-[10px]">
             <InputField
               type="email"
-              border={"border rounded-md px-3"}
+              border={"border rounded-sm px-3"}
               placeholder="Email"
               onChange={setEmail}
               width={"w-full"}
@@ -89,7 +92,7 @@ export default function Home() {
             />
             <InputField
               type="password"
-              border={"border rounded-md px-3 mb-[10px]"}
+              border={"border rounded-sm px-3 mb-[10px]"}
               placeholder="Password"
               onChange={setPassword}
               width={"w-full"}
@@ -103,7 +106,7 @@ export default function Home() {
             forgotPassword="Forgot password"
           />
           <Button
-            className="w-full mt-[30px]"
+            className="w-full mt-[30px] rounded-sm"
             size={"lg"}
             onClick={handleLogin}
           >

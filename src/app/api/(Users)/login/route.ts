@@ -17,7 +17,9 @@ export async function POST(req: NextRequest) {
     const singleAdmin = await Admin.findOne({ email });
     const singleOwner = await Owner.findOne({ email })
     const singleUser = await User.findOne({ email });
-    const userSchool = await School.findOne({ _id: singleStudent?.schoolId });
+    const studenSchool = await School.findOne({ _id: singleStudent?.school });
+    const teacherSchool = await School.findOne({ _id: singleTeacher?.school });
+    const ownerSchool = await School.findOne({ _id: singleOwner?.school });
 
     if (!email || !password) {
       return NextResponse.json(
@@ -54,7 +56,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: [singleUser,singleAdmin],
+          data: [singleUser,singleAdmin,],
         },
         { status: 200 }
       );
@@ -64,7 +66,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: [singleUser,singleOwner],
+          data: [singleUser,singleOwner,ownerSchool],
         },
         { status: 200 }
       );
@@ -74,7 +76,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: [singleUser, singleStudent],
+          data: [singleUser, singleStudent,studenSchool],
         },
         { status: 200 }
       );
@@ -83,7 +85,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           message: "login successfully",
-          data: [singleUser,singleTeacher],
+          data: [singleUser,singleTeacher,teacherSchool],
         },
         { status: 200 }
       );

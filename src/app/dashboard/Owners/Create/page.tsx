@@ -1,7 +1,9 @@
 "use client";
 
 import axiosInstance from "@/API/AXIOS";
+import showToast from "@/components/ui/Toast";
 import { Button } from "@/components/ui/button";
+import { InputField } from "@/components/ui/customInput";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -11,8 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { UserContext } from "@/contextAPI/generalContext";
+import { generateRandomPassword } from "@/helpers/generatePassword";
+import { LoaderIcon } from "lucide-react";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const Dashboard = () => {
   const [fullName, setFullname] = useState("");
@@ -22,57 +27,53 @@ const Dashboard = () => {
   const [gender, setGender] = useState("") as any;
   const [contact, setContact] = useState("");
   const [school, setSchool] = useState("") as any;
-  const [schoolData, setSchoolData] = useState([
-    { schoolName: "Crown Prince Academy", id: 1 },
-    { schoolName: "Best of the Best", id: 2 },
-    { schoolName: "Nhyiraba Preparatory", id: 3 },
-    { schoolName: "Primus International School", id: 4 },
-    { schoolName: "Best Brain Academy", id: 5 },
-  ]) as any;
+  const contextValue = useContext(UserContext);
+  const [creating, setCreating] = useState(false);
+  const [data, setData] = useState({});
 
-  useEffect(() => {
-    const fetchSchoolData = async () => {
-      try {
-        const res = await axiosInstance.get("/all-school");
-        const resData = JSON.stringify(res.data.data);
-        setSchoolData(resData);
-      } catch (error) {
-        console.log(error);
-      }
+  const schoolData = contextValue?.schoolData;
+
+  const handleFormData = async (e: any) => {
+    const payLoad = {
+      name: fullName,
+      email: email,
+      password,
+      role: "owner",
+      school: school,
+      dob: dob,
+      gender,
     };
-    fetchSchoolData();
-  }, []);
+    e.preventDefault();
+    alert(email);
 
-  const handleFormData = async () => {
     try {
       if (!fullName || !email || !password || !contact || !dob) {
-      return console.log('mesage')
+        return alert("Ensure all fieds are correctly filled");
       }
-      const payLoad = {
-        name: fullName,
-        email,
-        password,
-        role: "owner",
-        school: school,
-        dob: dob,
-        gender,
-      } as any;
-      const res = await axiosInstance.get("/register", payLoad);
-      if (res.status === 200) {
-        return console.log('mesage')
+
+      setCreating(true);
+      const res = await axiosInstance.post("/register", { data: payLoad });
+      if (res.status === 201) {
+        setCreating(false);
+        alert("Dataa saved successfully");
       }
     } catch (error: any) {
-      return console.log('mesage')
+      return console.log("mesage");
     }
   };
 
+  const handleGeneratePassword = (e: any) => {
+    e.preventDefault();
+    const newPassword = generateRandomPassword(20);
+    setPassword(newPassword);
+  };
   return (
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create Owner</h4>
           <Button className="rounded-sm" onClick={handleFormData}>
-            Add Owner
+            Add Owner {creating && <LoaderIcon className="mr-2 animate-spin" />}
           </Button>
         </div>
       </div>
@@ -103,14 +104,27 @@ const Dashboard = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                <Label className="w-[200px]">Password</Label>
-                <Input
-                  type="text"
-                  className="rounded-sm focus-visible:outline-none"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <div className="flex flex-col lg:gap-5 gap-3 items-start lg:w-[500px] w-full ">
+                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col mt-[-10px]">
+                  <Label className="w-[200px]">Password</Label>
+                  <InputField
+                    type="password"
+                    border={"border px-5 border-gray-200 rounded-sm"}
+                    placeholder="Password"
+                    value={password}
+                    onChange={setPassword}
+                    width={"w-full"}
+                    required={true}
+                    defaultValue={undefined}
+                  />
+                </div>
+                <Button
+                  className="rounded-sm lg:ml-[160px] lg:w-[340px] w-full"
+                  variant={"outline"}
+                  onClick={handleGeneratePassword}
+                >
+                  Generate Password
+                </Button>
               </div>
             </div>
           </form>
@@ -139,7 +153,7 @@ const Dashboard = () => {
                       className="text-[16px] "
                     />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-sm">
                     <SelectItem value="Male">Male</SelectItem>
                     <SelectItem value="Female">Female</SelectItem>
                   </SelectContent>
@@ -166,12 +180,16 @@ const Dashboard = () => {
                       className="text-[16px] "
                     />
                   </SelectTrigger>
-                  <SelectContent>
-                    {schoolData.map((item: any) => (
-                      <SelectItem key={item.id} value={item.schoolName}>
-                        {item.schoolName}
-                      </SelectItem>
-                    ))}
+                  <SelectContent className="rounded-sm">
+                    {schoolData?.length > 0 ? (
+                      schoolData.map((item: any) => (
+                        <SelectItem key={item?._id} value={item?.fullname}>
+                          {item?.fullname}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <p className="p-2"> No data found</p>
+                    )}
                   </SelectContent>
                 </Select>
               </div>

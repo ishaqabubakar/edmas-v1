@@ -7,11 +7,13 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { useRouter } from "next/navigation";
 import MobileMainMenus from "./mobileMenus";
 import Image from "next/image";
+import truncateText from "@/helpers/Truncate";
 
 const MobileSidebar = () => {
   const contextValue = useContext(UserContext);
   const collapse = contextValue?.collapse;
   const setCollapse = contextValue?.setCollapse;
+  const currentUserSchool =contextValue?.ctx
   const router = useRouter()
 
   return (
@@ -24,7 +26,7 @@ const MobileSidebar = () => {
           className={`font-Medium text-white flex items-center justify-center transition-all ease-in-out duration-500`}
         >
         <Image  src={'/Gitcal.svg'} width={30} height={30} alt="logo"/>
-        <p className="ml-[10px]">GitComplex</p>
+        <p className="ml-[10px]">{truncateText(currentUserSchool?.name,15)}</p>
         </div>
         {/* <h3
           className={`font-Medium text-white ${

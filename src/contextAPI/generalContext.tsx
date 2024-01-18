@@ -11,9 +11,15 @@ interface UserContextProps {
   userData: any;
   setUserData: any;
   ctx: any;
-  fetchSchool: any;
-  setUserSession:any
-  retrivedUserData:any
+  fetchSchoolById: any;
+  setUserSession: any;
+  retrivedUserData: any;
+  schoolData:any,
+  ownersData:any,
+
+
+
+
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -25,46 +31,86 @@ interface UserProviderProps {
 }
 
 export function UserProvider({ children }: UserProviderProps) {
-const [userSession, setUserSession] = useState() as any
+  const [userSession, setUserSession] = useState() as any;
 
-  const retrivedUserData = getCookie("userSession");
-  const ctx = retrivedUserData? JSON.parse(retrivedUserData) : null;
+  const retrivedUserData = getCookie("userSession") as any;
+  let ctx: any;
+
+  if (retrivedUserData !== undefined && retrivedUserData !== null) {
+    try {
+      ctx = JSON.parse(retrivedUserData);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      ctx = null;
+    }
+  } else {
+    ctx = null;
+  }
+
   const [collapse, setCollapse] = useState(false);
-  const [userData, setUserData] = useState() as any;
-  const fetchSchool = async () => {
+  const [userData, setUserData] = useState<any>(null);
+  const [schoolData, setSchoolData] = useState<any[] | undefined>();
+  const [ownersData, setOwnersData] = useState<any[] | undefined>();
+
+
+
+  const fetchSchoolById = async () => {
     try {
       const res = await axiosInstance.post("/get-school-by-id", {
         id: ctx.schoolId,
       });
       console.log("Response from /get-school-by-id:", res);
-  
+      
       if (res.status === 200) {
-        // Check the structure of res.data
-        console.log("Response Data:", res.data);
-        const data = res.data.data;
-        if (data) {
-          setUserData(data);
+        const data = res.data;
+  
+        if (data !== null && data !== undefined) {
+          setUserData(JSON.stringify(data)); // Set the entire data object to userData
         } else {
-          console.warn("Data is undefined in the response.");
+          console.warn("Data is null or undefined in the response.");
         }
       }
     } catch (error) {
       console.error("Error fetching school:", error);
     }
   };
+
+  const fetchSchoolData = async () => {
+    try {
+      const res = await axiosInstance.get("/all-school");
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setOwnersData(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchOwnersData = async () => {
+    try {
+      const res = await axiosInstance.get("/all-owners");
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setSchoolData(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
+
   useEffect(() => {
-    fetchSchool();
+    fetchOwnersData()
+    fetchSchoolData()
+    fetchSchoolById();
   }, []);
 
-useEffect(() => {
-  fetchSchool();
-}, []);
-
-// Alert the object, not the string representation
-alert(JSON.stringify(userData));
-
-  console.log(ctx)
   return (
     <UserContext.Provider
       value={{
@@ -74,9 +120,14 @@ alert(JSON.stringify(userData));
         userData,
         setUserData,
         ctx,
-        fetchSchool,
+        fetchSchoolById,
         setUserSession,
-        retrivedUserData
+        retrivedUserData,
+        schoolData,
+        ownersData
+
+      
+
 
       }}
     >

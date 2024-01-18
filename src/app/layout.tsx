@@ -4,7 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import UserProvider from "@/contextAPI/generalContext";
 import { ToastContainer } from "react-toastify";
-
+import 'devextreme/dist/css/dx.light.css';
 export const fontSans = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",

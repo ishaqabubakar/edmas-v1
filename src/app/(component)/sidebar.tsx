@@ -6,11 +6,13 @@ import { Icon } from "@iconify/react";
 import { UserContext } from "@/contextAPI/generalContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import truncateText from "@/helpers/Truncate";
 
 const Sidebar = () => {
   const contextValue = useContext(UserContext);
   const collapse = contextValue?.collapse;
   const setCollapse = contextValue?.setCollapse;
+  const currentUserSchool = contextValue?.ctx
   const router = useRouter()
 
   return (
@@ -30,7 +32,7 @@ const Sidebar = () => {
           }`}
         >
         <Image  src={'/Gitcal.svg'} width={30} height={30} alt="logo"/>
-        <p className="ml-[10px]">GitComplex</p>
+        <p className="ml-[10px]">{truncateText(currentUserSchool?.name,15)}</p>
         </div>
         <h3
           className={`font-Medium text-white ${
