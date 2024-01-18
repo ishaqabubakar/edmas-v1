@@ -24,10 +24,10 @@ const Dashboard = () => {
         <TopHeader />
       </div>
       <div className="h-full w-full lg:flex-row flex flex-col gap-5">
-        <div className="h-full w-full flex flex-col gap-5">
+        <div className="h-full w-full flex flex-col gap-5 overflow-clip">
           <div className="p-3 border-b h-full bg-white rounded-sm border">
             <p className="font-Medium py-3">Notiice Board</p>
-            <div className="w-full flex  p-2 rounded-sm gap-5 items-center justify-between">
+            <div className="w-full flex  p-2 rounded-sm gap-5 items-center justify-between overflow-clip">
               {/* <div>
                 {" "}
                 <h3 className="font-Medium capitalize">
