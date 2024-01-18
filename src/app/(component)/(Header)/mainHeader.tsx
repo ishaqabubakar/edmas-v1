@@ -24,7 +24,7 @@ const MainHeader = () => {
 
   const contextValue = useContext(UserContext);
   const setCollapse = contextValue?.setCollapse;
-  const { userData } = useUserHook()
+  const userData = contextValue?.userData
   const fullName = userData?.fullname;
 
 
@@ -39,7 +39,7 @@ const MainHeader = () => {
               <MobileSidebar />
             )}
           </div>
-          <p className="font-Medium">{lastPathname} {fullName}</p>
+          <p className="font-Medium">{lastPathname} {userData?.message}</p>
         </div>
 
         <div className="flex gap-2">

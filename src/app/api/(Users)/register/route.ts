@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
       email: data.email,
       name: data.name,
       role: data.role,
+
     });
     const savedUser = await user.save();
     console.log(savedUser);
@@ -70,6 +71,7 @@ export async function POST(req: NextRequest) {
         address: data.address,
         phonenumber: data.phonenumber,
         gender: data.gender,
+       initial:savedUser.initial
       };
       const savedAdmin = await new Admin(roleSpecificData).save();
       return NextResponse.json(
@@ -94,7 +96,8 @@ export async function POST(req: NextRequest) {
         address: data.address,
         phonenumber: data.phonenumber,
         gender: data.gender,
-        school:singleSchool._id
+        school:singleSchool._id,
+        initial:savedUser.initial
       };
       const savedOwner = await new Owner(roleSpecificData).save();
       return NextResponse.json(
@@ -122,6 +125,7 @@ export async function POST(req: NextRequest) {
         section: data.section,
         admissioncode: data.admissioncode,
         school:data?.school,
+        initial:savedUser.initial,
         parent: {
             fullname:data.parent.fullname,
             phone:data.parent.phone,
@@ -153,6 +157,7 @@ export async function POST(req: NextRequest) {
       gender: data.gender,
       class:data.class,
       school:data?.school,
+      initial:savedUser.initial
     };
     const savedTeacher = await new Teacher(roleSpecificData).save();
     return NextResponse.json(

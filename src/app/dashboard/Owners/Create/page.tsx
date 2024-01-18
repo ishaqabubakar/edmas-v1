@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Toast from "@/components/ui/toast";
+
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
@@ -34,7 +34,7 @@ const Dashboard = () => {
     const fetchSchoolData = async () => {
       try {
         const res = await axiosInstance.get("/all-school");
-        const resData = JSON.stringify(res.data);
+        const resData = JSON.stringify(res.data.data);
         setSchoolData(resData);
       } catch (error) {
         console.log(error);
@@ -46,7 +46,7 @@ const Dashboard = () => {
   const handleFormData = async () => {
     try {
       if (!fullName || !email || !password || !contact || !dob) {
-        return Toast("error", "Please ensure all fields are filled correctly.");
+      return console.log('mesage')
       }
       const payLoad = {
         name: fullName,
@@ -59,10 +59,10 @@ const Dashboard = () => {
       } as any;
       const res = await axiosInstance.get("/register", payLoad);
       if (res.status === 200) {
-        return Toast("success", "Account created successfully.");
+        return console.log('mesage')
       }
     } catch (error: any) {
-      return Toast("error", error.message);
+      return console.log('mesage')
     }
   };
 

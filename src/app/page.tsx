@@ -2,13 +2,14 @@
 
 import axiosInstance from "@/API/AXIOS";
 import { CheckBox } from "@/components/ui/CheckBox";
-import Toast from "@/components/ui/Toast";
+import { showToast } from "@/components/ui/Toast";
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/ui/customInput";
 import { setCookie } from "@/helpers/cookie";
 import { LoaderIcon } from "lucide-react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/contextAPI/generalContext";
 
 
 export default function Home() {
@@ -16,37 +17,49 @@ export default function Home() {
   const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const contextVaue = useContext(UserContext)
+  const setUserSession = contextVaue?.setUserSession
+  const userSession =contextVaue?.userSession
+  
+  useEffect(()=>{
+    setCookie('userSession',userSession,'')
+  },[userSession])
   const handleLogin = async (e: any) => {
     e.preventDefault();
+ 
 
     try {
       if (!password || !email) {
-        return Toast("error", "Invalid email or password");
+        return showToast("error", "Invalid email or password");
       }
       setLoading(true);
-      const response = await axiosInstance.post("/login", { email, password });
-      if (response.status === 200) {
-        const resData = response.data.data;
-        const userCredential = resData[0];
-        const userSchoolCredential = resData[1];
-        // alert(JSON.stringify(resData[0].name));
-        const userData = {
-          email: userCredential?.email,
-          role: userCredential?.role,
-          schoolId: userSchoolCredential?.school,
-          fullname: userCredential?.name,
-        };
-        setCookie("userSession", JSON.stringify(userData), "");
-        setLoading(false);
-        return router.push("/dashboard/dashboard");
-      }
+      await axiosInstance
+        .post("/login", { email, password })
+        .then((response) => {
+          if (response.status === 200) {
+            const resData = response.data.data;
+            const userCredential = resData[0];
+            const userSchoolCredential = resData[1];
+            const userData = {
+              email: userCredential?.email,
+              role: userCredential?.role,
+              schoolId: userSchoolCredential?.school,
+              fullname: userCredential?.name,
+              initial: userCredential?.initial,
+            };
+            router.push("/dashboard/dashboard");
+            setCookie("userSession", JSON.stringify(userData), "");
+            setUserSession(JSON.stringify(userData))
+            setLoading(false);
+          }
+        });
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
         setLoading(false);
-        return Toast("error", error.response?.data.message);
+        return showToast("error", error.response?.data.message);
       } else {
         setLoading(false);
-        return Toast("error", error.response?.data.message);
+        return showToast("error", error.response?.data.message);
       }
     }
   };
