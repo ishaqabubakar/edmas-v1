@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const noticeboardSchema = new mongoose.Schema({
   
-  school: {type: mongoose.Schema.ObjectId,ref: 'School'},
+  school: {type: mongoose.Schema.Types.ObjectId,ref: 'School'},
   title: {
     type: { type: String },
     required: true,
@@ -14,8 +14,6 @@ const noticeboardSchema = new mongoose.Schema({
   },
 });
 
-const Noticeboard = mongoose.models.Noticeboard
-  ? mongoose.model("Noticeboard")
-  : mongoose.model("Noticeboard", noticeboardSchema);
+const Noticeboard = mongoose.models.Noticeboard || mongoose.model("Noticeboard", noticeboardSchema);
 
 export default Noticeboard;

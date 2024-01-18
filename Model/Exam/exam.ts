@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const examSchema = new mongoose.Schema(
   {
-    school: {type: mongoose.Schema.ObjectId,ref: 'School'},
+    school: {type: mongoose.Schema.Types.ObjectId,ref: 'School'},
     examname: { type: String, required: true },
     subject: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }],
@@ -14,8 +14,6 @@ const examSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Exam = mongoose.models.Exam
-  ? mongoose.model("Exam")
-  : mongoose.model("Exam", examSchema);
+const Exam = mongoose.models.Exam || mongoose.model("Exam", examSchema);
 
 export default Exam;

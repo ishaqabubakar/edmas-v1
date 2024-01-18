@@ -4,7 +4,7 @@ const classSchema = new mongoose.Schema(
   {
 
     classname: { type: String, required: true },
-    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    school: [{ type: mongoose.Schema.Types.ObjectId, ref: "School" }],
 
     classalias: { type: String },
     teacher: {
@@ -17,8 +17,6 @@ const classSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Class = mongoose.models.Class
-  ? mongoose.model("Class")
-  : mongoose.model("Class", classSchema);
+const Class = mongoose.models.Class || mongoose.model("Class", classSchema);
 
 export default Class;

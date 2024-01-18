@@ -3,9 +3,9 @@ import School from "../../../../../Model/School/school";
 
 export async function PUT(req: NextRequest) {
   try {
-    const { name, location, phone, id } = await req.json();
+    const { name, location, phone, _id } = await req.json();
 
-    if (!id) {
+    if (!_id) {
       return NextResponse.json(
         {
           messasge: "could not update school",
@@ -14,7 +14,7 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const updatedSchool = await School.findByIdAndUpdate(id, {
+    const updatedSchool = await School.findByIdAndUpdate({_id}, {
       name,
       location,
       phone,
@@ -22,7 +22,7 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(
       {
-        message: "School created",
+        message: "School updated",
         data: updatedSchool,
       },
       { status: 200 }

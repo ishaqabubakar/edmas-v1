@@ -1,4 +1,4 @@
-import Teacher from "../../../../../Model/Teacher/teacher";
+ import Teacher from "../../../../../Model/Teacher/teacher";
 import Admin from "../../../../../Model/Admin/admin";
 import Student from "../../../../../Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";

@@ -37,14 +37,15 @@ export async function POST(req: NextRequest) {
 
     const newPayment = new Payment({
       classname,
-      school: school,
+      school,
       student: studentByOne._id,
-      section: sectionByOne._id, // Ensure teacher is an array
+      section: sectionByOne._id,
       title,
       description,
       transactiondate,
       status,
-      amount
+      amount// Ensure teacher is an array
+      
     });
 
     const savedPayment = await newPayment.save();
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error(error); // Log the error for debugging
+
     return NextResponse.json(
       {
         message: "Internal server error",

@@ -3,6 +3,7 @@ import School from "../../../../../Model/School/school";
 
 export async function GET() {
   try {
+    
     const schools = await School.find()
 
     return NextResponse.json(

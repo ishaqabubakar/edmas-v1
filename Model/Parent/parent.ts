@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const parentSchema = new mongoose.Schema(
   {
-    school: { type: mongoose.Schema.ObjectId, ref: "School" },
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     name: { type: String, required: true },
     email: { type: String, required: true },
     dob: { type: String },
@@ -15,8 +15,6 @@ const parentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Parent = mongoose.models.Parent
-  ? mongoose.model("Parent")
-  : mongoose.model("Parent", parentSchema);
+const Parent = mongoose.models.Parent || mongoose.model("Parent", parentSchema);
 
 export default Parent;

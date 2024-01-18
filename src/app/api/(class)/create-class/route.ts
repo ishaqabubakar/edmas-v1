@@ -5,6 +5,7 @@ import Class from "../../../../../Model/Class/class";
 import Teacher from "../../../../../Model/Teacher/teacher";
 import School from "../../../../../Model/School/school";
 
+
 export async function POST(req: NextRequest) {
   try {
     await connectDB();

@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const salariesSchema = new mongoose.Schema({
-
   school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-  staff: { type: String },
+  staffname: { type: String },
   title: {
     type: String,
     required: true,
@@ -19,7 +18,6 @@ const salariesSchema = new mongoose.Schema({
     required: true,
   },
 
-
   stafftype: { type: String },
 
   transactiondate: {
@@ -30,8 +28,7 @@ const salariesSchema = new mongoose.Schema({
   status: { type: String },
 });
 
-const Salaries = mongoose.models.Salaries
-  ? mongoose.model("Salaries")
-  : mongoose.model("Salaries", salariesSchema);
+const Salaries =
+  mongoose.models.Salaries || mongoose.model("Salaries", salariesSchema);
 
 export default Salaries;
