@@ -1,22 +1,50 @@
+"use client";
+
+import axiosInstance from "@/API/AXIOS";
+import Toast from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import React from "react";
+
+import React, { useState } from "react";
 
 const Dashboard = () => {
+  const [schoolName, setSchoolName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [contact, setcontact] = useState("");
+
+  const handleFormSubmission = async () => {
+    try {
+      if (!schoolName || !email || !location || !contact) {
+        return Toast("error", "Invalid email or password");
+      }
+
+      const res = await axiosInstance.post("/create-school", {
+        fullname: schoolName,
+        location,
+        phone: contact,
+        email,
+      });
+
+      if (res.status === 200) {
+        return Toast("success", "School created successfully");
+      } else {
+        return Toast("error", "Something went wrong. Please try again.");
+      }
+    } catch (error: any) {
+      alert(error);
+    }
+  };
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create School</h4>
-          <Button className="rounded-sm">Add School</Button>
+          <Button className="rounded-sm" onClick={handleFormSubmission}>
+            Add School
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
@@ -33,14 +61,16 @@ const Dashboard = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="School name"
+                    onChange={(e) => setSchoolName(e.target.value)}
                   />
                 </div>
                 <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Description</Label>
-                  <textarea
-                    className="rounded-sm focus-visible:outline-none border w-full p-3"
-                    placeholder="Description"
-                    minLength={200}
+                  <Label className="w-[200px]">Email</Label>
+                  <Input
+                    type="email"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -51,6 +81,7 @@ const Dashboard = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Location"
+                    onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
               </div>
@@ -61,9 +92,10 @@ const Dashboard = () => {
                     type="phone"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Phone"
+                    onChange={(e) => setcontact(e.target.value)}
                   />
                 </div>
-             </div>
+              </div>
             </div>
           </form>
         </div>

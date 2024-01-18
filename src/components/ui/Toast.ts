@@ -6,18 +6,7 @@ import {
   } from "react";
   import { toast, Slide, ToastContentProps } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
-  
-  interface toastOption {
-    position: string;
-    autoClose: number;
-    hideProgressBar: boolean;
-    closeOnClick: boolean;
-    pauseOnHover: boolean;
-    draggable: boolean;
-    progress?: any;
-    theme: string;
-    transition: any;
-  }
+
   const options:any = {
     position: "top-right",
     autoClose: 5000,
@@ -30,18 +19,9 @@ import {
     transition: Slide,
   };
   
-   const Toast = (
+ export const showToast = (
     notificationType: string,
-    notificationMessage:
-      | string
-      | number
-      | boolean
-      | ReactElement<any, string | JSXElementConstructor<any>>
-      | Iterable<ReactNode>
-      | PromiseLikeOfReactNode
-      | ((props: ToastContentProps<unknown>) => ReactNode)
-      | null
-      | undefined
+    notificationMessage:string
   ) => {
     switch (notificationType) {
       case "success":
@@ -61,4 +41,4 @@ import {
     }
   };
   
-  export default Toast
+  export default showToast

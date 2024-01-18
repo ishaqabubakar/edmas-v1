@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
       email: data.email,
       name: data.name,
       role: data.role,
+
     });
     const savedUser = await user.save();
     console.log(savedUser);
@@ -70,6 +71,7 @@ export async function POST(req: NextRequest) {
         address: data.address,
         phonenumber: data.phonenumber,
         gender: data.gender,
+       initial:savedUser.initial
       };
       const savedAdmin = await new Admin(roleSpecificData).save();
       return NextResponse.json(
@@ -77,7 +79,7 @@ export async function POST(req: NextRequest) {
           message: "User registered successfully",
           userData: {
             user: savedUser,
-            teacher: savedAdmin,
+            Admin: savedAdmin,
           },
         },
         { status: 201 }
@@ -94,7 +96,8 @@ export async function POST(req: NextRequest) {
         address: data.address,
         phonenumber: data.phonenumber,
         gender: data.gender,
-        school:singleSchool._id
+        school:singleSchool._id,
+        initial:savedUser.initial
       };
       const savedOwner = await new Owner(roleSpecificData).save();
       return NextResponse.json(
@@ -121,7 +124,8 @@ export async function POST(req: NextRequest) {
         class: data.class,
         section: data.section,
         admissioncode: data.admissioncode,
-        schoolId:data?.schoolId,
+        school:data?.school,
+        initial:savedUser.initial,
         parent: {
             fullname:data.parent.fullname,
             phone:data.parent.phone,
@@ -152,7 +156,8 @@ export async function POST(req: NextRequest) {
       phonenumber: data.phonenumber,
       gender: data.gender,
       class:data.class,
-      school:data?.schoolId,
+      school:data?.school,
+      initial:savedUser.initial
     };
     const savedTeacher = await new Teacher(roleSpecificData).save();
     return NextResponse.json(
@@ -160,7 +165,7 @@ export async function POST(req: NextRequest) {
         message: "User registered successfully",
         userData: {
           user: savedUser,
-          admin: savedTeacher,
+          teacher: savedTeacher,
         },
       },
       { status: 201 }

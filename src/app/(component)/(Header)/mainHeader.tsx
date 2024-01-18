@@ -7,6 +7,8 @@ import UserProfile from "../userProfile";
 import MobileSidebar from "../mobileSideView";
 import NotificationCenter from "../Notification";
 import { usePathname } from "next/navigation";
+import useUserHook from "@/hooks/useUserHook";
+
 
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,6 +24,10 @@ const MainHeader = () => {
 
   const contextValue = useContext(UserContext);
   const setCollapse = contextValue?.setCollapse;
+  const userData = contextValue?.userData
+  const fullName = userData?.fullname;
+
+
   return (
     <div className="py-5 h-[90px] border-b w-full px-5 flex items-center bg-white">
       <div className="flex items-center w-full justify-between">
@@ -33,7 +39,7 @@ const MainHeader = () => {
               <MobileSidebar />
             )}
           </div>
-          <p className="font-Medium">{lastPathname}</p>
+          <p className="font-Medium">{lastPathname} {userData?.message}</p>
         </div>
 
         <div className="flex gap-2">
