@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
 import { ShieldCloseIcon, X } from "lucide-react";
 import SchedulerTable from "@/app/(component)/Scheduler";
+import DigitalClock from "@/app/(component)/DigitalClock";
 
 const Dashboard = () => {
   const contextValue = useContext(UserContext);
@@ -16,7 +17,9 @@ const Dashboard = () => {
         <div className="h-[100px] bg-white w-full rounded-sm border flex  p-5 justify-between">
           <div className="">
             {" "}
-            <h3 className="text-[24px] font-Regular p-0">Welcome to {currentUser.name},</h3>
+            <h3 className="text-[24px] font-Regular p-0">
+              Welcome to {currentUser?.name},
+            </h3>
             <p>{currentUser?.fullname}</p>
           </div>
           <X />
@@ -72,10 +75,10 @@ const Dashboard = () => {
           </div>
           <div className=" flex flex-col gap-5 items-center justify-center">
             <div className="bg-white w-full h-full flex items-center justify-center">
-              <CalendarDemo />
+              <DigitalClock />
             </div>
             <div className="bg-white w-full h-full py-3">
-              <StudentParentStats />
+              <CalendarDemo />
             </div>
           </div>
         </div>

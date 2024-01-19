@@ -12,7 +12,7 @@ const SchedulerTable = () => (
     views={views}
     currentView="agenda"
     defaultCurrentDate={currentDate}
-    height={400}
+    height={500}
     startDayHour={9} style={{ border:"0px", borderRadius:'5px'}} >
     <Resource
       dataSource={assignees}

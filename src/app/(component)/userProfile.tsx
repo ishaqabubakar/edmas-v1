@@ -1,7 +1,5 @@
 "use client";
-import { CreditCard, LifeBuoy, LogOut, Settings, User } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { CreditCard, LifeBuoy, LogOut, Settings, User, UserRound } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,9 +29,7 @@ export function UserPforile() {
       <DropdownMenuTrigger asChild className="cursor-pointer">
         <div className="w-[40px] bg-gray-50 h-[40px] rounded-sm border-[2px] flex items-center justify-center">
           <h3 className="text-[16px] font-Medium">
-            {
-              ctx?.initial
-            }
+          <UserRound />
           </h3>
         </div>
       </DropdownMenuTrigger>

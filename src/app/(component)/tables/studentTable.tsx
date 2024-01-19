@@ -20,11 +20,11 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 
-const SchoolTable = () => {
+const StudentTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
-  const data = contxtValue?.schoolData;
+  const data = contxtValue?.studentBySchool;
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -34,10 +34,12 @@ const SchoolTable = () => {
     : [];
 
   const sortedData = [...filteredData]?.sort((a, b) => {
-    if (sortOption === "fullname") {
-      return a.fullname.localeCompare(b.fullname);
+    if (sortOption === "name") {
+      return a.name.localeCompare(b.name);
+    }else if(sortOption === "class"){
+        return a.class.localeCompare(b.class);
     } else {
-      return 0; // No sorting by default
+      return 0; 
     }
   });
 
@@ -62,12 +64,12 @@ const SchoolTable = () => {
             <DropdownMenuContent className="w-40 mr-7 rounded-sm">
               <DropdownMenuLabel>Sort By</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setSortOption("fullname")}>
-                School
+              <DropdownMenuItem onSelect={() => setSortOption("name")}>
+              Name
               </DropdownMenuItem>
-              {/* <DropdownMenuItem onSelect={() => setSortOption("school")}>
-             Location
-            </DropdownMenuItem> */}
+              <DropdownMenuItem onSelect={() => setSortOption("class")}>
+             Class
+            </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -78,9 +80,10 @@ const SchoolTable = () => {
             <TableHeader className="rounded-sm">
               <TableRow>
                 <TableHead>Full Name</TableHead>
-                <TableHead>School</TableHead>
+                <TableHead>Class</TableHead>
+                <TableHead className="">Section</TableHead>
                 <TableHead className="">Email</TableHead>
-                <TableHead className="">Location</TableHead>
+                <TableHead className="">Parent</TableHead>
                 <TableHead className="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -93,10 +96,11 @@ const SchoolTable = () => {
                   }`}
                   key={item.id}
                 >
-                  <TableCell className="py-2">{item.fullname}</TableCell>
-                  <TableCell className="py-2">{item.location}</TableCell>
-                  <TableCell className="py-2 ">{item.phone}</TableCell>
-                  <TableCell className="py-2 ">{item.email}</TableCell>
+                  <TableCell className="py-2">{item.name}</TableCell>
+                  <TableCell className="py-2">{item.class}</TableCell>
+                  <TableCell className="py-2">{item.section}</TableCell>
+                  <TableCell className="py-2 ">{item.parent.parentemail}</TableCell>
+                  <TableCell className="py-2 ">{item.parent.fullname}</TableCell>
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                     <DropdownMenu>
                       <DropdownMenuTrigger
@@ -131,4 +135,4 @@ const SchoolTable = () => {
   );
 };
 
-export default SchoolTable;
+export default StudentTable;

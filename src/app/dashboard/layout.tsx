@@ -6,8 +6,8 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { getCookie } from "@/helpers/cookie";
 import { UserContext } from "@/contextAPI/generalContext";
+import { Toaster } from 'sonner';
 const metadata: Metadata = {
   title: "EduApp",
   description: "Modern school management system",
@@ -49,6 +49,7 @@ export default function RootLayout({
           <div className="flex flex-col w-full h-full">
             <MainHeader />
             {children}
+            <Toaster richColors position="top-right" expand={true}/>
           </div>
         </main>
       </body>

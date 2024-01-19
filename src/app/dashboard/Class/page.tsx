@@ -1,13 +1,7 @@
+"use client"
+import ClassTable from "@/app/(component)/tables/classTable";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import Link from "next/link";
 import React from "react";
 
@@ -22,11 +16,7 @@ const Dashboard = () => {
           </Link>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-5 h-full">
-        <div className="w-full bg-white flex h-full border items-center rounded-sm justify-center">
-          <p className="text-gray-400">No record yet</p>
-        </div>
-      </div>
+      <ClassTable />
     </div>
   );
 };

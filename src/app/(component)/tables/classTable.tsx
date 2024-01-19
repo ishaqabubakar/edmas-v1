@@ -20,11 +20,11 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 
-const SchoolTable = () => {
+const ClassTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
-  const data = contxtValue?.schoolData;
+  const data = contxtValue?.classBySchool;
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -34,15 +34,21 @@ const SchoolTable = () => {
     : [];
 
   const sortedData = [...filteredData]?.sort((a, b) => {
-    if (sortOption === "fullname") {
-      return a.fullname.localeCompare(b.fullname);
+    if (sortOption === "classname") {
+      return a.classname.localeCompare(b.classname);
+    } else if (sortOption === "size") {
+      return a.size.localeCompare(b.size);
     } else {
-      return 0; // No sorting by default
+      return 0;
     }
   });
 
   return (
-    <div className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${!data && 'item-center justify-center'}`}>
+    <div
+      className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${
+        !data && "item-center justify-center"
+      }`}
+    >
       {data && (
         <div className="flex justify-between items-center py-3 px-3">
           <Input
@@ -62,12 +68,12 @@ const SchoolTable = () => {
             <DropdownMenuContent className="w-40 mr-7 rounded-sm">
               <DropdownMenuLabel>Sort By</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setSortOption("fullname")}>
-                School
+              <DropdownMenuItem onSelect={() => setSortOption("classname")}>
+                Name
               </DropdownMenuItem>
-              {/* <DropdownMenuItem onSelect={() => setSortOption("school")}>
-             Location
-            </DropdownMenuItem> */}
+              <DropdownMenuItem onSelect={() => setSortOption("size")}>
+               Size
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -77,10 +83,8 @@ const SchoolTable = () => {
           <Table className="bg-white w-full border-b">
             <TableHeader className="rounded-sm">
               <TableRow>
-                <TableHead>Full Name</TableHead>
-                <TableHead>School</TableHead>
-                <TableHead className="">Email</TableHead>
-                <TableHead className="">Location</TableHead>
+                <TableHead>Class Name</TableHead>
+                <TableHead>Class Size</TableHead>
                 <TableHead className="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -93,10 +97,8 @@ const SchoolTable = () => {
                   }`}
                   key={item.id}
                 >
-                  <TableCell className="py-2">{item.fullname}</TableCell>
-                  <TableCell className="py-2">{item.location}</TableCell>
-                  <TableCell className="py-2 ">{item.phone}</TableCell>
-                  <TableCell className="py-2 ">{item.email}</TableCell>
+                  <TableCell className="py-2">{item.classname}</TableCell>
+                  <TableCell className="py-2 ">{item.size}</TableCell>
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                     <DropdownMenu>
                       <DropdownMenuTrigger
@@ -126,9 +128,13 @@ const SchoolTable = () => {
           </Table>
         </div>
       )}
-        {!data &&  <p className="text-[16px] animate-pulse p-5 text-center">Loading data...</p>}
+      {!data && (
+        <p className="text-[16px] animate-pulse p-5 text-center">
+          Loading data...
+        </p>
+      )}
     </div>
   );
 };
 
-export default SchoolTable;
+export default ClassTable;

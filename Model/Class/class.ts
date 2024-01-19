@@ -14,7 +14,7 @@ const classSchema = new mongoose.Schema(
     size: { type: String },
   },
 
-  { timestamps: true }
+  { timestamps: true, toJSON: {virtuals: true }}
 );
 
 const Class = mongoose.models.Class || mongoose.model("Class", classSchema);

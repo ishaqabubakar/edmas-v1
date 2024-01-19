@@ -4,11 +4,11 @@ import Teacher from "../../../../../Model/Teacher/teacher";
 export async function POST( req:NextRequest) {
   try {
     const { id } = await req.json()
-    const teachBySchool = Teacher.find({ school: id})
+    const teachBySchool =await Teacher.find({ school: id})
 
     return NextResponse.json(
       {
-        message: "school",
+        message: "Teachers",
         data: teachBySchool,
       },
       { status: 200 }

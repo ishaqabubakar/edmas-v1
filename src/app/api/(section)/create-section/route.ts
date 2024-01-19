@@ -2,12 +2,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import Section from "../../../../../Model/Section/section";
+import Teacher from "../../../../../Model/Teacher/teacher";
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const { name, nickname, teacher } = await req.json();
+    const { name, nickname, teacher, school } = await req.json();
 
     if (!name || !nickname || !teacher) {
       return NextResponse.json(
@@ -17,11 +18,13 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
+  // Check if teacher exists
+  const teacherByOne = await Teacher.findOne({ name: teacher });
     const newSection = new Section({
       name,
       nickname,
-      teacher,
+      teacher:[teacherByOne._id],
+      school
     });
 
     const savedSection = await newSection.save();

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const student = await Student.find({ schoolId });
+    const student = await Student.find({ school:schoolId });
 
     if (!student) {
       return NextResponse.json(

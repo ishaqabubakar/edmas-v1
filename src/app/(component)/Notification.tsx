@@ -44,8 +44,8 @@ export function NotificationCenter() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <div className="w-[40px] bg-black h-[40px] rounded-sm  flex items-center justify-center">
-          <Icon icon="ion:notifications" className="text-[24px] text-white " />
+        <div className="w-[40px] h-[40px] rounded-sm  flex items-center justify-center">
+          <Icon icon="ion:notifications" className="text-[24px] text-gray-400 " />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="lg:w-[400px] w-[330px] flex flex-col mr-5 p-3 gap-2">

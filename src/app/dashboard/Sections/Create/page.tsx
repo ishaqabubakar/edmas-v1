@@ -1,3 +1,5 @@
+"use client";
+import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,15 +10,55 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import { UserContext } from "@/contextAPI/generalContext";
+import { LoaderIcon } from "lucide-react";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
 
-const page= () => {
+export const CreateClass = () => {
+  const contextValue = useContext(UserContext);
+  const allTeachers = contextValue?.teacherBySchool;
+  const [name, setName] = useState("");
+  const [creating, setCreating] = useState(false);
+  const [nickName, setNickname] = useState("");
+  const [teacher, setTeacher] = useState() as any;
+  const handleClassSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      if (!name || !teacher) {
+        return toast.error("Ensure all fields are filled correctly.");
+      }
+      setCreating(true);
+      const res = await axiosInstance.post("/create-section", {
+        name,
+        school: contextValue?.ctx.schoolId,
+        teacher,
+        nickname: nickName,
+      });
+
+      if (res.status === 200) {
+        setName("");
+        setNickname("");
+        setTeacher("");
+        setCreating(false);
+        return toast.success("Section created successfully");
+      }
+    } catch (error: any) {
+      setCreating(false);
+      console.log(error);
+      return toast.error(error.message);
+    }
+  };
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create Section</h4>
-          <Button className="rounded-sm">Add Section</Button>
+          <Button className="rounded-sm" onClick={handleClassSubmit}>
+            Add Section
+            {creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
@@ -33,6 +75,7 @@ const page= () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Name"
+                    onClick={(e: any) => setName(e.target.value)}
                   />
                 </div>
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -41,26 +84,33 @@ const page= () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Nickname"
+                    onClick={(e: any) => setNickname(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col gap-5">
-                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Teacher</Label>
-                  <Select>
-                    <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
-                      <SelectValue
-                        placeholder="Select Teacher"
-                        className="text-[16px] "
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Ishaq Abubakar">Ishaq Abubakar</SelectItem>
-                      <SelectItem value="Richie Boachie">Richie Boachie</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                    <Label className="w-[200px]">Teacher</Label>
+                    <Select onValueChange={(val) => setTeacher(val)}>
+                      <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
+                        <SelectValue
+                          placeholder="Select Teacher"
+                          className="text-[16px] "
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {allTeachers?.length > 0 ? (
+                          allTeachers.map((item: any) => (
+                            <SelectItem key={item?._id} value={item?.name}>
+                              {item?.name}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <p className="p-2"> No data found</p>
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-           
               </div>
             </div>
           </form>
@@ -70,4 +120,4 @@ const page= () => {
   );
 };
 
-export default page;
+export default CreateClass;

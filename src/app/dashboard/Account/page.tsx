@@ -1,6 +1,6 @@
 "use client";
 
-import TableComponent from "@/app/(component)/ownersTable";
+import TableComponent from "@/app/(component)/tables/ownersTable";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";

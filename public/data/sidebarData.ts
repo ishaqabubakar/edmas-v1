@@ -52,11 +52,11 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Classes & Subject",
     sub: [
       { path: "/dashboard/Class", menus: "Class" },
-      { path: "/dashboaard/Sections", menus: "Sections" },
+      { path: "/dashboard/Sections", menus: "Sections" },
       { path: "/dashboard/Routines", menus: "Routines" },
-      { path: "/dashboaard/Subjects", menus: "Subjects" },
-      { path: "/dashboaard/Syllabuses", menus: "Syllabuses" },
-      { path: "/dashboaard/Materials", menus: "Materials" },
+      { path: "/dashboard/Subjects", menus: "Subjects" },
+      { path: "/dashboard/Syllabuses", menus: "Syllabuses" },
+      { path: "/dashboard/Materials", menus: "Materials" },
     ],
   },
   {

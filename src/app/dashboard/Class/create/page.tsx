@@ -1,6 +1,9 @@
+"use client";
+import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 import {
   Select,
   SelectContent,
@@ -8,15 +11,64 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import { UserContext } from "@/contextAPI/generalContext";
+import { LoaderIcon } from "lucide-react";
+import React, { useContext, useState } from "react";
 
 const Dashboard = () => {
+  const contextValue = useContext(UserContext);
+  const allTeachers = contextValue?.teacherBySchool;
+  const schoolId = contextValue?.ctx.schoolId;
+
+  const [name, setName] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [size, setSize] = useState("");
+  const [creating, setCreating] = useState(false);
+
+  const handleClassSubmit = async (e: any) => {
+    e.preventDefault();
+  
+    try {
+      if (!name || !teacher) {
+        return toast.error("Ensure all fields are filled correctly.");
+      }
+  
+      setCreating(true);
+  
+      const response = await axiosInstance.post("/create-class", {
+        classname: name,
+        school: schoolId,
+        teacher,
+        size,
+      });
+  
+      if (response.status === 200) {
+        setName("");
+        setSize("");
+        setTeacher("");
+        setCreating(false);
+        toast.success("Class created successfully");
+      } else {
+        setCreating(false);
+        toast.error("Failed to create class. Please try again.");
+      }
+    } catch (error) {
+      setCreating(false);
+      console.error("Error creating class:", error);
+      toast.error("An error occurred while creating the class.");
+    }
+  };
+  
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create Class</h4>
-          <Button className="rounded-sm">Add Class</Button>
+          <Button className="rounded-sm" onClick={handleClassSubmit}>
+            Add Class
+            {creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
@@ -33,13 +85,14 @@ const Dashboard = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Class Name"
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-5">
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Teacher</Label>
-                  <Select>
+                  <Select onValueChange={(val) => setTeacher(val)}>
                     <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                       <SelectValue
                         placeholder="Select Teacher"
@@ -47,8 +100,15 @@ const Dashboard = () => {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Male">Ishaq Abubakar</SelectItem>
-                      <SelectItem value="Female">Richard Boachie</SelectItem>
+                      {allTeachers?.length > 0 ? (
+                        allTeachers.map((item: any) => (
+                          <SelectItem key={item?._id} value={item?.name}>
+                            {item?.name}
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <p className="p-2"> No data found</p>
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -58,6 +118,7 @@ const Dashboard = () => {
                     type="number"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Class size"
+                    onChange={(e) => setSize(e.target.value)}
                   />
                 </div>
               </div>

@@ -1,14 +1,11 @@
 "use client";
 
-import TableComponent from "@/app/(component)/ownersTable";
+import TableComponent from "@/app/(component)/tables/ownersTable";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-import React, { useState } from "react";
 
 export const Owner = () => {
-  const [data, setData] = useState(true);
-  
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -19,15 +16,7 @@ export const Owner = () => {
           </Link>
         </div>
       </div>
-      {data ? (
-        <TableComponent />
-      ) : (
-        <div className="w-full flex flex-col gap-5 h-full">
-          <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-            <p className="text-gray-400">No records yet</p>
-          </div>
-        </div>
-      )}
+      <TableComponent />
     </div>
   );
 };

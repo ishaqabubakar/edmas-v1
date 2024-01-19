@@ -16,6 +16,9 @@ interface UserContextProps {
   retrivedUserData: any;
   schoolData:any,
   ownersData:any,
+  studentBySchool:any,
+  teacherBySchool:any
+  classBySchool:any
 
 
 
@@ -51,6 +54,9 @@ export function UserProvider({ children }: UserProviderProps) {
   const [userData, setUserData] = useState<any>(null);
   const [schoolData, setSchoolData] = useState<any[] | undefined>();
   const [ownersData, setOwnersData] = useState<any[] | undefined>();
+  const [studentBySchool, setStudentBySchool] = useState<any[] | undefined>();
+  const [teacherBySchool, setTeacherBySchool] = useState<any[] | undefined>();
+  const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
 
 
 
@@ -81,7 +87,7 @@ export function UserProvider({ children }: UserProviderProps) {
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setOwnersData(newData.data); // Set newData directly, assuming it's an object or an array
+          setSchoolData(newData.data); // Set newData directly, assuming it's an object or an array
           console.log(newData.data) 
         }
       }
@@ -95,7 +101,50 @@ export function UserProvider({ children }: UserProviderProps) {
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setSchoolData(newData.data); // Set newData directly, assuming it's an object or an array
+          setOwnersData(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchStudentBySchoolId = async () => {
+    try {
+      const res = await axiosInstance.post("/get-student",{schoolId: ctx?.schoolId});
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setStudentBySchool(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchTeacherBySchoolId = async () => {
+    try {
+      const res = await axiosInstance.post("/get-teachers",{id: ctx?.schoolId});
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setTeacherBySchool(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const fetchClassBySchoolId = async () => {
+    try {
+      const res = await axiosInstance.post("/get-classes",{schoolId: ctx?.schoolId});
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setClassBySchool(newData.data); // Set newData directly, assuming it's an object or an array
           console.log(newData.data) 
         }
       }
@@ -109,6 +158,9 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchOwnersData()
     fetchSchoolData()
     fetchSchoolById();
+    fetchStudentBySchoolId()
+    fetchTeacherBySchoolId()
+    fetchClassBySchoolId()
   }, []);
 
   return (
@@ -124,7 +176,10 @@ export function UserProvider({ children }: UserProviderProps) {
         setUserSession,
         retrivedUserData,
         schoolData,
-        ownersData
+        ownersData,
+        studentBySchool,
+        teacherBySchool,
+        classBySchool
 
       
 

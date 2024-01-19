@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
             fullname:data.parent.fullname,
             phone:data.parent.phone,
             proffession:data.parent.proffession,
-            parentemail:data.parent.parente
+            parentemail:data.parent.parentemail
         }
       };
       const savedStudent = await new Student(roleSpecificData).save();
@@ -153,11 +153,12 @@ export async function POST(req: NextRequest) {
       email: savedUser.email,
       password: savedUser.password,
       address: data.address,
-      phonenumber: data.phonenumber,
+      phone: data.phone,
       gender: data.gender,
       class:data.class,
       school:data?.school,
-      initial:savedUser.initial
+      initial:savedUser.initial,
+      
     };
     const savedTeacher = await new Teacher(roleSpecificData).save();
     return NextResponse.json(

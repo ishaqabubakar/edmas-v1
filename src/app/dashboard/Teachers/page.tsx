@@ -1,13 +1,8 @@
+"use client"
+
+import TeachersTable from "@/app/(component)/tables/teachersTable";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import Link from "next/link";
 import React from "react";
 
@@ -20,9 +15,7 @@ const ViewTeachers = () => {
          <Link href={'/dashboard/Teachers/create'}> <Button className="rounded-sm">Add teacher</Button></Link>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-5 h-full bg-white rounded-sm border justify-center items-center">
-        <p className="text-gray-400">No records yet</p>
-      </div>
+     <TeachersTable />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import UserProvider from "@/contextAPI/generalContext";
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(fontSans.variable, 'font-poppins') }>
+     
       <ToastContainer
           position="top-right"
           autoClose={5000}
