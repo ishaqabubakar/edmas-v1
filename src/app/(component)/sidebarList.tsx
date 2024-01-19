@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
@@ -11,7 +13,7 @@ const MainMenus = ({}) => {
   const collapse = contextValue?.collapse;
   const setCollapse = contextValue?.setCollapse;
   const [openSubmenus, setOpenSubmenus] = useState([]);
-  const router = useRouter();
+
 
   const handleToggle = (index: number) => {
     const updatedSubmenus = [...openSubmenus] as any;
@@ -23,9 +25,10 @@ const MainMenus = ({}) => {
   return (
     <div>
       {sidebarMenus.map((menu, key) => (
-        <div key={key}>
+        <div>
           <div className="w-full">
             <li
+             key={key}
               className={`flex flex-row items-center justify-between cursor-pointer px-[10px] hover:bg-zinc-700 rounded-sm gap-[10px] h-[40px] text-[14px] font-Medium w-full transition-all ease-in-out duration-500  ${
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
@@ -56,7 +59,8 @@ const MainMenus = ({}) => {
                     ? "block pl-[15px] transition-all ease-in-out duration-500"
                     : "hidden transition-all ease-in-out duration-500"
                 }`}
-                href={`/dashboard/${sub.menus}`}
+                href={`${sub.path}`}
+                prefetch={false}
               >
                 {sub.menus}
               </Link>

@@ -12,21 +12,21 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "ri:school-line",
     menu: "Manage Schools",
     sub: [
-      { path: "/dashboard/School/insert-school", menus: "Schools" },
+      { path: "/dashboard/Schools", menus: "Schools" },
     ],
   },
   {
     icon: "lucide:user-round",
     menu: "Super Admin",
     sub: [
-      { path: "/dashboard/Owner/insert-owner", menus: "Owners" },
+      { path: "/dashboard/Owners", menus: "Owners" },
     ],
   },
   {
     icon: "lucide:user-round",
     menu: "Admin/Master",
     sub: [
-      { path: "/dashboard/Owner/insert-owner", menus: "Account" },
+      { path: "/dashboard/Account", menus: "Account" },
     ],
   },
   {
@@ -43,7 +43,7 @@ export const sidebarMenus: sidebarProps[] = [
     sub: [
       // { path: "/dashboard/Staffs/", menus: "Staffs" },
       { path: "/dashboard/Teachers", menus: "Teachers" },
-      { path: "/dashboard/", menus: "Others" },
+      { path: "/dashboard/Others", menus: "Others" },
     ],
   },
 
@@ -52,11 +52,11 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Classes & Subject",
     sub: [
       { path: "/dashboard/Class", menus: "Class" },
-      { path: "/dashboaard/Class-section", menus: "Sections" },
-      { path: "/dashboard/Class/insert-class", menus: "Routines" },
-      { path: "/dashboaard/Class/view-class", menus: "Subjects" },
-      { path: "/dashboaard/Class/view-class", menus: "Syllabuses" },
-      { path: "/dashboaard/Class/view-class", menus: "Materials" },
+      { path: "/dashboaard/Sections", menus: "Sections" },
+      { path: "/dashboard/Routines", menus: "Routines" },
+      { path: "/dashboaard/Subjects", menus: "Subjects" },
+      { path: "/dashboaard/Syllabuses", menus: "Syllabuses" },
+      { path: "/dashboaard/Materials", menus: "Materials" },
     ],
   },
   {
@@ -64,7 +64,7 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Examination",
     sub: [
       // { path: "/dashboard/Subject/view-subject", menus: "Exams" },
-      { path: "/dashboard/Subject/view-subject", menus: "Grade" },
+      { path: "/dashboard/Examination", menus: "Grade" },
      
     ],
   },
@@ -79,17 +79,17 @@ export const sidebarMenus: sidebarProps[] = [
     icon: "heroicons:building-office-2",
     menu: "Manage Office",
     sub: [
-      { path: "/dashboard/Parents/insert-parent", menus: "NoticeBoard" },
-      { path: "/dashboard/Parents/view-parent", menus: "Messages" },
-      { path: "/dashboard/Parents/view-parent", menus: "Occassions" },
+      { path: "/dashboard/NoticeBoard", menus: "NoticeBoard" },
+      { path: "/dashboard/Messages", menus: "Messages" },
+      { path: "/dashboard/Occassions", menus: "Occassions" },
     ],
   },
   {
     icon: "material-symbols:payments-outline-sharp",
     menu: "Payment",
     sub: [
-      { path: "/dashboard/Exams/insert-exam", menus: "Salaries" },
-      { path: "/dashboard/Exams/view-exam", menus: "Fees" },
+      { path: "/dashboard/Salaries", menus: "Salaries" },
+      { path: "/dashboard/Fees", menus: "Fees" },
     ],
   },
 

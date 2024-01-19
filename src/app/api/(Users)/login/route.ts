@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     if (!decodedPasword) {
       return NextResponse.json(
         {
-          message: "Inccorrect password",
+          message: "Incorrect password",
           data: [],
         },
         { status: 401 }

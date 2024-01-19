@@ -8,7 +8,7 @@ import { InputField } from "@/components/ui/customInput";
 import { setCookie } from "@/helpers/cookie";
 import { LoaderIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { UserContext } from "@/contextAPI/generalContext";
 
 
@@ -38,6 +38,7 @@ export default function Home() {
         .post("/login", { email, password })
         .then((response) => {
           if (response.status === 200) {
+            console.log(response.data.data)
             const resData = response.data.data;
             const userCredential = resData[0];
             const userSchoolCredential = resData[1];
@@ -50,7 +51,7 @@ export default function Home() {
               initial: userCredential?.initial,
               name:schoolData.fullname
             };
-            router.push("/dashboard/dashboard");
+             router.push("/dashboard/dashboard");
             setCookie("userSession", JSON.stringify(userData), "");
             setUserSession(JSON.stringify(userData))
             setLoading(false);
