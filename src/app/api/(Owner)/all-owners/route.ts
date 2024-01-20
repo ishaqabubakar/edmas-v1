@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import School from "../../../../../Model/school/school";
+import School from "../../../../../Model/School/school";
 import Owner from "../../../../../Model/Admin/Owner/Owner";
 
 export async function GET( req:NextRequest) {

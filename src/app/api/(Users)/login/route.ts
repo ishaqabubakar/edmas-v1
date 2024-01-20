@@ -4,7 +4,7 @@ import Student from "../../../../../Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import { User } from "../../../../../Model/user/user";
-import School from "../../../../../Model/school/school";
+import School from "../../../../../Model/School/school";
 import { comparedPassword } from "@/helpers/bycrpt";
 import Owner from "../../../../../Model/Admin/Owner/Owner";
 

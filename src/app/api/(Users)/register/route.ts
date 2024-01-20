@@ -8,7 +8,7 @@ import { hashPassword } from "@/helpers/bycrpt";
 
 import Owner from "../../../../../Model/Admin/Owner/Owner";
 import { User } from "../../../../../Model/user/user";
-import School from "../../../../../Model/school/school";
+import School from "../../../../../Model/School/school";
 
 export async function POST(req: NextRequest) {
   try {

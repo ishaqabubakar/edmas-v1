@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import Class from "../../../../../Model/Class/class";
 import Teacher from "../../../../../Model/Teacher/teacher";
-import School from "../../../../../Model/school/school";
+import School from "../../../../../Model/School/school";
 
 export async function POST(req: NextRequest) {
   try {
