@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Syllabus from "../../../../../Model/Syllabus/syllabus";
+import Syllabus from "../../../../Model/Syllabus/syllabus";
 
 export async function DELETE(req: NextRequest) {
   try {

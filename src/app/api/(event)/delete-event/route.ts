@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Event from "../../../../../Model/Events/event";
+import Event from "../../../../Model/Events/event";
 
 export async function DELETE(req: NextRequest) {
   try {

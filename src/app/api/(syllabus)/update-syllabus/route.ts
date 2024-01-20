@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import Subject from "../../../../../Model/Syllabus/syllabus";
-import Syllabus from "../../../../../Model/Syllabus/syllabus";
+import Subject from "../../../../Model/Syllabus/syllabus";
+import Syllabus from "../../../../Model/Syllabus/syllabus";
 
 
 export async function PUT(req: NextRequest) {

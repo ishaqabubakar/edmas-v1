@@ -1,11 +1,11 @@
 // Import necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Routine from "../../../../../Model/Routine/routine";
-import Class from "../../../../../Model/Class/class";
-import Section from "../../../../../Model/Section/section";
-import Subject from "../../../../../Model/Subject/subject";
-import School from "../../../../../Model/School/school";
+import Routine from "../../../../Model/Routine/routine";
+import Class from "../../../../Model/Class/class";
+import Section from "../../../../Model/Section/section";
+import Subject from "../../../../Model/Subject/subject";
+import School from "../../../../Model/School/school";
 
 
 export async function POST(req: NextRequest) {

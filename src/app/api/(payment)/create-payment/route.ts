@@ -1,9 +1,9 @@
 // Import other necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Section from "../../../../../Model/Section/section";
-import Student from "../../../../../Model/Student/student";
-import Payment from "../../../../../Model/Payment/payment";
+import Section from "../../../../Model/Section/section";
+import Student from "../../../../Model/Student/student";
+import Payment from "../../../../Model/Payment/payment";
 
 
 export async function POST(req: NextRequest) {

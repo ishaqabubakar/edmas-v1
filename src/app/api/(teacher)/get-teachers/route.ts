@@ -1,5 +1,6 @@
+import Teacher from "@/Model/Teacher/teacher";
 import { NextRequest, NextResponse } from "next/server";
-import Teacher from "../../../../../Model/Teacher/teacher";
+
 
 export async function POST( req:NextRequest) {
   try {

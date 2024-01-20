@@ -1,11 +1,11 @@
 // Import necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Grade from "../../../../../Model/Grade/grade";
-import Teacher from "../../../../../Model/Teacher/teacher";
-import Student from "../../../../../Model/Student/student";
-import Class from "../../../../../Model/Class/class";
-import Section from "../../../../../Model/Section/section";
+import Grade from "../../../../Model/Grade/grade";
+import Teacher from "../../../../Model/Teacher/teacher";
+import Student from "../../../../Model/Student/student";
+import Class from "../../../../Model/Class/class";
+import Section from "../../../../Model/Section/section";
 
 export async function POST(req: NextRequest) {
   try {

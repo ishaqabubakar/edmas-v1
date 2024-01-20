@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Payment from "../../../../../Model/Payment/payment";
+import Payment from "../../../../Model/Payment/payment";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {

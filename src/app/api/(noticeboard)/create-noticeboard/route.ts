@@ -1,8 +1,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import Noticeboard from "../../../../../Model/Noticeboard/noticeboard";
 import connectDB from "@/config/connection";
-import School from "../../../../../Model/School/school";
+import School from "@/Model/School/school";
+import Noticeboard from "@/Model/Noticeboard/noticeboard";
+
 
 export async function POST(req: NextRequest) {
   try {

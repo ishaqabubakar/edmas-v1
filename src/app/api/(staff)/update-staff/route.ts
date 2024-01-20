@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Staff from "../../../../../Model/Staff/staff";
+import Staff from "../../../../Model/Staff/staff";
 
 export async function PUT(req: NextRequest) {
   try {

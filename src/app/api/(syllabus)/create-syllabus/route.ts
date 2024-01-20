@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import Syllabus from "../../../../../Model/Syllabus/syllabus";
-import School from "../../../../../Model/School/school";
+import Syllabus from "../../../../Model/Syllabus/syllabus";
+import School from "../../../../Model/School/school";
 
 import connectDB from "@/config/connection";
 

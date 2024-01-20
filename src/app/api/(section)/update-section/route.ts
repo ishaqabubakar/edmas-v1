@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Section from "../../../../../Model/Section/section";
+import Section from "../../../../Model/Section/section";
 
 export async function PUT(req: NextRequest) {
   try {

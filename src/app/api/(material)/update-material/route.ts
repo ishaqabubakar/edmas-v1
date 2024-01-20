@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Material from "../../../../../Model/Materials/material";
+import Material from "../../../../Model/Materials/material";
 
 
 export async function PUT(req: NextRequest) {

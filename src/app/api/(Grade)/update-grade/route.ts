@@ -1,7 +1,7 @@
 // Import necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Grade from "../../../../../Model/Grade/grade";
+import Grade from "../../../../Model/Grade/grade";
 
 export async function PUT(req: NextRequest) {
   try {

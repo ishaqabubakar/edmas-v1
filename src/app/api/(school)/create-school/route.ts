@@ -1,6 +1,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
-import School from "../../../../../Model/School/school";
+import School from "../../../../Model/School/school";
 import connectDB from "@/config/connection";
 
 export async function POST(req: NextRequest) {

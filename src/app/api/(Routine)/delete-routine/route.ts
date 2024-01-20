@@ -1,7 +1,7 @@
 // Import necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Routine from "../../../../../Model/Routine/routine";
+import Routine from "../../../../Model/Routine/routine";
 
 export async function DELETE(req: NextRequest) {
   try {

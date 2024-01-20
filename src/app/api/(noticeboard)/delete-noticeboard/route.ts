@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Noticeboard from "../../../../../Model/Noticeboard/noticeboard";
+import Noticeboard from "../../../../Model/Noticeboard/noticeboard";
 
 export async function DELETE(req: NextRequest) {
   try {
