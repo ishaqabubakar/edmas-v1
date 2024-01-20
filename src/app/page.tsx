@@ -10,6 +10,7 @@ import { LoaderIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { UserContext } from "@/contextAPI/generalContext";
+import { toast } from "sonner";
 
 
 export default function Home() {
@@ -31,7 +32,7 @@ export default function Home() {
  
     try {
       if (!password || !email) {
-        return showToast("error", "Invalid email or password");
+        return toast.error("Invalid email or password");
       }
       setLoading(true);
       await axiosInstance
@@ -60,10 +61,10 @@ export default function Home() {
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
         setLoading(false);
-        return showToast("error", error.response?.data.message);
+        return toast.error(error.response?.data.message);
       } else {
         setLoading(false);
-        return showToast("error", error.response?.data.message);
+        return toast.error("error", error.response?.data.message);
       }
     }
   };

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
@@ -14,7 +14,6 @@ const MainMenus = ({}) => {
   const setCollapse = contextValue?.setCollapse;
   const [openSubmenus, setOpenSubmenus] = useState([]);
 
-
   const handleToggle = (index: number) => {
     const updatedSubmenus = [...openSubmenus] as any;
     updatedSubmenus[index] = !updatedSubmenus[index];
@@ -28,14 +27,27 @@ const MainMenus = ({}) => {
         <div>
           <div className="w-full">
             <li
-             key={key}
+              key={key}
               className={`flex flex-row items-center justify-between cursor-pointer px-[10px] hover:bg-zinc-700 rounded-sm gap-[10px] h-[40px] text-[14px] font-Medium w-full transition-all ease-in-out duration-500  ${
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
+              }  ${
+                contextValue?.ctx.role !== "admin" &&
+                (menu.menu === "Super Admin" ||
+                  menu.menu === "Manage Schools") &&
+                "hidden"
+              } ${
+                !(
+                  contextValue?.ctx.role === "owner" ||
+                  contextValue?.ctx.role === "admin"
+                ) &&
+                (menu.menu === "Admin/Master" ||
+                  menu.menu === "Manager Users") &&
+                "hidden"
               }`}
               onClick={() => handleToggle(key)}
             >
-              <p className="flex items-center gap-[10px]">
+              <p className={`flex items-center gap-[10px]`}>
                 <Icon icon={menu.icon} className="text-[20px] text-white " />
                 <p
                   className={`text-[14px] font-Regular text-white ${

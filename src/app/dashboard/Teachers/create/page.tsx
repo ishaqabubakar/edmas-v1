@@ -1,3 +1,6 @@
+"use client"
+
+import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,15 +11,63 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import { UserContext } from "@/contextAPI/generalContext";
+import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
 
-const Dashboard = () => {
+export const Dashboard = () => {
+  const contextValue = useContext(UserContext)
+  const router = useRouter()
+  const[name, setName] = useState('')
+  const[dob, setDob] = useState('')
+  const[email, setEmail] = useState('')
+  const[password, setPassword] = useState('')
+  const[address, setAddress] = useState('')
+  const[phone, setPhone] = useState('')
+  const[gender, setGender] = useState('')
+  const[className, setClassName] = useState('')
+
+  const payLoad ={
+      name,
+      dob,
+      email,
+      password,
+      address,
+      phone,
+      gender,
+      class:className,
+      role:'teacher',
+      school:contextValue?.ctx.schoolId,
+  }
+  const handleFormSubmission = async (e: any) => {
+    try {
+      if (!email || !name || !password || !className) {
+        return toast.error("Please ensure all fieds are correctly filled");
+      }
+      contextValue?.setCreating(true);
+      const res = await axiosInstance.post("/register", { data: payLoad });
+      if (res.status === 201) {
+        toast.success(res.data.message);
+        router.push('/dashboard/Teachers')
+        contextValue?.setCreating(false);
+      }
+    } catch (error: any) {
+      contextValue?.setCreating(false);
+      return toast.error(error.response.mesage);
+    }
+  };
+
+
   return (
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create Teacher</h4>
-          <Button className="rounded-sm">Add teacher</Button>
+          <Button className="rounded-sm" onClick={handleFormSubmission}>Add teacher
+          {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 overflow-y-auto no-scrollbar">
@@ -32,6 +83,7 @@ const Dashboard = () => {
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Teacher's Name"
+                  onChange={(e:any)=>setName(e.target.value)}
                 />
               </div>
             </div>
@@ -42,6 +94,7 @@ const Dashboard = () => {
                   type="email"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Email"
+                  onChange={(e:any)=>setEmail(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -50,6 +103,7 @@ const Dashboard = () => {
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Password"
+                  onChange={(e:any)=>setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -67,11 +121,12 @@ const Dashboard = () => {
                   type="date"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Teacher's Name"
+                  onChange={(e:any)=>setDob(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Gender</Label>
-                <Select>
+                <Select onValueChange={(val)=>setGender(val)}>
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select gender"
@@ -89,27 +144,40 @@ const Dashboard = () => {
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Contact Number</Label>
                 <Input
-                  type="number"
-                  max={10}
+                  type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Phone"
+                  onChange={(e:any)=>setPhone(e.target.value)}
+                />
+              </div>
+              <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                <Label className="w-[200px]">Address</Label>
+                <Input
+                  type="text"
+                  className="rounded-sm focus-visible:outline-none"
+                  placeholder="Address"
+                  onChange={(e:any)=>setAddress(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Class</Label>
-                <Select>
+                <Select onValueChange={(val)=>setClassName(val)}>
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select class"
                       className="text-[16px] "
                     />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Grade 1">Grade 1</SelectItem>
-                    <SelectItem value="Grade 2">Grade 2</SelectItem>
-                    <SelectItem value="JHS 1">JHS 1</SelectItem>
-                    <SelectItem value="JHS 2">JHS 2</SelectItem>
-                    <SelectItem value="JHS 3">JHS 3</SelectItem>
+                     <SelectContent className="rounded-sm">
+                    {contextValue?.classBySchool?.length > 0 ? (
+                     contextValue?.classBySchool?.map((item: any) => (
+                        <SelectItem key={item?._id} value={item?.classname}>
+                          {item?.classname}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <p className="p-2"> No data found</p>
+                    )}
                   </SelectContent>
                 </Select>
               </div>

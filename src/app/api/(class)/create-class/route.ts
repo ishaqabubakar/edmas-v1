@@ -3,18 +3,32 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import Class from "../../../../../Model/Class/class";
 import Teacher from "../../../../../Model/Teacher/teacher";
-
+import School from "../../../../../Model/school/school";
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
     const { classname, school, teacher, size } = await req.json();
+    const currentSchool = await School.findById(school);
+
+    const existingClass = await Class.findOne({
+      classname,
+      school: currentSchool,
+    });
 
     if (!classname || !school) {
       return NextResponse.json(
         {
           message: "Please provide class name and school ID",
+        },
+        { status: 400 }
+      );
+    }
+    if (existingClass) {
+      return NextResponse.json(
+        {
+          message: "Class name already exists for the specified school",
         },
         { status: 400 }
       );

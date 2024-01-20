@@ -1,7 +1,6 @@
 "use client";
 
 import axiosInstance from "@/API/AXIOS";
-import showToast from "@/components/ui/Toast";
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/ui/customInput";
 import { Input } from "@/components/ui/input";
@@ -17,7 +16,8 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { generateRandomPassword } from "@/helpers/generatePassword";
 import { LoaderIcon } from "lucide-react";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
 
 const Dashboard = () => {
   const [fullName, setFullname] = useState("");
@@ -29,7 +29,7 @@ const Dashboard = () => {
   const [school, setSchool] = useState("") as any;
   const contextValue = useContext(UserContext);
   const [creating, setCreating] = useState(false);
-  const [data, setData] = useState({});
+
 
   const schoolData = contextValue?.schoolData;
 
@@ -48,17 +48,17 @@ const Dashboard = () => {
 
     try {
       if (!fullName || !email || !password || !contact || !dob) {
-        return alert("Ensure all fieds are correctly filled");
+        return toast.error("Ensure all fieds are correctly filled");
       }
 
       setCreating(true);
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
         setCreating(false);
-        alert("Dataa saved successfully");
+        return toast.success("Dataa saved successfully");
       }
     } catch (error: any) {
-      return console.log("mesage");
+      return toast.error(error.message);
     }
   };
 

@@ -19,7 +19,9 @@ interface UserContextProps {
   studentBySchool:any,
   teacherBySchool:any
   classBySchool:any
-
+  sectionBySchool:any
+  creating:boolean,
+  setCreating:any
 
 
 
@@ -57,6 +59,8 @@ export function UserProvider({ children }: UserProviderProps) {
   const [studentBySchool, setStudentBySchool] = useState<any[] | undefined>();
   const [teacherBySchool, setTeacherBySchool] = useState<any[] | undefined>();
   const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
+  const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
+  const [creating, setCreating]= useState(false)
 
 
 
@@ -152,6 +156,20 @@ export function UserProvider({ children }: UserProviderProps) {
       console.log(error);
     }
   };
+  const fetchSectionBySchoolId = async () => {
+    try {
+      const res = await axiosInstance.post("/get-sections",{id: ctx?.schoolId});
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setSectionBySchool(newData.data); // Set newData directly, assuming it's an object or an array
+          console.log(newData.data) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
 
   useEffect(() => {
@@ -161,7 +179,17 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchStudentBySchoolId()
     fetchTeacherBySchoolId()
     fetchClassBySchoolId()
+    fetchSectionBySchoolId()
   }, []);
+  useEffect(() => {
+    fetchOwnersData()
+    fetchSchoolData()
+    fetchSchoolById();
+    fetchStudentBySchoolId()
+    fetchTeacherBySchoolId()
+    fetchClassBySchoolId()
+    fetchSectionBySchoolId()
+  }, [creating]);
 
   return (
     <UserContext.Provider
@@ -179,7 +207,10 @@ export function UserProvider({ children }: UserProviderProps) {
         ownersData,
         studentBySchool,
         teacherBySchool,
-        classBySchool
+        classBySchool,
+        sectionBySchool,
+        creating,
+        setCreating
 
       
 

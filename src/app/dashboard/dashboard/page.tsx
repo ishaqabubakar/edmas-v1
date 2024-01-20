@@ -1,30 +1,41 @@
 "use client";
 import CalendarDemo from "@/app/(component)/Calender/viewCalender";
-import StudentParentStats from "@/app/(component)/chart/studentChart";
-import TopHeader from "./topHeader";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
-import { ShieldCloseIcon, X } from "lucide-react";
+import { X } from "lucide-react";
 import SchedulerTable from "@/app/(component)/Scheduler";
 import DigitalClock from "@/app/(component)/DigitalClock";
+import TopHeaderStats from "./topHeader";
 
-const Dashboard = () => {
+export const Dashboard = () => {
+  const [hideWelcomeMessage, setHideWelcomeMessage] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setHideWelcomeMessage(false);
+    }, 20000);
+  });
   const contextValue = useContext(UserContext);
   const currentUser = contextValue?.ctx;
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex flex-col gap-5">
-        <div className="h-[100px] bg-white w-full rounded-sm border flex  p-5 justify-between">
-          <div className="">
-            {" "}
-            <h3 className="text-[24px] font-Regular p-0">
-              Welcome to {currentUser?.name},
-            </h3>
-            <p>{currentUser?.fullname}</p>
+        {hideWelcomeMessage && (
+          <div className="h-[100px] bg-white w-full rounded-sm border flex items-center  p-5 justify-between">
+            <div className="">
+              {" "}
+              <h3 className="lg:text-[24px] font-Regular p-0 text-[16px]">
+                Welcome to {currentUser?.name},
+              </h3>
+              <p className="hidden lg:block">{currentUser?.fullname}</p>
+            </div>
+            <X
+              onClick={() => setHideWelcomeMessage(false)}
+              className="hover:text-red-600 cursor-pointer transition-all ease-in-out duration-500"
+            />
           </div>
-          <X />
-        </div>
-        <TopHeader />
+        )}
+        <TopHeaderStats />
       </div>
       <div className="h-full w-full lg:flex-row flex flex-col gap-5">
         <div className="h-full w-full flex flex-col gap-5 overflow-clip">

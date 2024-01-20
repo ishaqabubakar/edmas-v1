@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { UserContext } from "@/contextAPI/generalContext";
 import { LoaderIcon } from "lucide-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export const CreateClass = () => {
@@ -21,35 +21,46 @@ export const CreateClass = () => {
   const [name, setName] = useState("");
   const [creating, setCreating] = useState(false);
   const [nickName, setNickname] = useState("");
-  const [teacher, setTeacher] = useState() as any;
+  const [teacher, setTeacher] = useState("");
+  
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      console.log("Name:", name);
+      console.log("Teacher:", teacher);
+  
       if (!name || !teacher) {
         return toast.error("Ensure all fields are filled correctly.");
       }
+  
       setCreating(true);
+  
       const res = await axiosInstance.post("/create-section", {
         name,
         school: contextValue?.ctx.schoolId,
         teacher,
         nickname: nickName,
       });
-
+  
+      console.log("Response:", res);
+  
       if (res.status === 200) {
-        setName("");
-        setNickname("");
-        setTeacher("");
         setCreating(false);
         return toast.success("Section created successfully");
       }
     } catch (error: any) {
       setCreating(false);
-      console.log(error);
+      console.log("Error:", error);
       return toast.error(error.message);
     }
   };
-
+  useEffect(() => {
+    if (!creating) {
+      setName("");
+      setNickname("");
+      setTeacher("");
+    }
+  }, [creating]);
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -75,7 +86,7 @@ export const CreateClass = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Name"
-                    onClick={(e: any) => setName(e.target.value)}
+                    onChange={(e: any) => setName(e.target.value)}
                   />
                 </div>
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -84,7 +95,7 @@ export const CreateClass = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Nickname"
-                    onClick={(e: any) => setNickname(e.target.value)}
+                    onChange={(e: any) => setNickname(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col gap-5">
