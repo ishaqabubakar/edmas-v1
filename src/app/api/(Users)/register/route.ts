@@ -1,12 +1,14 @@
 import connectDB from "@/config/connection";
-import  User from "../../../../../Model/User/user";
+
 import Admin from "../../../../../Model/Admin/admin";
 import Teacher from "../../../../../Model/Teacher/teacher";
 import Student from "../../../../../Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/helpers/bycrpt";
-import School from "../../../../../Model/School/school";
+
 import Owner from "../../../../../Model/Admin/Owner/Owner";
+import { User } from "../../../../../Model/user/user";
+import School from "../../../../../Model/school/school";
 
 export async function POST(req: NextRequest) {
   try {

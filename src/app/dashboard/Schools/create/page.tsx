@@ -1,12 +1,12 @@
 "use client";
 
 import axiosInstance from "@/API/AXIOS";
-import Toast from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 const Dashboard = () => {
   const [schoolName, setSchoolName] = useState("");
@@ -17,7 +17,7 @@ const Dashboard = () => {
   const handleFormSubmission = async () => {
     try {
       if (!schoolName || !email || !location || !contact) {
-        return Toast("error", "Invalid email or password");
+        return toast.error("Invalid email or password");
       }
 
       const res = await axiosInstance.post("/create-school", {
@@ -28,9 +28,9 @@ const Dashboard = () => {
       });
 
       if (res.status === 200) {
-        return Toast("success", "School created successfully");
+        return toast.success("School created successfully");
       } else {
-        return Toast("error", "Something went wrong. Please try again.");
+        return toast.error("Something went wrong. Please try again.");
       }
     } catch (error: any) {
       alert(error);

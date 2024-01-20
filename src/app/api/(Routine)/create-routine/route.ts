@@ -5,7 +5,8 @@ import Routine from "../../../../../Model/Routine/routine";
 import Class from "../../../../../Model/Class/class";
 import Section from "../../../../../Model/Section/section";
 import Subject from "../../../../../Model/Subject/subject";
-import School from "../../../../../Model/School/school";
+import School from "../../../../../Model/school/school";
+
 
 export async function POST(req: NextRequest) {
   try {
