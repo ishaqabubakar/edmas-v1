@@ -24,10 +24,10 @@ const MainMenus = ({}) => {
   return (
     <div>
       {sidebarMenus.map((menu, key) => (
-        <div>
+        <div   key={key}>
           <div className="w-full">
             <li
-              key={key}
+            
               className={`flex flex-row items-center justify-between cursor-pointer px-[10px] hover:bg-zinc-700 rounded-sm gap-[10px] h-[40px] text-[14px] font-Medium w-full transition-all ease-in-out duration-500  ${
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"

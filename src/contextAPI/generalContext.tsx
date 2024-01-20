@@ -181,6 +181,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchClassBySchoolId()
     fetchSectionBySchoolId()
   }, []);
+
   useEffect(() => {
     fetchOwnersData()
     fetchSchoolData()
@@ -191,6 +192,16 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchSectionBySchoolId()
   }, [creating]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  fetchOwnersData();
+  fetchSchoolData();
+  fetchSchoolById();
+  fetchStudentBySchoolId();
+  fetchTeacherBySchoolId();
+  fetchClassBySchoolId();
+  fetchSectionBySchoolId();
+}, []);
   return (
     <UserContext.Provider
       value={{
