@@ -1,8 +1,8 @@
 import connectDB from "@/config/connection";
-import  User  from "../../../../Model/User/user";
 import Student from "../../../../Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import User from "@/Model/user/user";
 
 
 export async function POST(req: NextRequest) {
