@@ -15,7 +15,7 @@ import { LoaderIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const page= () => {
+const Page= () => {
   const contextValue = useContext(UserContext);
   const allTeachers = contextValue?.teacherBySchool;
   const [name, setName] = useState("");
@@ -131,4 +131,4 @@ const page= () => {
   );
 };
 
-export default page;
+export default Page;
