@@ -1,4 +1,5 @@
 type sidebarProps = {
+  id:number,
   icon: String|any;
   menu: String;
   sub: {
@@ -9,13 +10,16 @@ type sidebarProps = {
 
 export const sidebarMenus: sidebarProps[] = [
   {
+    id:1,
     icon: "ri:school-line",
     menu: "Manage Schools",
+    
     sub: [
       { path: "/dashboard/Schools", menus: "Schools" },
     ],
   },
   {
+    id:2,
     icon: "lucide:user-round",
     menu: "Super Admin",
     sub: [
@@ -23,6 +27,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
+    id:3,
     icon: "lucide:user-round",
     menu: "Admin/Master",
     sub: [
@@ -30,6 +35,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
+    id:4,
     icon: "lucide:users-round",
     menu: "Students/Parents",
     sub: [
@@ -38,6 +44,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
+    id:5,
     icon: "lucide:users-round",
     menu: "Manage Users",
     sub: [
@@ -48,6 +55,7 @@ export const sidebarMenus: sidebarProps[] = [
   },
 
   {
+    id:6,
     icon: "fluent-emoji-high-contrast:classical-building",
     menu: "Classes & Subject",
     sub: [
@@ -60,6 +68,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
+    id:7,
     icon: "codicon:book",
     menu: "Examination",
     sub: [
@@ -76,6 +85,7 @@ export const sidebarMenus: sidebarProps[] = [
   //   ],
   // },
   {
+    id:8,
     icon: "heroicons:building-office-2",
     menu: "Manage Office",
     sub: [
@@ -85,6 +95,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
+    id:9,
     icon: "material-symbols:payments-outline-sharp",
     menu: "Payment",
     sub: [

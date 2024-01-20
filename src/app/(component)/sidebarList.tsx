@@ -24,7 +24,7 @@ const MainMenus = ({}) => {
   return (
     <div>
       {sidebarMenus.map((menu, key) => (
-        <div   key={key}>
+        <div   key={menu.id}>
           <div className="w-full">
             <li
             
