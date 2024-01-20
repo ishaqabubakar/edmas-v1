@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-const Dashboard = () => {
+const page = () => {
   const [schoolName, setSchoolName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
@@ -104,4 +104,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default page;
