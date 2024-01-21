@@ -7,7 +7,7 @@ import SchedulerTable from "@/app/(component)/Scheduler";
 import DigitalClock from "@/app/(component)/DigitalClock";
 import TopHeaderStats from "./topHeader";
 
-export const Dashboard = () => {
+ const Page = () => {
   const [hideWelcomeMessage, setHideWelcomeMessage] = useState(true);
 
   useEffect(() => {
@@ -98,4 +98,4 @@ export const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Page;
