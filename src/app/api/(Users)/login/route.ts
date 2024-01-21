@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         message: "internal server error",
         data: [],
       },
-      { status: 500, headers }
+      { status: 500}
     );
   }
 }
