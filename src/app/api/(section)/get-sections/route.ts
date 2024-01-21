@@ -1,5 +1,6 @@
+import Section from "@/Model/Section/section";
 import { NextRequest, NextResponse } from "next/server";
-import Section from "../../../../Model/Section/section";
+
 
 export async function POST(req: NextRequest) {
   try {

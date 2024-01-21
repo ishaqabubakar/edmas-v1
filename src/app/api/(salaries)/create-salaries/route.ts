@@ -1,7 +1,8 @@
 // Import other necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Salaries from "../../../../Model/Salaries/salary";
+import Salaries from "@/Model/Salaries/salary";
+
 
 export async function POST(req: NextRequest) {
   try {

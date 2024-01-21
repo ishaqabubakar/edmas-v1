@@ -1,5 +1,6 @@
+import Subject from "@/Model/Subject/subject";
 import { NextRequest, NextResponse } from "next/server";
-import Subject from "../../../../Model/Subject/subject";
+
 
 export async function DELETE(req: NextRequest) {
   try {

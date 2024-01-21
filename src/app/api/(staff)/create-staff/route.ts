@@ -1,5 +1,5 @@
+import Staff from "@/Model/Staff/staff";
 import connectDB from "@/config/connection";
-import Staff from "../../../../Model/Staff/staff"
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

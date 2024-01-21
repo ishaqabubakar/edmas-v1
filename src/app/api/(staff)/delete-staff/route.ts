@@ -1,5 +1,6 @@
+import Staff from "@/Model/Staff/staff";
 import { NextRequest, NextResponse } from "next/server";
-import Staff from "../../../../Model/Staff/staff";
+
 
 export async function DELETE(req: NextRequest) {
   try {
