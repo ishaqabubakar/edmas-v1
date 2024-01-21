@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 
-const Dashboard = () => {
+const page = () => {
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -78,4 +78,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default page;

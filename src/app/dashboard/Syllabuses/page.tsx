@@ -1,18 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import Link from "next/link";
 import React from "react";
 
 
-const Dashboard = () => {
+const page = () => {
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -30,4 +21,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default page;

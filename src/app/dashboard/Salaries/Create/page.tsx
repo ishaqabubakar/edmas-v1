@@ -12,7 +12,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
 
-export const Dashboard= () => {
+ const page= () => {
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -105,4 +105,4 @@ export const Dashboard= () => {
   );
 };
 
-export default Dashboard;
+export default page
