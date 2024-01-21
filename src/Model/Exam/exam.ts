@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const examSchema = new mongoose.Schema(
   {
     school: {type: mongoose.Schema.Types.ObjectId,ref: 'School'},
-    examname: { type: String, required: true },
+    examname: { type: String},
     subject: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }],
-      required: true,
+   
     },
     examdate: { type: Date },
     status: { type: String },

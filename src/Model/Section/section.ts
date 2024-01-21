@@ -8,7 +8,7 @@ const sectionSchema = new mongoose.Schema(
     nickname: { type: String },
     teacher: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
-      required: true,
+    
     },
   },
   { timestamps: true }

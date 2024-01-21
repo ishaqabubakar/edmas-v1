@@ -1,32 +1,31 @@
 import mongoose from "mongoose";
 
-const salariesSchema = new mongoose.Schema({
-  school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-  staffname: { type: String },
-  title: {
-    type: String,
-    required: true,
+const salariesSchema = new mongoose.Schema(
+  {
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    staffname: { type: String },
+    title: {
+      type: String,
+    },
+
+    description: {
+      type: String,
+    },
+
+    amount: {
+      type: Number,
+    },
+
+    stafftype: { type: String },
+
+    transactiondate: {
+      type: Date,
+    },
+
+    status: { type: String },
   },
-
-  description: {
-    type: String,
-    required: true,
-  },
-
-  amount: {
-    type: Number,
-    required: true,
-  },
-
-  stafftype: { type: String },
-
-  transactiondate: {
-    type: Date,
-    required: true,
-  },
-
-  status: { type: String },
-});
+  { timestamps: true }
+);
 
 const Salaries =
   mongoose.models.Salaries || mongoose.model("Salaries", salariesSchema);

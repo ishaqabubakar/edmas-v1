@@ -1,7 +1,7 @@
 import connectDB from "@/config/connection";
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/helpers/bycrpt";
-import Owner from "@/Model/Admin/Owner/Owner";
+import Owner from "@/Model/Owner/Owner";
 import Admin from "@/Model/Admin/admin";
 import Student from "@/Model/Student/student";
 import Teacher from "@/Model/Teacher/teacher";

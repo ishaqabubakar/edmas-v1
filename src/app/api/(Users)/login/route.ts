@@ -5,7 +5,7 @@ import { comparedPassword } from "@/helpers/bycrpt";
 import Student from "@/Model/Student/student";
 import Teacher from "@/Model/Teacher/teacher";
 import Admin from "@/Model/Admin/admin";
-import Owner from "@/Model/Admin/Owner/Owner";
+import Owner from "@/Model/Owner/Owner";
 import User from "@/Model/user/user";
 import School from "@/Model/School/school";
 

@@ -3,15 +3,15 @@ import mongoose, { Document, Schema, model } from "mongoose";
 const subjectSchema = new mongoose.Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    subjectname: { String, required: true },
+    subjectname: {type: String},
 
     class: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
-      required: true,
+    
     },
     teacher: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
-      required: true,
+    
     },
   },
   { timestamps: true }

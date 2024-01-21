@@ -5,17 +5,17 @@ const paymentSchema = new mongoose.Schema(
     classname: {
       type: Schema.Types.ObjectId,
       ref: "Class",
-      required: true,
+     
     },
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     student: {type: mongoose.Schema.Types.ObjectId, ref: "Student"},
     amount: {
       type: Number,
-      required: true,
+    
     },
     title: {
       type: String,
-      required: true,
+    
     },
 
     description: {
@@ -23,12 +23,12 @@ const paymentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      required: true,
+    
     },
     section: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
     transactiondate: {
       type: Date,
-      required: true,
+    
     },
   },
   { timestamps: true }

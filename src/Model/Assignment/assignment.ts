@@ -10,7 +10,7 @@ const assignmentSchema = new mongoose.Schema(
     },
     assignedby: {
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Teacher" }],
-      required: true,
+    
     },
     description: { type: String },
   },

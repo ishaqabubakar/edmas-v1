@@ -6,11 +6,11 @@ const staffSchema = new mongoose.Schema(
     
     name: {
       type: String,
-      required: true,
+    
     },
     dob: {
       type: String,
-      required: true,
+ 
     },
     phone: {
       type: String,

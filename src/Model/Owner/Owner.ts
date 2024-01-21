@@ -9,8 +9,8 @@ const OwnerSchema = new mongoose.Schema(
     },
     name: { type: String },
     dob: { type: String },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    email: { type: String },
+    password: { type: String },
     address: {
       type: String,
     },

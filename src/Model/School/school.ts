@@ -1,29 +1,23 @@
-import mongoose  from 'mongoose'
+import mongoose from "mongoose";
 
-
-const schoolSchema = new mongoose.Schema({
-   fullname:{
-
-        type:String,
-        required:true
+const schoolSchema = new mongoose.Schema(
+  {
+    fullname: {
+      type: String,
     },
-    location:{
-        type:String,
-        required:true
+    location: {
+      type: String,
     },
-    phone:{
-        type:String,
-        required:true
+    phone: {
+      type: String,
     },
     email: {
-        type: String,
-        required: true
-    }
- 
-})
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
+const School = mongoose.models.School || mongoose.model("School", schoolSchema);
 
-const School = mongoose.models.School ||  mongoose.model('School',schoolSchema)
-
-
-export default School
+export default School;

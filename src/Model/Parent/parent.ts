@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const parentSchema = new mongoose.Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    name: { type: String, required: true },
-    email: { type: String, required: true },
+    name: { type: String },
+    email: { type: String },
     dob: { type: String },
     address: { type: String },
     phonenumber: { type: String },

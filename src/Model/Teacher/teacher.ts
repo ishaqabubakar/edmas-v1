@@ -5,17 +5,17 @@ const teacherSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+
     },
     school: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "School",
-      required: true,
+
     },
-    name: { type: String, required: true },
-    dob: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    name: { type: String },
+    dob: { type: String  },
+    email: { type: String},
+    password: { type: String},
     address: { type: String },
     phone: { type: String },
     gender: { type: String },
