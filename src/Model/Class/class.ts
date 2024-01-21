@@ -4,7 +4,7 @@ import { StringDecoder } from "string_decoder";
 const classSchema = new mongoose.Schema(
   {
 
-    classname: { type: StringDecoder },
+    classname: { type: String },
     school: [{ type: mongoose.Schema.Types.ObjectId, ref: "School" }],
 
     classalias: { type: String },
