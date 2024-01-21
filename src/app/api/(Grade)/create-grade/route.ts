@@ -1,11 +1,7 @@
 // Import necessary modules
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Grade from "../../../../Model/Grade/grade";
-import Teacher from "../../../../Model/Teacher/teacher";
-import Student from "../../../../Model/Student/student";
-import Class from "../../../../Model/Class/class";
-import Section from "../../../../Model/Section/section";
+import Grade from "@/Model/Grade/grade";
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,29 +30,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if related documents (School, Teacher, Student, Class, Section) exist
-    const teacher = await Teacher.findOne(teacherId);
-    const student = await Student.findOne(studentId);
-    const className = await Class.findOne(classId);
-    const section = await Section.findOne(sectionId);
-
-    if (!teacher || !student || !className || !section) {
-      return NextResponse.json(
-        {
-          message: "One or more related documents not found.",
-        },
-        { status: 404 }
-      );
-    }
 
     // Create a new grade
     const newGrade = new Grade({
       school: schoolId,
-      teacher: teacher._id,
+      teacher: teacherId,
       title,
-      student: student._id,
-      class: className._id,
-      section: section._id,
+      student: studentId._id,
+      classname:classId,
+      section: sectionId,
       marks,
       grade,
     });

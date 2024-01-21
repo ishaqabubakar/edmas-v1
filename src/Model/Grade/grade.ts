@@ -11,7 +11,7 @@ const gradeSchema = new mongoose.Schema(
     student:{
       school: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
     },
-    class:{
+    classname:{
       type:mongoose.Schema.Types.ObjectId,
       ref:"Class"
     },
