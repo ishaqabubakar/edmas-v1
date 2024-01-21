@@ -7,7 +7,7 @@ import UserProvider from "@/contextAPI/generalContext";
 import { ToastContainer } from "react-toastify";
 import 'devextreme/dist/css/dx.light.css';
 
-export const fontSans = Poppins({
+const fontSans = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "Modern school management system",
 };
 
-export default function Layout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
