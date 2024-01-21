@@ -23,13 +23,19 @@ export async function POST(req: NextRequest) {
     const teacherSchool = await School.findOne({ _id: singleTeacher?.school });
     const ownerSchool = await School.findOne({ _id: singleOwner?.school });
 
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS, POST",
+      "Access-Control-Allow-Headers": "Content-Type",
+    };
+
     if (!email || !password) {
       return NextResponse.json(
         {
           message: "Invalid email or password",
           data: [],
         },
-        { status: 401 }
+        { status: 401, headers }
       );
     }
     if (!singleUser) {
@@ -38,7 +44,7 @@ export async function POST(req: NextRequest) {
           message: "User not found",
           data: [],
         },
-        { status: 401 }
+        { status: 401, headers }
       );
     }
 
@@ -50,7 +56,7 @@ export async function POST(req: NextRequest) {
           message: "Incorrect password",
           data: [],
         },
-        { status: 401 }
+        { status: 401, headers }
       );
     }
 
@@ -60,7 +66,7 @@ export async function POST(req: NextRequest) {
           message: "login successfully",
           data: [singleUser,singleAdmin,],
         },
-        { status: 200 }
+        { status: 200, headers }
       );
     }
 
@@ -70,7 +76,7 @@ export async function POST(req: NextRequest) {
           message: "login successfully",
           data: [singleUser,singleOwner,ownerSchool],
         },
-        { status: 200 }
+        { status: 200 , headers}
       );
     }
 
@@ -80,7 +86,7 @@ export async function POST(req: NextRequest) {
           message: "login successfully",
           data: [singleUser, singleStudent,studenSchool],
         },
-        { status: 200 }
+        { status: 200 , headers}
       );
     }
     if (singleUser.role === "teacher") {
@@ -89,7 +95,7 @@ export async function POST(req: NextRequest) {
           message: "login successfully",
           data: [singleUser,singleTeacher,teacherSchool],
         },
-        { status: 200 }
+        { status: 200, headers }
       );
     } else {
       return NextResponse.json(
@@ -97,7 +103,7 @@ export async function POST(req: NextRequest) {
           message: "No data found for this user",
           data: [],
         },
-        { status: 401 }
+        { status: 401, headers }
       );
     }
   } catch (error) {
@@ -107,7 +113,7 @@ export async function POST(req: NextRequest) {
         message: "internal server error",
         data: [],
       },
-      { status: 500 }
+      { status: 500, headers }
     );
   }
 }
