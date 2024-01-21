@@ -14,16 +14,18 @@ import {
 import { UserContext } from "@/contextAPI/generalContext";
 import { LoaderIcon } from "lucide-react";
 import React, { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
   const contextValue = useContext(UserContext);
   const allTeachers = contextValue?.teacherBySchool;
   const schoolId = contextValue?.ctx?.schoolId;
+  const router = useRouter()
 
   const [name, setName] = useState("");
   const [teacher, setTeacher] = useState("");
   const [size, setSize] = useState("");
-  const [creating, setCreating] = useState(false);
+
 
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const Dashboard = () => {
         return toast.error("Ensure all fields are filled correctly.");
       }
   
-      setCreating(true);
+      contextValue?.setCreating(true);
   
       const response = await axiosInstance.post("/create-class", {
         classname: name,
@@ -43,17 +45,18 @@ const Dashboard = () => {
       });
   
       if (response.status === 200) {
+        router.push('/dashboard/Class')
         setName("");
         setSize("");
         setTeacher("");
-        setCreating(false);
+        contextValue?.setCreating(false);
         toast.success("Class created successfully");
       } else {
-        setCreating(false);
+        contextValue?.setCreating(false);
         toast.error("Failed to create class. Please try again.");
       }
     } catch (error) {
-      setCreating(false);
+      contextValue?.setCreating(false);
       console.error("Error creating class:", error);
       toast.error("An error occurred while creating the class.");
     }
@@ -67,7 +70,7 @@ const Dashboard = () => {
           <h4 className="text-[20px] font-Regular">Create Class</h4>
           <Button className="rounded-sm" onClick={handleClassSubmit}>
             Add Class
-            {creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+            {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
           </Button>
         </div>
       </div>

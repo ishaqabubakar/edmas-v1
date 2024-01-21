@@ -15,52 +15,51 @@ import { LoaderIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const Page= () => {
+const Page = () => {
   const contextValue = useContext(UserContext);
   const allTeachers = contextValue?.teacherBySchool;
   const [name, setName] = useState("");
-  const [creating, setCreating] = useState(false);
   const [nickName, setNickname] = useState("");
   const [teacher, setTeacher] = useState("");
-  
+
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
     try {
       console.log("Name:", name);
       console.log("Teacher:", teacher);
-  
+
       if (!name || !teacher) {
         return toast.error("Ensure all fields are filled correctly.");
       }
-  
-      setCreating(true);
-  
+
+      contextValue?.setCreating(true);
+
       const res = await axiosInstance.post("/create-section", {
         name,
         school: contextValue?.ctx?.schoolId,
         teacher,
         nickname: nickName,
       });
-  
+
       console.log("Response:", res);
-  
+
       if (res.status === 200) {
-        setCreating(false);
+        contextValue?.setCreating(false);
         return toast.success("Section created successfully");
       }
     } catch (error: any) {
-      setCreating(false);
+      contextValue?.setCreating(false);
       console.log("Error:", error);
       return toast.error(error.message);
     }
   };
   useEffect(() => {
-    if (!creating) {
+    if (!contextValue?.creating) {
       setName("");
       setNickname("");
       setTeacher("");
     }
-  }, [creating]);
+  }, [contextValue?.creating]);
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -68,7 +67,9 @@ const Page= () => {
           <h4 className="text-[20px] font-Regular">Create Section</h4>
           <Button className="rounded-sm" onClick={handleClassSubmit}>
             Add Section
-            {creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
           </Button>
         </div>
       </div>

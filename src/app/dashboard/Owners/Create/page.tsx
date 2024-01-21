@@ -15,6 +15,7 @@ import {
 import { UserContext } from "@/contextAPI/generalContext";
 import { generateRandomPassword } from "@/helpers/generatePassword";
 import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
@@ -28,7 +29,7 @@ const Dashboard = () => {
   const [contact, setContact] = useState("");
   const [school, setSchool] = useState("") as any;
   const contextValue = useContext(UserContext);
-  const [creating, setCreating] = useState(false);
+  const router = useRouter()
 
 
   const schoolData = contextValue?.schoolData;
@@ -51,13 +52,15 @@ const Dashboard = () => {
         return toast.error("Ensure all fieds are correctly filled");
       }
 
-      setCreating(true);
+      contextValue?.setCreating(true);
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
-        setCreating(false);
+        router.push('/dashboard/Owners')
+        contextValue?.setCreating(false);
         return toast.success("Dataa saved successfully");
       }
     } catch (error: any) {
+      contextValue?.setCreating(false);
       return toast.error(error.message);
     }
   };
@@ -73,7 +76,7 @@ const Dashboard = () => {
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">Create Owner</h4>
           <Button className="rounded-sm" onClick={handleFormData}>
-            Add Owner {creating && <LoaderIcon className="mr-2 animate-spin" />}
+            Add Owner {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" />}
           </Button>
         </div>
       </div>

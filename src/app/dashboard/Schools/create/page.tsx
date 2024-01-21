@@ -4,8 +4,11 @@ import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { UserContext } from "@/contextAPI/generalContext";
+import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
 const Page = () => {
@@ -13,13 +16,15 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [contact, setcontact] = useState("");
+  const router = useRouter();
+  const contextValue = useContext(UserContext);
 
   const handleFormSubmission = async () => {
     try {
       if (!schoolName || !email || !location || !contact) {
         return toast.error("Invalid email or password");
       }
-
+      contextValue?.setCreating(true);
       const res = await axiosInstance.post("/create-school", {
         fullname: schoolName,
         location,
@@ -28,12 +33,15 @@ const Page = () => {
       });
 
       if (res.status === 200) {
+        router.push("/dashboard/Schools");
+        contextValue?.setCreating(false);
         return toast.success("School created successfully");
       } else {
         return toast.error("Something went wrong. Please try again.");
       }
     } catch (error: any) {
-      alert(error);
+      contextValue?.setCreating(false);
+      toast.error(error.response.message);
     }
   };
 
@@ -44,6 +52,9 @@ const Page = () => {
           <h4 className="text-[20px] font-Regular">Create School</h4>
           <Button className="rounded-sm" onClick={handleFormSubmission}>
             Add School
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
           </Button>
         </div>
       </div>

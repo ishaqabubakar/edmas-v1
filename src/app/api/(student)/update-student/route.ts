@@ -17,6 +17,7 @@ export async function PUT(req: NextRequest) {
 
     const updatedStudent= await Student.findByIdAndUpdate(id, data);
 
+
     return NextResponse.json(
       {
         message: "School created",

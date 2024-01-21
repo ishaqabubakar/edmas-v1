@@ -2,6 +2,7 @@
 "use client";
 import axiosInstance from "@/API/AXIOS";
 import { getCookie } from "@/helpers/cookie";
+import { useSearchParams } from "next/navigation";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 interface UserContextProps {
@@ -22,6 +23,9 @@ interface UserContextProps {
   sectionBySchool:any
   creating:boolean,
   setCreating:any
+  paramID:any
+  paramMode:any
+  studentById:any
 
 
 
@@ -37,7 +41,9 @@ interface UserProviderProps {
 
 export function UserProvider({ children }: UserProviderProps) {
   const [userSession, setUserSession] = useState() as any;
-
+  const searchParam  = useSearchParams()
+  const paramID = searchParam.get('id')
+  const paramMode = searchParam.get('mode')
   const retrivedUserData = getCookie("userSession") as any;
   let ctx: any;
 
@@ -60,7 +66,9 @@ export function UserProvider({ children }: UserProviderProps) {
   const [teacherBySchool, setTeacherBySchool] = useState<any[] | undefined>();
   const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
   const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
+  const [studentById, setStudentById] = useState<any[] | undefined>();
   const [creating, setCreating]= useState(false)
+  const[trackStudentID, setTrackStudentID] = useState()
 
 
 
@@ -170,6 +178,20 @@ export function UserProvider({ children }: UserProviderProps) {
       console.log(error);
     }
   };
+  const fetchStudentById = async () => {
+    try {
+      const res = await axiosInstance.post("/student-by-id",{id: paramID});
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setStudentById(newData.data); // Set newData directly, assuming it's an object or an array
+          // alert(JSON.stringify(newData.data)) 
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
 
   useEffect(() => {
@@ -180,7 +202,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchTeacherBySchoolId()
     fetchClassBySchoolId()
     fetchSectionBySchoolId()
-  }, []);
+    fetchStudentById()
+  },[]);
 
   useEffect(() => {
     fetchOwnersData()
@@ -190,7 +213,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchTeacherBySchoolId()
     fetchClassBySchoolId()
     fetchSectionBySchoolId()
-  }, [creating]);
+    fetchStudentById()
+  }, [creating, paramID]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(() => {
@@ -202,6 +226,7 @@ useEffect(() => {
   fetchClassBySchoolId();
   fetchSectionBySchoolId();
 }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -221,7 +246,10 @@ useEffect(() => {
         classBySchool,
         sectionBySchool,
         creating,
-        setCreating
+        setCreating,
+        paramID,
+        paramMode,
+        studentById
 
       
 
