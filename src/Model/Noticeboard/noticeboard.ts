@@ -1,19 +1,18 @@
 import mongoose from "mongoose";
 
-const noticeboardSchema = new mongoose.Schema({
-  
-  school: {type: mongoose.Schema.Types.ObjectId,ref: 'School'},
-  title: {
-    type: { type: String },
-    required: true,
+const noticeboardSchema = new mongoose.Schema(
+  {
+    school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
+    title: {
+      type: { type: String },
+    },
+    description: { type: String },
   },
-  description: { type: String },
-  date: {
-    type: { type: Date },
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-const Noticeboard = mongoose.models.Noticeboard || mongoose.model("Noticeboard", noticeboardSchema);
+const Noticeboard =
+  mongoose.models.Noticeboard ||
+  mongoose.model("Noticeboard", noticeboardSchema);
 
 export default Noticeboard;
