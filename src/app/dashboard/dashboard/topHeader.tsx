@@ -5,7 +5,7 @@ export const TopHeaderStats = () => {
   const contextValue = useContext(UserContext);
   return (
     <div className="w-full lg:flex-row flex flex-col gap-5">
-      {contextValue?.ctx.role === "admin" && (
+      {contextValue?.ctx?.role === "admin" && (
         <div className="w-full  bg-[#ef7f00]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
