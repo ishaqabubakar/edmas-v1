@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
-export const Dashboard = () => {
+ const Page = () => {
   const contextValue = useContext(UserContext)
   const router = useRouter()
   const[name, setName] = useState('')
@@ -189,4 +189,4 @@ export const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Page;
