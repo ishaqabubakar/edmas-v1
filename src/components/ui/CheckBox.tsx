@@ -21,7 +21,7 @@ export const CheckBox: React.FC<checkBoxProps> = ({
   return (
     <div className="font-poppins flex flex-row justify-between items-center">
       <div className="gap-[5px] flex ">
-        <label className="flex gap-[5px]" name='rememberMe'>
+        <label className="flex gap-[5px]">
           <input
             readOnly
             type="checkbox"
