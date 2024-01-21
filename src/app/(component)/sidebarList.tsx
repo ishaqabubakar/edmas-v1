@@ -32,14 +32,14 @@ const MainMenus = ({}) => {
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
               }  ${
-                contextValue?.ctx.role !== "admin" &&
+                contextValue?.ctx?.role !== "admin" &&
                 (menu.menu === "Super Admin" ||
                   menu.menu === "Manage Schools") &&
                 "hidden"
               } ${
                 !(
-                  contextValue?.ctx.role === "owner" ||
-                  contextValue?.ctx.role === "admin"
+                  contextValue?.ctx?.role === "owner" ||
+                  contextValue?.ctx?.role === "admin"
                 ) &&
                 (menu.menu === "Admin/Master" ||
                   menu.menu === "Manager Users") &&
