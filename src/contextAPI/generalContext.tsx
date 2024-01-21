@@ -67,7 +67,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const fetchSchoolById = async () => {
     try {
       const res = await axiosInstance.post("/get-school-by-id", {
-        id: ctx.schoolId,
+        id: ctx?.schoolId,
       });
       console.log("Response from /get-school-by-id:", res);
       
