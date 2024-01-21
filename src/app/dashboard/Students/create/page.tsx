@@ -54,7 +54,7 @@ import { toast } from "sonner";
     section: sectionName,
     role: "student",
     admissioncode: adminNumber,
-    school: contextValue?.ctx.schoolId,
+    school: contextValue?.ctx?.schoolId,
     parent: {
       fullname: pName,
       phone: pPhone,

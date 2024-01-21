@@ -37,7 +37,7 @@ const Page= () => {
   
       const res = await axiosInstance.post("/create-section", {
         name,
-        school: contextValue?.ctx.schoolId,
+        school: contextValue?.ctx?.schoolId,
         teacher,
         nickname: nickName,
       });

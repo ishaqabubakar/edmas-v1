@@ -39,7 +39,7 @@ import { toast } from "sonner";
       gender,
       class:className,
       role:'teacher',
-      school:contextValue?.ctx.schoolId,
+      school:contextValue?.ctx?.schoolId,
   }
   const handleFormSubmission = async (e: any) => {
     try {

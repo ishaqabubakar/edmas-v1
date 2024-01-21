@@ -18,7 +18,7 @@ import React, { useContext, useState } from "react";
 const Dashboard = () => {
   const contextValue = useContext(UserContext);
   const allTeachers = contextValue?.teacherBySchool;
-  const schoolId = contextValue?.ctx.schoolId;
+  const schoolId = contextValue?.ctx?.schoolId;
 
   const [name, setName] = useState("");
   const [teacher, setTeacher] = useState("");
