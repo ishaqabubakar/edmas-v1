@@ -18,7 +18,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
 
-export const Page= () => {
+export const Page:React.FC= () => {
   const contextValue = useContext(UserContext);
   const classData = contextValue?.classBySchool;
   const sectionData = contextValue?.sectionBySchool;
