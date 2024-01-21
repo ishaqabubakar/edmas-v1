@@ -1,6 +1,6 @@
 
 
-export const page = () => {
+ const page = () => {
 
   return (
   <></>
