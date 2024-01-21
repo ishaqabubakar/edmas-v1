@@ -18,7 +18,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
 
- const page= () => {
+ const Page= () => {
   const contextValue = useContext(UserContext);
   const classData = contextValue?.classBySchool;
   const sectionData = contextValue?.sectionBySchool;
@@ -297,4 +297,4 @@ import { toast } from "sonner";
   );
 };
 
-export default page;
+export default Page;
