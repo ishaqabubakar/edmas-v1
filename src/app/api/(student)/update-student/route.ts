@@ -1,4 +1,5 @@
 import Student from "@/Model/Student/student";
+import User from "@/Model/user/user";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -15,12 +16,13 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const updatedStudent= await Student.findByIdAndUpdate(id, data);
+    const updatedUser= await User.findByIdAndUpdate(id, data);
+    const updatedStudent= await Student.findOneAndUpdate({userId:updatedUser?._id}, data);
 
 
     return NextResponse.json(
       {
-        message: "School created",
+        message: "Student Updated",
         data: updatedStudent,
       },
       { status: 200 }

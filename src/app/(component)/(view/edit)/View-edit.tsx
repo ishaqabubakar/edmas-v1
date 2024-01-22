@@ -66,13 +66,13 @@ const ViewAndEdit = () => {
       setCreating(true);
       const res = await axiosInstance.post("/update-student", {id:contextValue?.paramID, data: payLoad }) as any;
       if (res.status === 200) {
-        toast.success(res.message);
+        toast.success(res.data.message);
         router.push("/dashboard/Students");
         setCreating(false);
       }
     } catch (error: any) {
       setCreating(false);
-      return toast.error(error.response.mesage);
+      return toast.error(error);
     }
   };
   const studentArray = contextValue?.studentById as any;

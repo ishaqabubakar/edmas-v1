@@ -1,7 +1,6 @@
 import Student from "@/Model/Student/student";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const { id } = await req.json();
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const student = await Student.find({ _id:id }) as any;
+    const student = (await Student.findOne({ userId: id })) as any;
 
     if (!student) {
       return NextResponse.json(
@@ -31,21 +30,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
       {
         message: "Student found",
         data: {
-          name:student[0]?.name,
-          email:student[0]?.email,
-          class:student[0]?.class ,
-          section:student[0]?.section ,
-          parentName:student[0]?.parent?.fullname ,
-          parentemail:student[0]?.parent?.parentemail,
-          proffession:student[0]?.parent?.proffession,
-          admission:student[0]?.admissioncode,
-          address:student[0]?.address,
-          dob:student[0]?.dob
+          name: student?.name,
+          email: student?.email,
+          class: student?.class,
+          section: student?.section,
+          parentName: student?.parent?.fullname,
+          parentemail: student?.parent?.parentemail,
+          proffession: student?.parent?.proffession,
+          admission: student?.admissioncode,
+          address: student?.address,
+          dob: student?.dob,
         },
+       
       },
       { status: 200 }
     );
-  } catch (error :any) {
+  } catch (error: any) {
     console.error("Error:", error.message);
     return NextResponse.json(
       {

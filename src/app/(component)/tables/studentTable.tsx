@@ -115,10 +115,10 @@ const StudentTable = () => {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onSelect={() => 
-                         router.push(`/dashboard/Students?id=${item._id}&mode=view`)}>
+                         router.push(`/dashboard/Students?id=${item.userId}&mode=view`)}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => router.push(`/dashboard/Students?id=${item._id}&mode=edit`)}>
+                        <DropdownMenuItem onSelect={() => router.push(`/dashboard/Students?id=${item.userId}&mode=edit`)}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem onSelect={() => alert("Delete")}>
