@@ -1,3 +1,5 @@
+"use client";
+import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,15 +10,79 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import { UserContext } from "@/contextAPI/generalContext";
+import { AxiosError } from "axios";
+import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
 
-const page = () => {
+const Page = () => {
+  const contextValue = useContext(UserContext);
+
+
+  const router = useRouter();
+
+  const [name, setName] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [className, setClassName] = useState("");
+  const allTeachers = contextValue?.teacherBySchool;
+  const classData = contextValue?.classBySchool;
+
+
+  const handleSubjectSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      if (!name || !teacher) {
+        return toast.error("Ensure all fields are filled correctly.");
+      }
+  
+      contextValue?.setCreating(true);
+  
+      const response = await axiosInstance.post("/create-subject", {
+        subjectname: name,
+        school:contextValue?.ctx?.schoolId,
+        teacher,
+        classId: className,
+      });
+  
+      if (response.status === 200) {
+        router.push("/dashboard/Subjects");
+        contextValue?.setCreating(false);
+        toast.success("Subject is being created. Please wait for confirmation.");
+      } else {
+        contextValue?.setCreating(false);
+        toast.error("Failed to create subject. Please try again.");
+      }
+    } catch (error: any) {
+      contextValue?.setCreating(false);
+      console.error("Error creating subject:", error);
+  
+      if (error.response) {
+        // The request was made, but the server responded with a status code
+        toast.error(`Server responded with status ${error.response.status}: ${error.response.data.message}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        toast.error("No response received from the server. Please check your internet connection.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        toast.error(`An error occurred: ${error.message}`);
+      }
+    }
+  };
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Syllabus</h4>
-          <Button className="rounded-sm">Add Syllabus</Button>
+          <h4 className="text-[20px] font-Regular">Create Subject</h4>
+          <Button className="rounded-sm" onClick={handleSubjectSubmit}>
+            Add Subject
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
@@ -33,42 +99,57 @@ const page = () => {
                     type="text"
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Title"
+                    onChange={(e: any) => setName(e.target.value)}
                   />
                 </div>
               </div>
               <div className="flex flex-col gap-5">
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Class</Label>
-                  <Select>
+                  <Select onValueChange={(val) => setClassName(val)}>
                     <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                       <SelectValue
                         placeholder="Select Class"
                         className="text-[16px] "
                       />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Class 1">Class 1</SelectItem>
-                      <SelectItem value="Class 2">Class 2</SelectItem>
+                    <SelectContent className="rounded-sm">
+                      {classData?.length > 0 ? (
+                        classData.map((item: any) => (
+                          <SelectItem key={item?._id} value={item?.classname}>
+                            {item?.classname}
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <p className="p-2"> No data found</p>
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
-              <div className="flex flex-col gap-5">
-                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Teacher</Label>
-                  <Select>
-                    <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
-                      <SelectValue
-                        placeholder="Select Teacher"
-                        className="text-[16px] "
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Ishaq Abubakar">Ishaq Abubakar</SelectItem>
-                      <SelectItem value="Richie Boachie">Richie Boachie</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <div className="flex flex-col gap-5">
+                  <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                    <Label className="w-[200px]">Teacher</Label>
+                    <Select onValueChange={(val) => setTeacher(val)}>
+                      <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
+                        <SelectValue
+                          placeholder="Select Teacher"
+                          className="text-[16px] "
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {allTeachers?.length > 0 ? (
+                          allTeachers.map((item: any) => (
+                            <SelectItem key={item?._id} value={item?.name}>
+                              {item?.name}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <p className="p-2"> No data found</p>
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </form>
@@ -78,4 +159,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

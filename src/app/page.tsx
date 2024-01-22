@@ -24,7 +24,6 @@ export default function Home() {
   
   useEffect(()=>{
     setCookie('userSession',userSession,'')
-    console.log('hello there')
   },[userSession])
 
   const handleLogin = async (e: any) => {
@@ -39,7 +38,6 @@ export default function Home() {
         .post("/login", { email, password })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data.data)
             const resData = response.data.data;
             const userCredential = resData[0];
             const userSchoolCredential = resData[1];

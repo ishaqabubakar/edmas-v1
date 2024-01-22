@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const routineSchema = new mongoose.Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    class: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }],
-    section: [{ type: mongoose.Schema.Types.ObjectId, ref: "Section" }],
-    subject: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }],
+    class:  {type: mongoose.Schema.Types.ObjectId, ref: "Class" },
+    section: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
+    subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
     day: { type: String },
-    begintime: { type: Date },
-    endtime: { type: Date },
+    starttime: { type: String },
+    endtime: { type: String },
   },
   { timestamps: true }
 );

@@ -2,6 +2,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import Routine from "@/Model/Routine/routine";
+import Section from "@/Model/Section/section";
+import Class from "@/Model/Class/class";
+import Subject from "@/Model/Subject/subject";
+import School from "@/Model/School/school";
 
 
 export async function POST(req: NextRequest) {
@@ -12,7 +16,6 @@ export async function POST(req: NextRequest) {
     // Extract data from the request body
     const { schoolId, classIds, sectionIds, subjectIds, day, starttime, endtime } = await req.json();
 
-    // Validate required fields
     if (!schoolId || !classIds || !sectionIds || !subjectIds || !day || !starttime || !endtime) {
       return NextResponse.json(
         {
@@ -21,12 +24,15 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+   const findByOneSection = await Section.findOne({ name: sectionIds})
+   const findByOneClass= await Class.findOne({ classname: classIds})
+   const findBySubject= await Subject.findOne({ subjectname:subjectIds})
 
     // Create a new routine
     const newRoutine = new Routine({
-      class: classIds,
-      section: sectionIds,
-      subject: subjectIds,
+      class: findByOneClass?._id,
+      section: findByOneSection?._id,
+      subject: findBySubject?._id,
       school: schoolId,
       day,
       starttime,

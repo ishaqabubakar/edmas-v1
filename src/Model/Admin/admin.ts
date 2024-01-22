@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const adminSchema = new mongoose.Schema(
+const managerSchema = new mongoose.Schema(
   {
 
     userId: {
@@ -30,7 +30,7 @@ const adminSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Admin = mongoose.models.Admin || mongoose.model("Admin", adminSchema);
+const Manager = mongoose.models.Manager || mongoose.model("Manager", managerSchema);
 
 
-export default Admin;
+export default Manager;

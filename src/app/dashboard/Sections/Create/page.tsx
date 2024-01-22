@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { UserContext } from "@/contextAPI/generalContext";
 import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -21,6 +22,7 @@ const Page = () => {
   const [name, setName] = useState("");
   const [nickName, setNickname] = useState("");
   const [teacher, setTeacher] = useState("");
+  const router = useRouter()
 
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
@@ -45,6 +47,7 @@ const Page = () => {
 
       if (res.status === 200) {
         contextValue?.setCreating(false);
+        router.push("/dashboard/Sections");
         return toast.success("Section created successfully");
       }
     } catch (error: any) {

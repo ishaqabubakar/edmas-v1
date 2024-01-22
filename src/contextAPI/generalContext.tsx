@@ -3,7 +3,13 @@
 import axiosInstance from "@/API/AXIOS";
 import { getCookie } from "@/helpers/cookie";
 import { useSearchParams } from "next/navigation";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 interface UserContextProps {
   collapse: any;
@@ -15,20 +21,20 @@ interface UserContextProps {
   fetchSchoolById: any;
   setUserSession: any;
   retrivedUserData: any;
-  schoolData:any,
-  ownersData:any,
-  studentBySchool:any,
-  teacherBySchool:any
-  classBySchool:any
-  sectionBySchool:any
-  creating:boolean,
-  setCreating:any
-  paramID:any
-  paramMode:any
-  studentById:any
-
-
-
+  schoolData: any;
+  ownersData: any;
+  studentBySchool: any;
+  teacherBySchool: any;
+  classBySchool: any;
+  sectionBySchool: any;
+  creating: boolean;
+  setCreating: any;
+  paramID: any;
+  paramMode: any;
+  studentById: any;
+  setTrackStudentID: any;
+  subjectBySchoolId: any;
+  routineBySchoolId:any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -41,9 +47,9 @@ interface UserProviderProps {
 
 export function UserProvider({ children }: UserProviderProps) {
   const [userSession, setUserSession] = useState() as any;
-  const searchParam  = useSearchParams()
-  const paramID = searchParam.get('id')
-  const paramMode = searchParam.get('mode')
+  const searchParam = useSearchParams();
+  const paramID = searchParam.get("id");
+  const paramMode = searchParam.get("mode");
   const retrivedUserData = getCookie("userSession") as any;
   let ctx: any;
 
@@ -67,23 +73,25 @@ export function UserProvider({ children }: UserProviderProps) {
   const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
   const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
   const [studentById, setStudentById] = useState<any[] | undefined>();
-  const [creating, setCreating]= useState(false)
-  const[trackStudentID, setTrackStudentID] = useState()
+  const [routineBySchoolId, setRoutineBySchoolId] = useState<any[] | undefined>();
+  const [subjectBySchoolId, setSubjectBySchoolId] = useState<
+    any[] | undefined
+  >();
+  const [creating, setCreating] = useState(false);
+  const [trackStudentID, setTrackStudentID] = useState();
 
-
-
-  const fetchSchoolById = async () => {
+  const fetchSchoolById = useCallback(async () => {
     try {
       const res = await axiosInstance.post("/get-school-by-id", {
         id: ctx?.schoolId,
       });
       console.log("Response from /get-school-by-id:", res);
-      
+
       if (res.status === 200) {
         const data = res.data;
-  
+
         if (data !== null && data !== undefined) {
-          setUserData(JSON.stringify(data)); // Set the entire data object to userData
+          setUserData(JSON.stringify(data));
         } else {
           console.warn("Data is null or undefined in the response.");
         }
@@ -91,7 +99,7 @@ export function UserProvider({ children }: UserProviderProps) {
     } catch (error) {
       console.error("Error fetching school:", error);
     }
-  };
+  }, [ctx?.schoolId]);
 
   const fetchSchoolData = async () => {
     try {
@@ -99,8 +107,8 @@ export function UserProvider({ children }: UserProviderProps) {
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setSchoolData(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setSchoolData(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
@@ -113,119 +121,190 @@ export function UserProvider({ children }: UserProviderProps) {
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setOwnersData(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setOwnersData(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const fetchStudentBySchoolId = async () => {
+  const fetchStudentBySchoolId = useCallback(async () => {
     try {
-      const res = await axiosInstance.post("/get-student",{schoolId: ctx?.schoolId});
+      const res = await axiosInstance.post("/get-student", {
+        schoolId: ctx?.schoolId,
+      });
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setStudentBySchool(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setStudentBySchool(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  const fetchTeacherBySchoolId = async () => {
+  }, [ctx?.schoolId]);
+  const fetchTeacherBySchoolId = useCallback(async () => {
     try {
-      const res = await axiosInstance.post("/get-teachers",{id: ctx?.schoolId});
+      const res = await axiosInstance.post("/get-teachers", {
+        id: ctx?.schoolId,
+      });
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setTeacherBySchool(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setTeacherBySchool(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  
-  const fetchClassBySchoolId = async () => {
+  }, [ctx?.schoolId]);
+
+  const fetchClassBySchoolId = useCallback(async () => {
     try {
-      const res = await axiosInstance.post("/get-classes",{schoolId: ctx?.schoolId});
+      const res = await axiosInstance.post("/get-classes", {
+        schoolId: ctx?.schoolId,
+      });
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setClassBySchool(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setClassBySchool(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  const fetchSectionBySchoolId = async () => {
+  }, [ctx?.schoolId]);
+  const fetchSectionBySchoolId = useCallback(async () => {
     try {
-      const res = await axiosInstance.post("/get-sections",{id: ctx?.schoolId});
+      const res = await axiosInstance.post("/get-sections", {
+        id: ctx?.schoolId,
+      });
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setSectionBySchool(newData.data); // Set newData directly, assuming it's an object or an array
-          console.log(newData.data) 
+          setSectionBySchool(newData.data);
+          console.log(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  const fetchStudentById = async () => {
+  }, [ctx?.schoolId]);
+
+  const fetchStudentById = useCallback(async () => {
     try {
-      const res = await axiosInstance.post("/student-by-id",{id: paramID});
+      const res = await axiosInstance.post("/student-by-id", {
+        id: paramID,
+      });
       if (res.status === 200) {
         const newData = res.data;
         if (newData) {
-          setStudentById(newData.data); // Set newData directly, assuming it's an object or an array
-          // alert(JSON.stringify(newData.data)) 
+          setStudentById(newData.data);
         }
       }
     } catch (error) {
       console.log(error);
     }
-  };
-  
+  }, []);
+
+  const fetchSubjectBySchoolId = useCallback(async () => {
+    try {
+      const res = await axiosInstance.post("/get-subject", {
+        schoolId: ctx?.schoolId,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setSubjectBySchoolId(newData.data);
+          console.log(subjectBySchoolId)
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const fetchRoutineBySchoolId = useCallback(async () => {
+    try {
+      const res = await axiosInstance.post("/get-routine", {
+        schoolId: ctx?.schoolId,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setRoutineBySchoolId(newData.data);
+          console.log(subjectBySchoolId)
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    fetchOwnersData()
-    fetchSchoolData()
+    fetchOwnersData();
+    fetchSchoolData();
     fetchSchoolById();
-    fetchStudentBySchoolId()
-    fetchTeacherBySchoolId()
-    fetchClassBySchoolId()
-    fetchSectionBySchoolId()
-    fetchStudentById()
-  },[]);
+    fetchStudentBySchoolId();
+    fetchTeacherBySchoolId();
+    fetchClassBySchoolId();
+    fetchSectionBySchoolId();
+    fetchStudentById();
+    fetchStudentBySchoolId();
+    fetchRoutineBySchoolId()
+  }, [
+    fetchClassBySchoolId,
+    fetchSchoolById,
+    fetchSectionBySchoolId,
+    fetchStudentById,
+    fetchStudentBySchoolId,
+    fetchTeacherBySchoolId,
+   fetchRoutineBySchoolId
+  ]);
 
   useEffect(() => {
-    fetchOwnersData()
-    fetchSchoolData()
+    fetchStudentById();
+  }, []);
+
+  useEffect(() => {
+    fetchOwnersData();
+    fetchSchoolData();
     fetchSchoolById();
-    fetchStudentBySchoolId()
-    fetchTeacherBySchoolId()
-    fetchClassBySchoolId()
-    fetchSectionBySchoolId()
-    fetchStudentById()
-  }, [creating, paramID]);
+    fetchStudentBySchoolId();
+    fetchTeacherBySchoolId();
+    fetchClassBySchoolId();
+    fetchSectionBySchoolId();
+    fetchStudentById();
+    fetchSubjectBySchoolId();
+    fetchRoutineBySchoolId()
+  }, [
+    creating,
+    fetchClassBySchoolId,
+    fetchSchoolById,
+    fetchSectionBySchoolId,
+    fetchStudentById,
+    fetchStudentBySchoolId,
+    fetchTeacherBySchoolId,
+    fetchRoutineBySchoolId,
+    trackStudentID,
+    paramID,
+    fetchSubjectBySchoolId,
+  ]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => {
-  fetchOwnersData();
-  fetchSchoolData();
-  fetchSchoolById();
-  fetchStudentBySchoolId();
-  fetchTeacherBySchoolId();
-  fetchClassBySchoolId();
-  fetchSectionBySchoolId();
-}, []);
+  useEffect(() => {
+    fetchOwnersData();
+    fetchSchoolData();
+    fetchSchoolById();
+    fetchStudentBySchoolId();
+    fetchTeacherBySchoolId();
+    fetchClassBySchoolId();
+    fetchSectionBySchoolId();
+  }, []);
 
   return (
     <UserContext.Provider
@@ -249,11 +328,10 @@ useEffect(() => {
         setCreating,
         paramID,
         paramMode,
-        studentById
-
-      
-
-
+        studentById,
+        setTrackStudentID,
+        subjectBySchoolId,
+        routineBySchoolId
       }}
     >
       {children}

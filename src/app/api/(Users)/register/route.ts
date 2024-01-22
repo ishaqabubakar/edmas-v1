@@ -7,6 +7,7 @@ import Student from "@/Model/Student/student";
 import Teacher from "@/Model/Teacher/teacher";
 import User from "@/Model/user/user";
 import School from "@/Model/School/school";
+import Manager from "@/Model/Admin/admin";
 
 
 
@@ -64,7 +65,7 @@ export async function POST(req: NextRequest) {
 
     // Determine the role-specific information
     let roleSpecificData;
-    if (data.role === "admin") {
+    if (data.role === "manager") {
       roleSpecificData = {
         userId: savedUser._id,
         name: data.name,
@@ -76,13 +77,13 @@ export async function POST(req: NextRequest) {
         gender: data.gender,
        initial:savedUser.initial
       };
-      const savedAdmin = await new Admin(roleSpecificData).save();
+      const savedAdmin = await new Manager(roleSpecificData).save();
       return NextResponse.json(
         {
           message: "User registered successfully",
           userData: {
             user: savedUser,
-            Admin: savedAdmin,
+            Manager: savedAdmin,
           },
         },
         { status: 201 }

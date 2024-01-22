@@ -4,10 +4,10 @@ import connectDB from "@/config/connection";
 import { comparedPassword } from "@/helpers/bycrpt";
 import Student from "@/Model/Student/student";
 import Teacher from "@/Model/Teacher/teacher";
-import Admin from "@/Model/Admin/admin";
 import Owner from "@/Model/Owner/Owner";
 import User from "@/Model/user/user";
 import School from "@/Model/School/school";
+import Manager from "@/Model/Admin/admin";
 
 
 export async function POST(req: NextRequest) {
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const { email, password } = await req.json();
     const singleStudent = await Student.findOne({ email });
     const singleTeacher = await Teacher.findOne({ email });
-    const singleAdmin = await Admin.findOne({ email });
+    const singleAdmin = await Manager.findOne({ email });
     const singleOwner = await Owner.findOne({ email })
     const singleUser = await User.findOne({ email });
     const studenSchool = await School.findOne({ _id: singleStudent?.school });
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (singleUser.role === "admin") {
+    if (singleUser.role === "manager") {
       return NextResponse.json(
         {
           message: "login successfully",

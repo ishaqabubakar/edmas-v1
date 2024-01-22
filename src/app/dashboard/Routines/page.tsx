@@ -1,3 +1,6 @@
+"use client"
+
+import RoutineTable from "@/app/(component)/tables/routineTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
@@ -12,11 +15,7 @@ const page = () => {
          <Link href={"/dashboard/Routines/Create"} ><Button className="rounded-sm">Add Routine</Button></Link>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-5 h-full">
-        <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-          <p className="text-gray-400">No class routine records yet</p>
-        </div>
-      </div>
+   <RoutineTable />
     </div>
   );
 };

@@ -18,15 +18,13 @@ import {
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
-const StudentTable = () => {
+const SubjectTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
-  const data = contxtValue?.studentBySchool;
-  const router = useRouter();
+  const data = contxtValue?.subjectBySchoolId;
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -36,10 +34,8 @@ const StudentTable = () => {
     : [];
 
   const sortedData = [...filteredData]?.sort((a, b) => {
-    if (sortOption === "name") {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === "class") {
-      return a.class.localeCompare(b.class);
+    if (sortOption === "subjectname") {
+      return a.subjectname.localeCompare(b.subjectname);
     } else {
       return 0;
     }
@@ -70,12 +66,12 @@ const StudentTable = () => {
             <DropdownMenuContent className="w-40 mr-7 rounded-sm">
               <DropdownMenuLabel>Sort By</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setSortOption("name")}>
+              <DropdownMenuItem onSelect={() => setSortOption("subjectname")}>
                 Name
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => setSortOption("class")}>
-                Class
-              </DropdownMenuItem>
+              {/* <DropdownMenuItem onSelect={() => setSortOption("size")}>
+               Size
+              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -85,11 +81,8 @@ const StudentTable = () => {
           <Table className="bg-white w-full border-b">
             <TableHeader className="rounded-sm">
               <TableRow>
-                <TableHead>Full Name</TableHead>
-                <TableHead>Class</TableHead>
-                <TableHead className="">Section</TableHead>
-                <TableHead className="">Email</TableHead>
-                <TableHead className="">Parent</TableHead>
+                <TableHead>Subject Name</TableHead>
+                {/* <TableHead>Class Size</TableHead> */}
                 <TableHead className="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -102,15 +95,8 @@ const StudentTable = () => {
                   }`}
                   key={item.id}
                 >
-                  <TableCell className="py-2">{item.name}</TableCell>
-                  <TableCell className="py-2">{item.class}</TableCell>
-                  <TableCell className="py-2">{item.section}</TableCell>
-                  <TableCell className="py-2 ">
-                    {item.parent.parentemail}
-                  </TableCell>
-                  <TableCell className="py-2 ">
-                    {item.parent.fullname}
-                  </TableCell>
+                  <TableCell className="py-2">{item.subjectname}</TableCell>
+                  {/* <TableCell className="py-2 ">{item.size}</TableCell> */}
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                     <DropdownMenu>
                       <DropdownMenuTrigger
@@ -122,24 +108,10 @@ const StudentTable = () => {
                       <DropdownMenuContent className="w-40 mr-7 rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          onSelect={() => {
-                            router.push(
-                              `/dashboard/Students?id=${item.userId}&mode=view`
-                            );
-                            contxtValue?.setTrackStudentID(item.userId);
-                          }}
-                        >
+                        <DropdownMenuItem onSelect={() => alert(item._id)}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onSelect={() => {
-                            router.push(
-                              `/dashboard/Students?id=${item.userId}&mode=edit`
-                            );
-                            contxtValue?.setTrackStudentID(item.userId);
-                          }}
-                        >
+                        <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem onSelect={() => alert("Delete")}>
@@ -163,4 +135,4 @@ const StudentTable = () => {
   );
 };
 
-export default StudentTable;
+export default SubjectTable;

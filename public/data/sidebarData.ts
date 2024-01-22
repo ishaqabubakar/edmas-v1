@@ -63,7 +63,7 @@ export const sidebarMenus: sidebarProps[] = [
       { path: "/dashboard/Sections", menus: "Sections" },
       { path: "/dashboard/Routines", menus: "Routines" },
       { path: "/dashboard/Subjects", menus: "Subjects" },
-      { path: "/dashboard/Syllabuses", menus: "Syllabuses" },
+      // { path: "/dashboard/Syllabuses", menus: "Syllabuses" },
       { path: "/dashboard/Materials", menus: "Materials" },
     ],
   },
