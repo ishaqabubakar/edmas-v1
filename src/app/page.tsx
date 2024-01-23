@@ -68,8 +68,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-50">
-      <form className="w-[400px] h-fit  rounded-[10px] flex flex-col items-center bg-white p-5 lg:p-[30px] justify-center">
+    <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-50 p-5">
+      <form className="lg:w-[400px] h-fit  rounded-[10px] flex flex-col items-center bg-white p-5 lg:p-[30px] justify-center w-full">
         <div className="flex flex-col items-center pb-[30px]">
           <h2 className="text-[40px]">
             <span>Ed</span>

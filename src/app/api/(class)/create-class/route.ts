@@ -3,14 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import School from "@/Model/School/school";
 import Class from "@/Model/Class/class";
-import Teacher from "@/Model/Teacher/teacher";
+
 
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const { classname, school, teacher, size } = await req.json();
+    const { classname, school,  size } = await req.json();
     const currentSchool = await School.findById(school);
 
     const existingClass = await Class.findOne({
@@ -35,29 +35,29 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Check if teacher exists
-    const teacherByOne = await Teacher.findOne({ name: teacher });
+    // // Check if teacher exists
+    // const teacherByOne = await Teacher.findOne({ name: teacher });
 
-    if (!teacherByOne) {
-      return NextResponse.json(
-        {
-          message: "Teacher not found",
-        },
-        { status: 404 }
-      );
-    }
+    // if (!teacherByOne) {
+    //   return NextResponse.json(
+    //     {
+    //       message: "Teacher not found",
+    //     },
+    //     { status: 404 }
+    //   );
+    // }
 
     const newClass = new Class({
       classname,
       school: school,
-      teacher: [teacherByOne._id], // Ensure teacher is an array
+      // teacher: [teacherByOne._id], // Ensure teacher is an array
       size,
     });
 
     const savedClass = await newClass.save();
 
     // Populate the teacher field in the savedClass result
-    await savedClass.populate("teacher");
+    await savedClass.save();
 
     return NextResponse.json(
       {
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
         data: {
           name: savedClass?.classname,
           size: savedClass?.size,
-          teacher: savedClass?.teacher,
+          // teacher: savedClass?.teacher,
         },
       },
       { status: 200 }

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const classes = await Class.find({ school: schoolId })
 
-    if (!classes || classes.length === 0) {
+    if (!classes) {
       return NextResponse.json(
         {
           message: `No class found for schoolId ${schoolId}.`,

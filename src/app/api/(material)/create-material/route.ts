@@ -4,6 +4,7 @@ import Material from "../../../../Model/Materials/material";
 
 import connectDB from "@/config/connection";
 import School from "../../../../Model/School/school";
+import { upload } from "@/Middleware/uploadMiddleware";
 
 export async function POST(req: NextRequest) {
   try {

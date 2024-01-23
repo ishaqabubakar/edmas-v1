@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     const sections = await Section.find({ school: id });
 
-    if (!sections || sections.length === 0) {
+    if (!sections) {
       return NextResponse.json(
         {
           message: `No ssection found for schoolId ${id}.`,

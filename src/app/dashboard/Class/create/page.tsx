@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
   const contextValue = useContext(UserContext);
-  const allTeachers = contextValue?.teacherBySchool;
+  // const allTeachers = contextValue?.teacherBySchool;
   const schoolId = contextValue?.ctx?.schoolId;
   const router = useRouter()
 
@@ -31,7 +31,7 @@ const Dashboard = () => {
     e.preventDefault();
   
     try {
-      if (!name || !teacher) {
+      if (!name) {
         return toast.error("Ensure all fields are filled correctly.");
       }
   
@@ -40,7 +40,6 @@ const Dashboard = () => {
       const response = await axiosInstance.post("/create-class", {
         classname: name,
         school: schoolId,
-        teacher,
         size,
       });
   
@@ -93,7 +92,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-5">
-                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                {/* <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Teacher</Label>
                   <Select onValueChange={(val) => setTeacher(val)}>
                     <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
@@ -114,7 +113,7 @@ const Dashboard = () => {
                       )}
                     </SelectContent>
                   </Select>
-                </div>
+                </div> */}
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Class Size</Label>
                   <Input

@@ -73,7 +73,10 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Examination",
     sub: [
       // { path: "/dashboard/Subject/view-subject", menus: "Exams" },
-      { path: "/dashboard/Examination", menus: "Grade" },
+      { path: "/dashboard/Grade", menus: "Exam" },
+      { path: "/dashboard/Grade", menus: "Test" },
+      { path: "/dashboard/Grade", menus: "Gradebook" },
+      { path: "/dashboard/Grade", menus: "Report" },
      
     ],
   },
