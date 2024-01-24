@@ -4,13 +4,12 @@ const materialSchema = new mongoose.Schema(
   {
     materialname: {type: String},
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    teacher: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" },
     subject: { type: mongoose.Schema.Types.ObjectId, ref: "Subject" },
-    title: {type: String},
+    section: { type: mongoose.Schema.Types.ObjectId, ref: "Section" },
     description: {type: String},
     attachment: {type: String},
 
-  },
+  },  
   { timestamps: true }
 );
 

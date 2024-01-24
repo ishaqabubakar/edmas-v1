@@ -1,27 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import Material from "../../../../Model/Materials/material";
-
-
 import connectDB from "@/config/connection";
-import School from "../../../../Model/School/school";
-import { upload } from "@/Middleware/uploadMiddleware";
+import School from "@/Model/School/school";
+import Material from "@/Model/Materials/material";
+import upload from "@/Middleware/uploadMiddleware";
+import multer from "multer";
+import Subject from "@/Model/Subject/subject";
+import Section from "@/Model/Section/section";
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    const { school, materialname, teacher, subject,title, description, attachment } = await req.json();
+    const { school, materialname, subject, description, attachment,section } = await req.json();
 
-    if (!school || !materialname || !teacher || !subject || !title || !description ) {
+    if (!school || !materialname || !subject || !description) {
       return NextResponse.json(
         {
-          messasge: "Please provide all the details needed. ",
+          message: "Please provide all the details needed.",
         },
         { status: 400 }
       );
     }
 
-    const schoolByOne = await School.findOne({ school });
-
+    const schoolByOne = await School.findOne({ _id:school });
     if (!schoolByOne) {
       return NextResponse.json(
         {
@@ -30,14 +30,17 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
+
+    const subjectByOne = await Subject.findOne({ subjectname: materialname });
+    const sectionByOne = await Section.findOne({ name: section });
+
     const newMaterial = new Material({
       school,
       materialname,
-      teacher,
-      subject,
-      title,
+      subject: subjectByOne?._id,
+      section:sectionByOne?._id,
       description,
-      attachment
+      attachment, 
     });
 
     const savedMaterial = await newMaterial.save();
@@ -50,6 +53,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       {
         message: "Internal server error",

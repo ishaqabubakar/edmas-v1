@@ -35,7 +35,10 @@ interface UserContextProps {
   studentById: any;
   setTrackStudentID: any;
   subjectBySchoolId: any;
-  routineBySchoolId:any
+  routineBySchoolId: any;
+  noticeboardBySchoolId: any;
+  noticeById: any;
+  noticeID: any;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -50,6 +53,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [userSession, setUserSession] = useState() as any;
   const searchParam = useSearchParams();
   const paramID = searchParam.get("id");
+  const noticeID = searchParam.get("notice");
   const paramMode = searchParam.get("mode");
   const retrivedUserData = getCookie("userSession") as any;
   let ctx: any;
@@ -74,7 +78,13 @@ export function UserProvider({ children }: UserProviderProps) {
   const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
   const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
   const [studentById, setStudentById] = useState<any[] | undefined>();
-  const [routineBySchoolId, setRoutineBySchoolId] = useState<any[] | undefined>();
+  const [noticeById, setNoticeById] = useState<any[] | undefined>();
+  const [routineBySchoolId, setRoutineBySchoolId] = useState<
+    any[] | undefined
+  >();
+  const [noticeboardBySchoolId, setNoticeboardBySchoolId] = useState<
+    any[] | undefined
+  >();
   const [subjectBySchoolId, setSubjectBySchoolId] = useState<
     any[] | undefined
   >();
@@ -221,7 +231,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setSubjectBySchoolId(newData.data);
-          console.log(subjectBySchoolId)
+          console.log(subjectBySchoolId);
         }
       }
     } catch (error) {
@@ -238,7 +248,39 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setRoutineBySchoolId(newData.data);
-          console.log(subjectBySchoolId)
+          console.log(subjectBySchoolId);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const fetchNoticeBoardBySchoolId = useCallback(async () => {
+    try {
+      const res = await axiosInstance.post("/get-noticeboards", {
+        id: ctx?.schoolId,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setNoticeboardBySchoolId(newData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const fetchNoticeBoardById = useCallback(async () => {
+    try {
+      const res = await axiosInstance.post("/notice-id", {
+        id: noticeID,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setNoticeById(newData.data);
         }
       }
     } catch (error) {
@@ -256,7 +298,9 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchSectionBySchoolId();
     fetchStudentById();
     fetchStudentBySchoolId();
-    fetchRoutineBySchoolId()
+    fetchRoutineBySchoolId();
+    fetchNoticeBoardBySchoolId();
+    fetchNoticeBoardById();
   }, [
     fetchClassBySchoolId,
     fetchSchoolById,
@@ -264,7 +308,9 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchStudentById,
     fetchStudentBySchoolId,
     fetchTeacherBySchoolId,
-   fetchRoutineBySchoolId
+    fetchRoutineBySchoolId,
+    fetchNoticeBoardBySchoolId,
+    fetchNoticeBoardById,
   ]);
 
   useEffect(() => {
@@ -281,7 +327,9 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchSectionBySchoolId();
     fetchStudentById();
     fetchSubjectBySchoolId();
-    fetchRoutineBySchoolId()
+    fetchRoutineBySchoolId();
+    fetchNoticeBoardBySchoolId();
+    fetchNoticeBoardById();
   }, [
     creating,
     fetchClassBySchoolId,
@@ -291,9 +339,12 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchStudentBySchoolId,
     fetchTeacherBySchoolId,
     fetchRoutineBySchoolId,
+    fetchNoticeBoardBySchoolId,
     trackStudentID,
     paramID,
+    noticeID,
     fetchSubjectBySchoolId,
+    fetchNoticeBoardById,
   ]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -305,6 +356,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchTeacherBySchoolId();
     fetchClassBySchoolId();
     fetchSectionBySchoolId();
+    fetchNoticeBoardById();
   }, []);
 
   return (
@@ -332,7 +384,10 @@ export function UserProvider({ children }: UserProviderProps) {
         studentById,
         setTrackStudentID,
         subjectBySchoolId,
-        routineBySchoolId
+        routineBySchoolId,
+        noticeboardBySchoolId,
+        noticeById,
+        noticeID,
       }}
     >
       {children}

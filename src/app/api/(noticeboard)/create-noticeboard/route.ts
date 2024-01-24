@@ -8,18 +8,18 @@ import Noticeboard from "@/Model/Noticeboard/noticeboard";
 export async function POST(req: NextRequest) {
   try {
     await connectDB()
-    const {school, title, description, date } = await req.json();
+    const {school, title, date, description, author } = await req.json();
 
-    if (!school ||!title || !date || description) {
+    if (!school || !title  || !description) {
       return NextResponse.json(
         {
-          messasge: "Please provide name, location and phone",
+          messasge: "Ensure all fieds are correctly filled",
         },
         { status: 400 }
       );
     }
 
-    const schoolByOne = await School.findOne({school}) 
+    const schoolByOne = await School.findOne({_id: school}) 
 
     if (!schoolByOne) {
         return NextResponse.json(
@@ -33,7 +33,8 @@ export async function POST(req: NextRequest) {
       school,
       title,
       date,
-      description
+      description,
+      author
     });
 
     const savedNoticeboard = await newNoticeboard.save();

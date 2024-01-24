@@ -2,13 +2,24 @@
 import CalendarDemo from "@/app/(component)/Calender/viewCalender";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
-import { X } from "lucide-react";
+import {
+  ArrowRightIcon,
+  ChevronRight,
+  Clock,
+  TimerIcon,
+  TimerOffIcon,
+  X,
+} from "lucide-react";
 import SchedulerTable from "@/app/(component)/Scheduler";
 import DigitalClock from "@/app/(component)/DigitalClock";
 import TopHeaderStats from "./topHeader";
+import formatDate from "@/helpers/DateFormater";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
- const Page = () => {
+const Page = () => {
   const [hideWelcomeMessage, setHideWelcomeMessage] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,25 +49,50 @@ import TopHeaderStats from "./topHeader";
         <TopHeaderStats />
       </div>
       <div className="h-full w-full lg:flex-row flex flex-col gap-5">
-        <div className="h-full w-full flex flex-col gap-5 overflow-clip">
+        <div className="h-full w-full flex flex-col gap-5">
           <div className="p-3 border-b h-full bg-white rounded-sm border">
-            <p className="font-Medium py-3">Notiice Board</p>
-            <div className="w-full flex  p-2 rounded-sm gap-5 items-center justify-between overflow-clip">
-              {/* <div>
-                {" "}
-                <h3 className="font-Medium capitalize">
-                  Today is public holiday!!
-                </h3>
-                <p className="font-Regular text-[12px]">
-                  Published by{" "}
-                  <span className="font-Medium">School Head Master</span>
-                </p>
-              </div>
-              <div className="border bg-white h-fit w-[80px] rounded-sm p-2 flex flex-col items-start justify-center">
-                <p className="font-Regular">JAN, 03</p>
-                <p className="font-Regular">2024</p>
-              </div> */}
-              <SchedulerTable />
+            <div className="flex justify-between items-center">
+              <p className="font-Medium py-3">Notiice Board</p>
+              <Link
+                href="/dashboard/NoticeBoard/notices"
+                className="font-Medium py-3 hover:text-slate-900 flex gap-1 items-center"
+              >
+                <p> View all</p>
+                <ChevronRight size={16} />
+              </Link>
+            </div>
+            <div className="flex flex-col gap-[10px]">
+              {contextValue?.noticeboardBySchoolId
+                ?.slice(0, 4)
+                .map((notice: any) => (
+                  <div
+                    key={notice._id}
+                    onClick={() =>
+                      router.push(
+                        `/dashboard/NoticeBoard/notices?notice=${notice._id}`
+                      )
+                    }
+                    className="w-full flex bg-gray-50 h-[80px] border p-5 rounded-sm gap-5 items-center justify-between overflow-clip"
+                  >
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-Medium capitalize">{notice.title}</h3>
+                      <div className="font-Regular text-[12px] flex items-center">
+                        <p className="flex items-center">
+                          <Clock size={16} className="text-gray-500 mr-1" />
+                          <span className="text-gray-500 text-[14px] font-Medium">
+                            {notice.date}
+                          </span>
+                        </p>
+                        <span className="mx-1 text-[16px] text-gray-500">
+                          |
+                        </span>
+                        <span className="font-Regular text-[14px] text-gray-500">
+                          {notice.author}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
           {/* <div className="p-3 border-b h-full bg-white rounded-sm border">

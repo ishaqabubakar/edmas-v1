@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req:NextRequest) {
   try {
     const { id } = await req.json()
-    const noticeboards = await Noticeboard.find({ school:id })
+    const noticeboards = await Noticeboard.findById(id)
 
     return NextResponse.json(
       {

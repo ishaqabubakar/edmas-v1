@@ -3,10 +3,13 @@ import mongoose from "mongoose";
 const noticeboardSchema = new mongoose.Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
-    title: {
-      type: { type: String },
+    title: { type: String },
+
+    date: {
+      type: String,
     },
     description: { type: String },
+    author: { type: String },
   },
   { timestamps: true }
 );
