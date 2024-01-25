@@ -67,11 +67,10 @@ const Page = () => {
                 .map((notice: any) => (
                   <div
                     key={notice._id}
-                    onClick={() =>
-                      router.push(
-                        `/dashboard/NoticeBoard/notices?notice=${notice._id}`
-                      )
-                    }
+                    onClick={ () => {
+                     contextValue?.fetchNoticeBoardById(notice?._id);
+                      router.push(`/dashboard/NoticeBoard/notices?notice=${notice._id}`);
+                    }}
                     className="w-full flex bg-gray-50 h-[80px] border p-5 rounded-sm gap-5 items-center justify-between overflow-clip"
                   >
                     <div className="flex flex-col gap-2">

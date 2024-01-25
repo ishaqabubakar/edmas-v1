@@ -17,7 +17,7 @@ export function ViewSidebar() {
       <SheetTrigger asChild>
       <MenuIcon />
       </SheetTrigger>
-      <SheetClose className="hidden"></SheetClose>
+      <SheetClose ></SheetClose>
       <SheetContent className="w-[250px] p-0">
      <MobileSidebar />
       </SheetContent>

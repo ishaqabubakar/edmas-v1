@@ -123,21 +123,21 @@ const StudentTable = () => {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          onSelect={() => {
+                          onSelect={async() => {
+                            await contxtValue?.fetchStudentById(item.userId);
                             router.push(
                               `/dashboard/Students?id=${item.userId}&mode=view`
                             );
-                            contxtValue?.setTrackStudentID(item.userId);
                           }}
                         >
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onSelect={() => {
+                          onSelect={async() => {
+                           await contxtValue?.fetchStudentById(item.userId);
                             router.push(
                               `/dashboard/Students?id=${item.userId}&mode=edit`
                             );
-                            contxtValue?.setTrackStudentID(item.userId);
                           }}
                         >
                           <Edit className="mr-2 text-brand-icon" /> Edit

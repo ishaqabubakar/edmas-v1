@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
 import School from "@/Model/School/school";
 import Material from "@/Model/Materials/material";
-import upload from "@/Middleware/uploadMiddleware";
-import multer from "multer";
 import Subject from "@/Model/Subject/subject";
 import Section from "@/Model/Section/section";
 

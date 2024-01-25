@@ -26,7 +26,7 @@ const ViewAndEdit = () => {
   const router = useRouter();
   const [sName, setSname] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [className, setClassName] = useState("");
   const [adminNumber, setAdminNumber] = useState("");
   const [age, setAge] = useState("");
@@ -41,18 +41,17 @@ const ViewAndEdit = () => {
   const [sectionName, setSectionName] = useState("");
 
   const payLoad = {
-    name: sName,
-    dob: dob,
-    email: email,
-    password: password,
-    address: address,
-    phonenumber: phone,
-    gender: gender,
-    class: className,
-    section: sectionName,
+    // name: sName,
+    // dob: dob,
+    // // password: password,
+    // address: address,
+    // phonenumber: phone,
+    // gender: gender,
+    // class: className,
+    // section: sectionName,
     role: "student",
-    admissioncode: adminNumber,
-    school: contextValue?.ctx?.schoolId,
+    // admissioncode: adminNumber,
+    // school: contextValue?.ctx?.schoolId,
     parent: {
       fullname: pName,
       phone: pPhone,
@@ -64,7 +63,7 @@ const ViewAndEdit = () => {
   const handleFormSubmission = async (e: any) => {
     try {
       setCreating(true);
-      const res = await axiosInstance.post("/update-student", {id:contextValue?.paramID, data: payLoad }) as any;
+      const res = await axiosInstance.put("/update-student", { data: payLoad, id:contextValue?.paramID, }) as any;
       if (res.status === 200) {
         toast.success(res.data.message);
         router.push("/dashboard/Students");
@@ -75,7 +74,7 @@ const ViewAndEdit = () => {
       return toast.error(error);
     }
   };
-  const studentArray = contextValue?.studentById as any;
+
 
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
@@ -107,8 +106,7 @@ const ViewAndEdit = () => {
                       type="text"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Student name"
-                      onChange={(e: any) => setSname(e.target.value)}
-                      defaultValue={studentArray?.name}
+                      value={contextValue?.studentById?.name}
                       disabled={contextValue?.paramMode==='view'}
                      
                     />
@@ -119,12 +117,11 @@ const ViewAndEdit = () => {
                       type="email"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Email"
-                      onChange={(e: any) => setEmail(e.target.value)}
-                      defaultValue={studentArray?.email}
-                      disabled={contextValue?.paramMode==='view'}
+                      value={contextValue?.studentById?.email}
+                      disabled={true}
                     />
                   </div>
-                  <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
+                  {/* <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Password</Label>
                     <Input
                       type="password"
@@ -133,7 +130,7 @@ const ViewAndEdit = () => {
                       onChange={(e: any) => setPassword(e.target.value)}
                       disabled={contextValue?.paramMode==='view'}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex flex-col gap-5">
                   <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -142,7 +139,7 @@ const ViewAndEdit = () => {
                       type="text"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Admission"
-                      onChange={(e: any) => setAdminNumber(e.target.value)}
+                      value={contextValue?.studentById?.admissioncode}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -152,7 +149,7 @@ const ViewAndEdit = () => {
                       type="text"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Age"
-                      onChange={(e: any) => setAge(e.target.value)}
+                      value={contextValue?.studentById?.age}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -160,7 +157,7 @@ const ViewAndEdit = () => {
                 <div className=" flex flex-col gap-5">
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Gender</Label>
-                    <Select onValueChange={(val) => setGender(val)} defaultValue={studentArray?.gender}  disabled={contextValue?.paramMode==='view'}>
+                    <Select  value={contextValue?.studentById?.gender}  disabled={contextValue?.paramMode==='view'}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select gender"
@@ -179,8 +176,7 @@ const ViewAndEdit = () => {
                       type="date"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Date of birth"
-                      onChange={(e: any) => setDob(e.target.value)}
-                      defaultValue={studentArray?.dob}
+                      value={contextValue?.studentById?.dob}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -192,8 +188,7 @@ const ViewAndEdit = () => {
                       type="phone"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Phone"
-                      onChange={(e: any) => setPhone(e.target.value)}
-                      defaultValue={studentArray?.phone}
+                      value={contextValue?.studentById?.phone}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -203,8 +198,7 @@ const ViewAndEdit = () => {
                       type="text"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="House Address"
-                      onChange={(e: any) => setAddress(e.target.value)}
-                      defaultValue={studentArray?.address}
+                      value={contextValue?.studentById?.address}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -212,7 +206,7 @@ const ViewAndEdit = () => {
                 <div className="flex gap-5  flex-col">
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Class</Label>
-                    <Select onValueChange={(val) => setClassName(val)} defaultValue={studentArray?.class}  disabled={contextValue?.paramMode==='view'}>
+                    <Select value={contextValue?.studentById?.class}  disabled={contextValue?.paramMode==='view'}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Class"
@@ -234,7 +228,7 @@ const ViewAndEdit = () => {
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Section</Label>
-                    <Select onValueChange={(val) => setSectionName(val)} defaultValue={studentArray?.section}  disabled={contextValue?.paramMode==='view'}>
+                    <Select value={contextValue?.studentById?.section}  disabled={contextValue?.paramMode==='view'}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select section"
@@ -270,7 +264,7 @@ const ViewAndEdit = () => {
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Full name"
                       onChange={(e: any) => setPname(e.target.value)} 
-                      defaultValue={studentArray?.parentName}
+                      value={contextValue?.studentById?.parentName}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -281,7 +275,7 @@ const ViewAndEdit = () => {
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Email"
                       onChange={(e: any) => setPemail(e.target.value)}
-                      defaultValue={studentArray?.parentemail}
+                      value={contextValue?.studentById?.parentemail}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -294,7 +288,7 @@ const ViewAndEdit = () => {
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Proffession"
                       onChange={(e: any) => setPproffession(e.target.value)}
-                      defaultChecked={studentArray?.proffession}
+                      defaultChecked={contextValue?.studentById?.proffession}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
@@ -305,7 +299,7 @@ const ViewAndEdit = () => {
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Phone"
                       onChange={(e: any) => setPphone(e.target.value)}
-                      defaultValue={studentArray?.phone}
+                      value={contextValue?.studentById?.phone}
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>

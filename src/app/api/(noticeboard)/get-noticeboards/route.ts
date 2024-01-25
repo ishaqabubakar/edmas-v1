@@ -1,11 +1,13 @@
 import Noticeboard from "@/Model/Noticeboard/noticeboard";
 import { NextRequest, NextResponse } from "next/server";
 
-
-export async function POST(req:NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const { id } = await req.json()
-    const noticeboards = await Noticeboard.find({ school:id })
+    const { id } = await req.json();
+    const noticeboards = await Noticeboard.find({ school: id });
+
+    // Sort noticeboards by createdAt field in descending order
+    noticeboards.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
     return NextResponse.json(
       {
