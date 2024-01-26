@@ -12,7 +12,7 @@ import Link from "next/link";
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">View Owners</h4>
           <Link href={"/dashboard/Owners/Create"}>
-            <Button className="rounded-sm">Add Owner</Button>
+            <Button className="rounded-sm">Create Owner</Button>
           </Link>
         </div>
       </div>

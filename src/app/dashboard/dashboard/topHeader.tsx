@@ -29,7 +29,9 @@ export const TopHeaderStats = () => {
             <p className="text-[14px] font-Regular text-brand-icon">
               Total Students
             </p>
-            <h3 className="text-[35px] font-Medium">{contextValue?.studentBySchool?.length}</h3>
+            <h3 className="text-[35px] font-Medium">
+              {contextValue?.studentBySchool?.length}
+            </h3>
           </div>
           <div className="flex flex-col item-center leading-6">
             <Icon
@@ -45,7 +47,9 @@ export const TopHeaderStats = () => {
             <p className="text-[14px] font-Regular text-brand-icon">
               Total Class
             </p>
-            <h3 className="text-[35px] font-Medium">{contextValue?.classBySchool?.length}</h3>
+            <h3 className="text-[35px] font-Medium">
+              {contextValue?.classBySchool?.length}
+            </h3>
           </div>
           <div className="flex flex-col item-center leading-6">
             <Icon
@@ -55,29 +59,35 @@ export const TopHeaderStats = () => {
           </div>
         </div>
       </div>
-      <div className="w-full  bg-[#7a1a63]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
-        <div className="flex items-center justify-between w-full gap-5 ">
-          <div className=" rounded-sm flex flex-col items-start justify-center">
-            <p className="text-[14px] font-Regular text-brand-icon">
-              Total Sections
-            </p>
-            <h3 className="text-[35px] font-Medium">{contextValue?.sectionBySchool?.length}</h3>
-          </div>
-          <div className="flex flex-col item-center leading-6">
-            <Icon
-              icon="mingcute:section-line"
-              className="text-[50px] text-[#7a1a63]"
-            />
+      {contextValue?.ctx?.role !=="admin" && (
+        <div className="w-full  bg-[#7a1a63]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
+          <div className="flex items-center justify-between w-full gap-5 ">
+            <div className=" rounded-sm flex flex-col items-start justify-center">
+              <p className="text-[14px] font-Regular text-brand-icon">
+                Total Sections
+              </p>
+              <h3 className="text-[35px] font-Medium">
+                {contextValue?.sectionBySchool?.length}
+              </h3>
+            </div>
+            <div className="flex flex-col item-center leading-6">
+              <Icon
+                icon="mingcute:section-line"
+                className="text-[50px] text-[#7a1a63]"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="w-full  bg-[#00bfef]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
         <div className="flex items-center justify-between w-full gap-5 ">
           <div className=" rounded-sm flex flex-col items-start justify-center">
             <p className="text-[14px] font-Regular text-brand-icon">
               Total Teachers
             </p>
-            <h3 className="text-[35px] font-Medium">{contextValue?.teacherBySchool?.length}</h3>
+            <h3 className="text-[35px] font-Medium">
+              {contextValue?.teacherBySchool?.length}
+            </h3>
           </div>
           <div className="flex flex-col item-center leading-6">
             <Icon

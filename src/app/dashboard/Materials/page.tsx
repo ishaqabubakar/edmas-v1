@@ -18,7 +18,7 @@ const page = () => {
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">View Materials</h4>
-         <Link href={"/dashboard/Materials/Create"} ><Button className="rounded-sm">Add Material</Button></Link>
+         <Link href={"/dashboard/Materials/Create"} ><Button className="rounded-sm">Create Material</Button></Link>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">

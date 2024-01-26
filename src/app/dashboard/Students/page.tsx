@@ -17,7 +17,7 @@ const Dashboard = () => {
             <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
               <h4 className="text-[20px] font-Regular">View Students</h4>
               <Link href={"/dashboard/Students/create"}>
-                <Button className="rounded-sm">Add Student</Button>
+                <Button className="rounded-sm">Create Student</Button>
               </Link>
             </div>
           </div>

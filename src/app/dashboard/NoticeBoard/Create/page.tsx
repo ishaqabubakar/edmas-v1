@@ -12,14 +12,7 @@ import { useRouter } from "next/navigation";
 
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
-import dynamic from "next/dynamic";
 
-const CustomEditor = dynamic(
-  () => {
-    return import("../../../(component)/custom-editor");
-  },
-  { ssr: false }
-);
 
 const Page = () => {
   const contextValue = useContext(UserContext);

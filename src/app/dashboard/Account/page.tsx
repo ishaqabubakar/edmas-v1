@@ -13,7 +13,7 @@ const page = () => {
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">View Admins</h4>
           <Link href={"/dashboard/Account/Create"}>
-            <Button className="rounded-sm">Add Admin</Button>
+            <Button className="rounded-sm">Create Admin</Button>
           </Link>
         </div>
       </div>
