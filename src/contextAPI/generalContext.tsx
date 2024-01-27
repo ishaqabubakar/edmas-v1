@@ -332,7 +332,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchNoticeBoardBySchoolId();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [creating]);
+  }, [creating, paramID]);
 
   return (
     <UserContext.Provider

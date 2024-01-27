@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+"use client"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,11 +19,13 @@ import {
 import { UserContext } from "@/contextAPI/generalContext";
 import truncateText from "@/helpers/Truncate";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const NoticeTable = (props: any) => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
+  const router = useRouter()
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.noticeboardBySchoolId;
   const filteredData = Array.isArray(data)
@@ -108,7 +110,10 @@ const NoticeTable = (props: any) => {
                       <DropdownMenuContent className="w-40 mr-7 rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onSelect={() => alert(item._id)}>
+                        <DropdownMenuItem onSelect={async() =>{
+                           await contxtValue?.fetchNoticeBoardById(item?._id);
+                           router.push(`/dashboard/NoticeBoard/notices?notice=${item._id}`);
+                        }}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
                         <DropdownMenuItem onSelect={() => alert("Edit")}>

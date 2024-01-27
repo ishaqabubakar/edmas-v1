@@ -12,7 +12,7 @@ const page = () => {
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <h4 className="text-[20px] font-Regular">View Teachers</h4>
-         <Link href={'/dashboard/Teachers/create'}> <Button className="rounded-sm">Add teacher</Button></Link>
+         <Link href={'/dashboard/Teachers/create'}> <Button className="rounded-sm">Create teacher</Button></Link>
         </div>
       </div>
      <TeachersTable />
