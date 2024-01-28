@@ -7,7 +7,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import Link from "next/link";
 import React, { useContext } from "react";
 
-const page = () => {
+const Page = () => {
   const contextValue = useContext(UserContext);
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
@@ -31,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
