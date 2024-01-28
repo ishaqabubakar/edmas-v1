@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const TeachersTable = () => {
@@ -25,6 +26,7 @@ const TeachersTable = () => {
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.teacherBySchool;
+  const router = useRouter()
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -116,10 +118,16 @@ const TeachersTable = () => {
                       <DropdownMenuContent className="w-40 mr-7 rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onSelect={() => alert(item._id)}>
+                        <DropdownMenuItem onSelect={async() =>{
+                         await contxtValue?.fetchTeacherById(item?.userId)
+                         router.push(`/dashboard/Teachers?id=${item?.userId}&mode=view`)
+                        }}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Edit")}>
+                        <DropdownMenuItem  onSelect={async() =>{
+                         await contxtValue?.fetchTeacherById(item?.userId)
+                         router.push(`/dashboard/Teachers?id=${item?.userId}&mode=edit`)
+                        }}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem onSelect={() => alert("Delete")}>

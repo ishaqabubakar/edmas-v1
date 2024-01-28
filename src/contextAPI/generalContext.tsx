@@ -44,6 +44,8 @@ interface UserContextProps {
   setTrigger: any;
   fetchNoticeBoardById: any;
   fetchStudentById:any
+  teacherById:any,
+  fetchTeacherById:any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -84,6 +86,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
   const [studentById, setStudentById] = useState<any[] | undefined>();
   const [noticeById, setNoticeById] = useState<any[] | undefined>();
+  const [teacherById, setTeacherById] = useState<any[] | undefined>();
   const [trigger, setTrigger] = useState(false);
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
@@ -301,6 +304,23 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
+
+  const fetchTeacherById = async (id:any) => {
+    try {
+      const res = await axiosInstance.post("/teacher-by-id", {
+        id: id,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setTeacherById(newData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchOwnersData();
     fetchSchoolData();
@@ -314,6 +334,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchRoutineBySchoolId();
     fetchNoticeBoardBySchoolId();
     fetchNoticeBoardById(noticeID);
+    fetchTeacherById(paramID)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -330,6 +351,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchSubjectBySchoolId();
     fetchRoutineBySchoolId();
     fetchNoticeBoardBySchoolId();
+    fetchTeacherById(paramID)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [creating, paramID]);
@@ -366,7 +388,9 @@ export function UserProvider({ children }: UserProviderProps) {
         trigger,
         setTrigger,
         fetchNoticeBoardById,
-        fetchStudentById
+        fetchStudentById,
+        teacherById,
+        fetchTeacherById
       }}
     >
       {children}

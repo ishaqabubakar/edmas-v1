@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Teacher from "../../../../Model/Teacher/teacher";
+import User from "@/Model/user/user";
 
 export async function PUT(req: NextRequest) {
   try {
@@ -14,11 +15,19 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const updatedTeacher = await Teacher.findByIdAndUpdate(id, data);
+      // Update specific fields in the User document
+      const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
+
+      // Update specific fields in the Student document
+      const updatedTeacher = await Teacher.findOneAndUpdate(
+        { userId: updatedUser?._id },
+        data,
+        { new: true }
+      );
 
     return NextResponse.json(
       {
-        message: "Teacher created",
+        message: "Teacher Updated",
         data: updatedTeacher,
       },
       { status: 200 }
