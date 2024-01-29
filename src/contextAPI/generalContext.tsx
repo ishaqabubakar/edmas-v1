@@ -46,6 +46,8 @@ interface UserContextProps {
   fetchStudentById:any
   teacherById:any,
   fetchTeacherById:any
+  fetchAcountById:any
+  fetchAcountByOwner:any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -87,6 +89,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [studentById, setStudentById] = useState<any[] | undefined>();
   const [noticeById, setNoticeById] = useState<any[] | undefined>();
   const [teacherById, setTeacherById] = useState<any[] | undefined>();
+  const [fetchAcountById, setFetchAcountById] = useState<any[] | undefined>();
   const [trigger, setTrigger] = useState(false);
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
@@ -321,6 +324,22 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
+  const fetchAcountByOwner = async (id:any) => {
+    try {
+      const res = await axiosInstance.post("/owner-by-id", {
+        id: id,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+          setFetchAcountById(newData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchOwnersData();
     fetchSchoolData();
@@ -390,7 +409,9 @@ export function UserProvider({ children }: UserProviderProps) {
         fetchNoticeBoardById,
         fetchStudentById,
         teacherById,
-        fetchTeacherById
+        fetchTeacherById,
+        fetchAcountById,
+        fetchAcountByOwner
       }}
     >
       {children}

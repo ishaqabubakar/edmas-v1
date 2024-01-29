@@ -1,6 +1,6 @@
 "use client";
 
-import ViewAndEditTeacher from "@/app/(component)/(view/view-edit-teacher";
+import ViewAndEditTeacher from "@/app/(component)/(view)/view-edit-teacher";
 import TeachersTable from "@/app/(component)/tables/teachersTable";
 import { Button } from "@/components/ui/button";
 import { UserContext } from "@/contextAPI/generalContext";

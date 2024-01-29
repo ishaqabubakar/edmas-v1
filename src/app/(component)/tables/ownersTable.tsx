@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+"use client"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,11 +18,13 @@ import {
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const TableComponent = (props: any) => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
+  const router = useRouter()
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.ownersData;
   const filteredData = Array.isArray(data)
@@ -94,10 +96,36 @@ const TableComponent = (props: any) => {
                 >
                   <TableCell className="py-2">{item?.name}</TableCell>
                   <TableCell className="py-2">{item.email}</TableCell>
-                  <TableCell className="py-2 ">{item.dob}</TableCell>
-                  <TableCell className="py-2 ">0553109991</TableCell>
+                  <TableCell className="py-2 ">{item.address}</TableCell>
+                  <TableCell className="py-2 ">{item.phonenumber}</TableCell>
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
-                    <DropdownMenu>{/* ... */}</DropdownMenu>
+                  <DropdownMenu>
+                      <DropdownMenuTrigger
+                        asChild
+                        className="w-fit mr-auto ml-auto"
+                      >
+                        <MoreHorizontal className="text-brand-icon" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-40 mr-7 rounded-sm">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onSelect={async() =>{
+                           await contxtValue?.fetchAcountByOwner(item?.userId);
+                           router.push(`/dashboard/Account?id=${item.userId}&mode=view`);
+                        }}>
+                          <Eye className="mr-2 text-brand-icon" /> View
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onSelect={async() => {
+                           await contxtValue?.fetchAcountByOwner(item?.userId); 
+                           router.push(`/dashboard/Account?id=${item.userId}&mode=edit`);
+                        }}>
+                          <Edit className="mr-2 text-brand-icon" /> Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onSelect={() => alert("Delete")}>
+                          <Trash className="mr-2 text-brand-icon" /> Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                 </TableRow>
               ))}
