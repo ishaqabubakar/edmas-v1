@@ -12,8 +12,7 @@ export async function POST(req: NextRequest) {
       staffname,
       school,
       amount,
-      title,
-      description,
+      narration,
       transactiondate,
       status,
       stafftype,
@@ -22,7 +21,6 @@ export async function POST(req: NextRequest) {
     if (
       !amount ||
       !status ||
-      !school ||
       !transactiondate ||
       !staffname ||
       !school ||
@@ -40,8 +38,7 @@ export async function POST(req: NextRequest) {
       staffname,
       stafftype,
       school: school,
-      title,
-      description,
+      narration,
       transactiondate,
       status,
       amount,

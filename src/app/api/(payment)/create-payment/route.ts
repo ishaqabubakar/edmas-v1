@@ -1,18 +1,16 @@
-// Import other necessary modules
+
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/connection";
-import Section from "../../../../Model/Section/section";
-import Student from "../../../../Model/Student/student";
-import Payment from "../../../../Model/Payment/payment";
-
+import Payment from "@/Model/Payment/payment";
 
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    
-    const { classname, student, school, amount, title, description, section, transactiondate, status  } = await req.json();
-    
-    if ( !amount || !status || !school || !transactiondate) {
+
+    const { classname, student, school, amount, transactiondate, status } =
+      await req.json();
+
+    if (!amount || !status || !school || !transactiondate) {
       return NextResponse.json(
         {
           message: "Please provide the correct details",
@@ -21,12 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    
-  
-    const studentByOne = await Student.findOne({student})
-    const sectionByOne =  await Section.findOne({section})
-
-    if (!studentByOne) {
+    if (!classname || !student || !amount) {
       return NextResponse.json(
         {
           message: "Student and their respective details cannot be found.",
@@ -38,14 +31,9 @@ export async function POST(req: NextRequest) {
     const newPayment = new Payment({
       classname,
       school,
-      student: studentByOne._id,
-      section: sectionByOne._id,
-      title,
-      description,
       transactiondate,
       status,
-      amount// Ensure teacher is an array
-      
+      amount,
     });
 
     const savedPayment = await newPayment.save();

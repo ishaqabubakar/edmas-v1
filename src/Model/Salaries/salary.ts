@@ -4,11 +4,7 @@ const salariesSchema = new mongoose.Schema(
   {
     school: { type: mongoose.Schema.Types.ObjectId, ref: "School" },
     staffname: { type: String },
-    title: {
-      type: String,
-    },
-
-    description: {
+    narration: {
       type: String,
     },
 

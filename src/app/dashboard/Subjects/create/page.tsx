@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { UserContext } from "@/contextAPI/generalContext";
-import { AxiosError } from "axios";
 import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";

@@ -93,8 +93,8 @@ export const sidebarMenus: sidebarProps[] = [
     menu: "Manage Office",
     sub: [
       { path: "/dashboard/NoticeBoard", menus: "NoticeBoard" },
-      { path: "/dashboard/Messages", menus: "Messages" },
-      { path: "/dashboard/Occassions", menus: "Occassions" },
+      // { path: "/dashboard/Messages", menus: "Messages" },
+      // { path: "/dashboard/Occassions", menus: "Occassions" },
     ],
   },
   {
