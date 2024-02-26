@@ -51,7 +51,7 @@ export default function Home() {
               initial: userCredential?.initial,
               name:schoolData.fullname
             };
-             router.push("/dashboard/dashboard");
+             router.push("/dashboard/Dashboard");
             setCookie("userSession", JSON.stringify(userData), "");
             setUserSession(JSON.stringify(userData))
             setLoading(false);
