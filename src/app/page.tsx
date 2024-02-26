@@ -13,23 +13,22 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { toast } from "sonner";
 import Image from "next/image";
 
-
 export default function Home() {
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const contextVaue = useContext(UserContext)
-  const setUserSession = contextVaue?.setUserSession
-  const userSession =contextVaue?.userSession
-  
-  useEffect(()=>{
-    setCookie('userSession',userSession,'')
-  },[userSession])
+  const contextVaue = useContext(UserContext);
+  const setUserSession = contextVaue?.setUserSession;
+  const userSession = contextVaue?.userSession;
+
+  useEffect(() => {
+    setCookie("userSession", userSession, "");
+  }, [userSession]);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
- 
+
     try {
       if (!password || !email) {
         return toast.error("Invalid email or password");
@@ -42,18 +41,18 @@ export default function Home() {
             const resData = response.data.data;
             const userCredential = resData[0];
             const userSchoolCredential = resData[1];
-            const schoolData = resData[2]
+            const schoolData = resData[2];
             const userData = {
               email: userCredential?.email,
               role: userCredential?.role,
               schoolId: userSchoolCredential?.school,
               fullname: userCredential?.name,
               initial: userCredential?.initial,
-              name:schoolData.fullname
+              name: schoolData.fullname,
             };
-             router.push("/dashboard/Dashboard");
+            router.push("/dashboard/Dashboard");
             setCookie("userSession", JSON.stringify(userData), "");
-            setUserSession(JSON.stringify(userData))
+            setUserSession(JSON.stringify(userData));
             setLoading(false);
           }
         });
@@ -72,9 +71,14 @@ export default function Home() {
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-50 p-5">
       <form className="lg:w-[400px] h-fit  rounded-[10px] flex flex-col items-center bg-white p-5 lg:p-[30px] justify-center w-full">
         <div className="flex flex-col items-center pb-[30px]">
-       <div className="w-[70px] h-[70px] p-3 bg-slate-900 flex items-center justify-center rounded-sm">
-       <Image src='/edmasLogo.png' height={60} width={60} alt="edmas logo"/>
-       </div>
+          <div className="w-[70px] h-[70px] p-3 bg-slate-900 flex items-center justify-center rounded-sm">
+            <Image
+              src="/edmasLogo.png"
+              height={60}
+              width={60}
+              alt="edmas logo"
+            />
+          </div>
           <p className="text-sm text-center">
             Enter your details to access the account
           </p>

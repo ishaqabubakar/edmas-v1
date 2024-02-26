@@ -3,17 +3,12 @@ import CalendarDemo from "@/app/(component)/Calender/viewCalender";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
 import {
-  ArrowRightIcon,
   ChevronRight,
   Clock,
-  TimerIcon,
-  TimerOffIcon,
   X,
 } from "lucide-react";
-import SchedulerTable from "@/app/(component)/Scheduler";
 import DigitalClock from "@/app/(component)/DigitalClock";
 import TopHeaderStats from "./topHeader";
-import formatDate from "@/helpers/DateFormater";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
