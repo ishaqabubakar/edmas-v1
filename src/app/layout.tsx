@@ -24,6 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+        <head>
+        <link rel="icon" type="image/png" href="/edmasLogo.png" />
+      </head>
       <body className={cn(fontSans.variable, 'font-poppins') }>
      
       <ToastContainer

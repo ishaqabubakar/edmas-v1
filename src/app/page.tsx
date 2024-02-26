@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { UserContext } from "@/contextAPI/generalContext";
 import { toast } from "sonner";
+import Image from "next/image";
 
 
 export default function Home() {
@@ -71,10 +72,9 @@ export default function Home() {
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-gray-50 p-5">
       <form className="lg:w-[400px] h-fit  rounded-[10px] flex flex-col items-center bg-white p-5 lg:p-[30px] justify-center w-full">
         <div className="flex flex-col items-center pb-[30px]">
-          <h2 className="text-[40px]">
-            <span>Ed</span>
-            <span className="font-Bold text-orange-700">Mas</span>
-          </h2>
+       <div className="w-[70px] h-[70px] p-3 bg-slate-900 flex items-center justify-center rounded-sm">
+       <Image src='/edmasLogo.png' height={60} width={60} alt="edmas logo"/>
+       </div>
           <p className="text-sm text-center">
             Enter your details to access the account
           </p>

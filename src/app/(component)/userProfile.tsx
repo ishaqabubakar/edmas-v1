@@ -1,5 +1,12 @@
 "use client";
-import { CreditCard, LifeBuoy, LogOut, Settings, User, UserRound } from "lucide-react";
+import {
+  CreditCard,
+  LifeBuoy,
+  LogOut,
+  Settings,
+  User,
+  UserRound,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { removeCookie } from "@/helpers/cookie";
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { UserContext } from "@/contextAPI/generalContext";
 import { useContext } from "react";
 
@@ -20,16 +27,29 @@ export function UserPforile() {
 
   const handleLogout = () => {
     removeCookie("userSession");
-    return router.push('/')
+    return router.push("/");
+  };
+  const handleSettingsNavigate = () => {
+    return router.push("/dashboard/Settings");
+  };
+  const handleBillingNavigate = () => {
+    return router.push("/dashboard/Billing");
+  };
+  const handleSupportNavigate = () => {
+    return router.push("/dashboard/Support");
+  };
+  const handleProfileNavigate = () => {
+    return router.push("/dashboard/Profile");
   };
   const contextValue = useContext(UserContext);
   const ctx = contextValue?.ctx;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
         <div className="w-[40px] bg-gray-50 h-[40px] rounded-sm border-[2px] flex items-center justify-center">
           <h3 className="text-[16px] font-Medium">
-          <UserRound />
+            <UserRound />
           </h3>
         </div>
       </DropdownMenuTrigger>
@@ -37,25 +57,24 @@ export function UserPforile() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handleProfileNavigate}>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handleBillingNavigate}>
             <CreditCard className="mr-2 h-4 w-4" />
             <span>Billing</span>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={handleSettingsNavigate}>
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleSupportNavigate}>
           <LifeBuoy className="mr-2 h-4 w-4" />
           <span>Support</span>
         </DropdownMenuItem>
