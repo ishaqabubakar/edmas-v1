@@ -81,6 +81,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="School name"
                     value={schoolName}
+                    disabled={contextValue?.paramMode==='view'}
                     onChange={(e) => setSchoolName(e.target.value)}
                   />
                 </div>
@@ -91,6 +92,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Email"
                     value={email}
+                    disabled={contextValue?.paramMode==='view'}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -103,6 +105,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Location"
                     value={location}
+                    disabled={contextValue?.paramMode==='view'}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
@@ -115,6 +118,7 @@ const ViewAndEditSchool = () => {
                     value={contact}
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Phone"
+                    disabled={contextValue?.paramMode==='view'}
                     onChange={(e) => setcontact(e.target.value)}
                   />
                 </div>
