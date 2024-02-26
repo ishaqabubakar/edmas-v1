@@ -89,26 +89,6 @@ const Page = () => {
                 ))}
             </div>
           </div>
-          {/* <div className="p-3 border-b h-full bg-white rounded-sm border">
-            <p className="font-Medium py-3">Upcoming Event</p>
-            <div className="w-full bg-gray-50 flex  p-2 rounded-sm border gap-5 items-center justify-between">
-              <div>
-                {" "}
-                <h3 className="font-Medium capitalize">
-                  Speech and price given day
-                </h3>
-                <p className="font-Regular text-[12px]">
-                  Published by{" "}
-                  <span className="font-Medium">School Head Master</span>
-                </p>
-              </div>
-              <div className="border bg-white h-fit w-[80px] rounded-sm p-2 flex flex-col items-start justify-center">
-                <p className="font-Regular">AUG, 07</p>
-                <p className="font-Regular">2024</p>
-              </div>
-            </div>
-          </div> */}
-          {/* <CalendarDemo /> */}
         </div>
         <div className="h-fit lg:w-[400px] rounded-sm border w-full ">
           <div className="p-3 border-b bg-white">
