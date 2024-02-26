@@ -52,7 +52,7 @@ const Sidebar = () => {
               "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
             }`}
             onClick={()=>{
-              router.push('/dashboard/Dashboard')
+              router.push('/dashboard/dashboard')
               setCollapse(true)
             }}
           >
