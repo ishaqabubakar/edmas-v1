@@ -1,7 +1,6 @@
 // import React, { createContext, ReactNode, useState } from "react";
 "use client";
 import axiosInstance from "@/API/AXIOS";
-import { generateUserId } from "@/helpers/UUID";
 import { getCookie } from "@/helpers/cookie";
 import { useSearchParams } from "next/navigation";
 import {
@@ -9,9 +8,9 @@ import {
   createContext,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from "react";
+
 
 interface UserContextProps {
   collapse: any;
@@ -43,11 +42,13 @@ interface UserContextProps {
   trigger: Boolean;
   setTrigger: any;
   fetchNoticeBoardById: any;
-  fetchStudentById:any
-  teacherById:any,
-  fetchTeacherById:any
-  fetchAcountById:any
-  fetchAcountByOwner:any
+  fetchStudentById: any;
+  teacherById: any;
+  fetchTeacherById: any;
+  fetchAcountById: any;
+  fetchAcountByOwner: any;
+  singleSchoolById: any;
+  fetchCurrentSchoolById: any;
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -84,12 +85,13 @@ export function UserProvider({ children }: UserProviderProps) {
   const [ownersData, setOwnersData] = useState<any[] | undefined>();
   const [studentBySchool, setStudentBySchool] = useState<any[] | undefined>();
   const [teacherBySchool, setTeacherBySchool] = useState<any[] | undefined>();
-  const [classBySchool, setClassBySchool] = useState<any[] | undefined>();
+  const [classBySchool, setClassBySchool] = useState<any[] | undefined>(); 
   const [sectionBySchool, setSectionBySchool] = useState<any[] | undefined>();
   const [studentById, setStudentById] = useState<any[] | undefined>();
   const [noticeById, setNoticeById] = useState<any[] | undefined>();
   const [teacherById, setTeacherById] = useState<any[] | undefined>();
   const [fetchAcountById, setFetchAcountById] = useState<any[] | undefined>();
+  const [singleSchoolById, setSingleSchoolById] = useState<any[] | undefined>();
   const [trigger, setTrigger] = useState(false);
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
@@ -218,7 +220,7 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   }, [ctx?.schoolId]);
 
-  const fetchStudentById = async ( id:any ) => {
+  const fetchStudentById = async (id: any) => {
     try {
       const res = await axiosInstance.post("/student-by-id", {
         id: id,
@@ -227,7 +229,6 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setStudentById(newData.data);
-          
         }
       }
     } catch (error) {
@@ -291,7 +292,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  const fetchNoticeBoardById = async (id:any) => {
+  const fetchNoticeBoardById = async (id: any) => {
     try {
       const res = await axiosInstance.post("/notice-id", {
         id: id,
@@ -307,8 +308,7 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
-
-  const fetchTeacherById = async (id:any) => {
+  const fetchTeacherById = async (id: any) => {
     try {
       const res = await axiosInstance.post("/teacher-by-id", {
         id: id,
@@ -324,7 +324,7 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
-  const fetchAcountByOwner = async (id:any) => {
+  const fetchAcountByOwner = async (id: any) => {
     try {
       const res = await axiosInstance.post("/owner-by-id", {
         id: id,
@@ -340,7 +340,27 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
+  const fetchCurrentSchoolById = async (id: any) => {
+    {
+      try {
+        const res = await axiosInstance.post("/get-school-by-id", {
+          id: id,
+        });
+        if (res.status === 200) {
+          const newData = res.data;
+          console.log(JSON.stringify(newData))
+          if (newData) {
+            setSingleSchoolById(newData.data);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
+    
     fetchOwnersData();
     fetchSchoolData();
     fetchSchoolById();
@@ -353,10 +373,10 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchRoutineBySchoolId();
     fetchNoticeBoardBySchoolId();
     fetchNoticeBoardById(noticeID);
-    fetchTeacherById(paramID)
+    fetchTeacherById(paramID);
+    fetchCurrentSchoolById(paramID)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   useEffect(() => {
     fetchOwnersData();
@@ -370,7 +390,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchSubjectBySchoolId();
     fetchRoutineBySchoolId();
     fetchNoticeBoardBySchoolId();
-    fetchTeacherById(paramID)
+    fetchTeacherById(paramID);
+    fetchCurrentSchoolById(paramID)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [creating, paramID]);
@@ -411,7 +432,9 @@ export function UserProvider({ children }: UserProviderProps) {
         teacherById,
         fetchTeacherById,
         fetchAcountById,
-        fetchAcountByOwner
+        fetchAcountByOwner,
+        singleSchoolById,
+        fetchCurrentSchoolById,
       }}
     >
       {children}

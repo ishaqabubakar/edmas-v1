@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
   try {
-    const { name, location, phone, _id } = await req.json();
+    const { name, location, phone, _id, email } = await req.json();
 
     if (!_id) {
       return NextResponse.json(
@@ -16,10 +16,11 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    const updatedSchool = await School.findByIdAndUpdate({_id}, {
+    const updatedSchool = await School.findByIdAndUpdate(_id, {
       name,
       location,
       phone,
+      email
     });
 
     return NextResponse.json(

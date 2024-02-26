@@ -2,10 +2,9 @@
 
 import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
-import { useRouter } from "next/navigation";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import { UserContext } from "@/contextAPI/generalContext";
-import { ArrowDown, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const MainMenus = ({}) => {
@@ -31,19 +30,6 @@ const MainMenus = ({}) => {
               className={`flex flex-row items-center justify-between cursor-pointer px-[10px] hover:bg-zinc-700 rounded-sm gap-[10px] h-[40px] text-[14px] font-Medium w-full transition-all ease-in-out duration-500  ${
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
-              }  ${
-                contextValue?.ctx?.role !== "admin" &&
-                (menu.menu === "Super Admin" ||
-                  menu.menu === "Manage Schools") &&
-                "hidden"
-              } ${
-                !(
-                  contextValue?.ctx?.role === "owner" ||
-                  contextValue?.ctx?.role === "admin"
-                ) &&
-                (menu.menu === "Admin/Master" ||
-                  menu.menu === "Manager Users") &&
-                "hidden"
               }`}
               onClick={() => handleToggle(key)}
             >

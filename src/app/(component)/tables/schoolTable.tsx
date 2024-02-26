@@ -18,11 +18,13 @@ import {
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 const SchoolTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
+  const router = useRouter();
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.schoolData;
   const filteredData = Array.isArray(data)
@@ -78,9 +80,9 @@ const SchoolTable = () => {
             <TableHeader className="rounded-sm">
               <TableRow>
                 <TableHead>Full Name</TableHead>
-                <TableHead>School</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead className="">Phone</TableHead>
                 <TableHead className="">Email</TableHead>
-                <TableHead className="">Location</TableHead>
                 <TableHead className="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -108,13 +110,23 @@ const SchoolTable = () => {
                       <DropdownMenuContent className="w-40 mr-7 rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onSelect={() => alert(item._id)}>
+                        <DropdownMenuItem onSelect={async() =>{
+                          await contxtValue.fetchCurrentSchoolById(item._id)
+                          router.push(
+                            `/dashboard/Schools?id=${item._id}&mode=view`
+                          );
+                        }}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Edit")}>
+                        <DropdownMenuItem onSelect={async() =>{
+                          await contxtValue.fetchCurrentSchoolById(item._id)
+                          router.push(
+                            `/dashboard/Schools?id=${item._id}&mode=edit`
+                          );
+                        }}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Delete")}>
+                        <DropdownMenuItem onSelect={() => alert(item._id)}>
                           <Trash className="mr-2 text-brand-icon" /> Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>

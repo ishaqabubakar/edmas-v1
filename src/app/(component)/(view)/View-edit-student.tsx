@@ -124,16 +124,6 @@ const ViewAndEdit = () => {
                       disabled={contextValue?.paramMode==='view'}
                     />
                   </div>
-                  {/* <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                    <Label className="w-[200px]">Password</Label>
-                    <Input
-                      type="password"
-                      className="rounded-sm focus-visible:outline-none"
-                      placeholder="Password"
-                      onChange={(e: any) => setPassword(e.target.value)}
-                      disabled={contextValue?.paramMode==='view'}
-                    />
-                  </div> */}
                 </div>
                 <div className="flex flex-col gap-5">
                   <div className="flex lg:flex-row gap-2 lg:gap-5 lg:items-center items-start lg:w-[500px] w-full flex-col">
