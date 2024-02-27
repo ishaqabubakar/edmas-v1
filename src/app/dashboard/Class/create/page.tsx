@@ -15,36 +15,36 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { LoaderIcon } from "lucide-react";
 import React, { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import Back from "@/app/(component)/Back";
 
 const Dashboard = () => {
   const contextValue = useContext(UserContext);
   // const allTeachers = contextValue?.teacherBySchool;
   const schoolId = contextValue?.ctx?.schoolId;
-  const router = useRouter()
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [teacher, setTeacher] = useState("");
   const [size, setSize] = useState("");
 
-
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
-  
+
     try {
       if (!name) {
         return toast.error("Ensure all fields are filled correctly.");
       }
-  
+
       contextValue?.setCreating(true);
-  
+
       const response = await axiosInstance.post("/create-class", {
         classname: name,
         school: schoolId,
         size,
       });
-  
+
       if (response.status === 200) {
-        router.push('/dashboard/Class')
+        router.push("/dashboard/Class");
         setName("");
         setSize("");
         setTeacher("");
@@ -60,16 +60,20 @@ const Dashboard = () => {
       toast.error("An error occurred while creating the class.");
     }
   };
-  
 
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Class</h4>
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">Add Class</h4>
+          </div>
           <Button className="rounded-sm" onClick={handleClassSubmit}>
             Add Class
-            {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
           </Button>
         </div>
       </div>

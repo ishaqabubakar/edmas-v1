@@ -1,15 +1,65 @@
+"use client";
+
+import axiosInstance from "@/API/AXIOS";
+import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
+import { UserContext } from "@/contextAPI/generalContext";
+import { LoaderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
 
 const Dashboard = () => {
+  const [fullName, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const contextValue = useContext(UserContext);
+  const router = useRouter();
+
+  const handleFormData = async (e: any) => {
+    const payLoad = {
+      name: fullName,
+      email: email,
+      password,
+      role: "owner",
+      school: contextValue?.ctx?.schoolId,
+    };
+    e.preventDefault();
+
+    try {
+      if (!fullName || !email || !password) {
+        return toast.error("Ensure all fieds are correctly filled");
+      }
+
+      contextValue?.setCreating(true);
+      const res = await axiosInstance.post("/register", { data: payLoad });
+      if (res.status === 201) {
+        router.push("/dashboard/Owners");
+        contextValue?.setCreating(false);
+        return toast.success("Dataa saved successfully");
+      }
+    } catch (error: any) {
+      contextValue?.setCreating(false);
+      return toast.error(error.message);
+    }
+  };
+
   return (
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Owner</h4>
-          <Button className="rounded-sm">Add Admin</Button>
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">Create Admin</h4>
+          </div>
+          <Button className="rounded-sm" onClick={handleFormData}>
+            Add Admin
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
+          </Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 overflow-y-auto no-scrollbar">
@@ -25,6 +75,7 @@ const Dashboard = () => {
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Full Name"
+                  onChange={(e: any) => setFullname(e.target.value)}
                 />
               </div>
             </div>
@@ -35,6 +86,7 @@ const Dashboard = () => {
                   type="email"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Email"
+                  onChange={(e: any) => setEmail(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -43,6 +95,7 @@ const Dashboard = () => {
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Password"
+                  onChange={(e: any) => setPassword(e.target.value)}
                 />
               </div>
             </div>

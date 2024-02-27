@@ -8,6 +8,7 @@ import MobileSidebar from "../mobileSideView";
 import NotificationCenter from "../Notification";
 import { usePathname } from "next/navigation";
 import useUserHook from "@/hooks/useUserHook";
+import AllSchoolListData from "../schoolDropdowns";
 
 
 const MainHeader = () => {
@@ -41,6 +42,7 @@ const MainHeader = () => {
         </div>
 
         <div className="flex gap-2">
+          <AllSchoolListData />
           <NotificationCenter />
           <UserProfile />
         </div>

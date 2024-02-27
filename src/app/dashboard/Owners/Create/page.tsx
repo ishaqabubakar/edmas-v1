@@ -1,6 +1,7 @@
 "use client";
 
 import axiosInstance from "@/API/AXIOS";
+import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/ui/customInput";
 import { Input } from "@/components/ui/input";
@@ -74,7 +75,10 @@ const Dashboard = () => {
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Owner</h4>
+        <div className="flex gap-2 items-center">
+              <Back />
+              <h4 className="text-[20px] font-Regular">Create Owner</h4>
+            </div>
           <Button className="rounded-sm" onClick={handleFormData}>
             Add Owner {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" />}
           </Button>

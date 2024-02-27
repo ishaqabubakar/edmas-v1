@@ -4,7 +4,7 @@ import connectDB from "@/config/connection";
 import Routine from "@/Model/Routine/routine";
 
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
     // Connect to the database
     await connectDB();

@@ -1,3 +1,4 @@
+import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -19,6 +20,8 @@ import {
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
+import { toast } from "sonner";
+import { DialogCloseButton } from "../DailogModal";
 
 const RoutineTable = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -42,7 +45,22 @@ const RoutineTable = () => {
       return 0;
     }
   });
-
+  const handleDelete = async (id: any) => {
+    try {
+      const res = await axiosInstance.post("/delete-routine", {
+        id: id,
+      });
+      if (res.status === 200) {
+        toast.success("Routine Deleted Successfully");
+       
+      }
+    } catch (error: any) {
+      console.error("Error deleting Routine:", error);
+      toast.error("Failed to delete Routine");
+      // Optionally, rethrow the error to propagate it further if needed
+      // throw error;
+    }
+  };
   return (
     <div
       className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${
@@ -124,9 +142,7 @@ const RoutineTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Delete")}>
-                          <Trash className="mr-2 text-brand-icon" /> Delete
-                        </DropdownMenuItem>
+                       <DialogCloseButton  id ={item._id} handleDelete={handleDelete}/>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

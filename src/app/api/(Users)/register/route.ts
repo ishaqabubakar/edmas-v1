@@ -77,13 +77,13 @@ export async function POST(req: NextRequest) {
         gender: data.gender,
        initial:savedUser.initial
       };
-      const savedAdmin = await new Manager(roleSpecificData).save();
+      const savedManager = await new Manager(roleSpecificData).save();
       return NextResponse.json(
         {
           message: "User registered successfully",
           userData: {
             user: savedUser,
-            Manager: savedAdmin,
+            Manager: savedManager,
           },
         },
         { status: 201 }

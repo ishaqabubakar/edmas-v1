@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import axiosInstance from "@/API/AXIOS";
+import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,30 +18,30 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
- const Page = () => {
-  const contextValue = useContext(UserContext)
-  const router = useRouter()
-  const[name, setName] = useState('')
-  const[dob, setDob] = useState('')
-  const[email, setEmail] = useState('')
-  const[password, setPassword] = useState('')
-  const[address, setAddress] = useState('')
-  const[phone, setPhone] = useState('')
-  const[gender, setGender] = useState('')
-  const[className, setClassName] = useState('')
+const Page = () => {
+  const contextValue = useContext(UserContext);
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [dob, setDob] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
+  const [className, setClassName] = useState("");
 
-  const payLoad ={
-      name,
-      dob,
-      email,
-      password,
-      address,
-      phone,
-      gender,
-      class:className,
-      role:'teacher',
-      school:contextValue?.ctx?.schoolId,
-  }
+  const payLoad = {
+    name,
+    dob,
+    email,
+    password,
+    address,
+    phone,
+    gender,
+    class: className,
+    role: "teacher",
+    school: contextValue?.ctx?.schoolId,
+  };
   const handleFormSubmission = async (e: any) => {
     try {
       if (!email || !name || !password || !className) {
@@ -50,7 +51,7 @@ import { toast } from "sonner";
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
         toast.success(res.data.message);
-        router.push('/dashboard/Teachers')
+        router.push("/dashboard/Teachers");
         contextValue?.setCreating(false);
       }
     } catch (error: any) {
@@ -59,14 +60,19 @@ import { toast } from "sonner";
     }
   };
 
-
   return (
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Teacher</h4>
-          <Button className="rounded-sm" onClick={handleFormSubmission}>Add teacher
-          {contextValue?.creating && <LoaderIcon className="mr-2 animate-spin" size={14} />}
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">Create Teachers</h4>
+          </div>
+          <Button className="rounded-sm" onClick={handleFormSubmission}>
+            Add teacher
+            {contextValue?.creating && (
+              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            )}
           </Button>
         </div>
       </div>
@@ -83,7 +89,7 @@ import { toast } from "sonner";
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Teacher's Name"
-                  onChange={(e:any)=>setName(e.target.value)}
+                  onChange={(e: any) => setName(e.target.value)}
                 />
               </div>
             </div>
@@ -94,7 +100,7 @@ import { toast } from "sonner";
                   type="email"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Email"
-                  onChange={(e:any)=>setEmail(e.target.value)}
+                  onChange={(e: any) => setEmail(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -103,7 +109,7 @@ import { toast } from "sonner";
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Password"
-                  onChange={(e:any)=>setPassword(e.target.value)}
+                  onChange={(e: any) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -121,12 +127,12 @@ import { toast } from "sonner";
                   type="date"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Teacher's Name"
-                  onChange={(e:any)=>setDob(e.target.value)}
+                  onChange={(e: any) => setDob(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Gender</Label>
-                <Select onValueChange={(val)=>setGender(val)}>
+                <Select onValueChange={(val) => setGender(val)}>
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select gender"
@@ -147,7 +153,7 @@ import { toast } from "sonner";
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Phone"
-                  onChange={(e:any)=>setPhone(e.target.value)}
+                  onChange={(e: any) => setPhone(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -156,21 +162,21 @@ import { toast } from "sonner";
                   type="text"
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Address"
-                  onChange={(e:any)=>setAddress(e.target.value)}
+                  onChange={(e: any) => setAddress(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Class</Label>
-                <Select onValueChange={(val)=>setClassName(val)}>
+                <Select onValueChange={(val) => setClassName(val)}>
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select class"
                       className="text-[16px] "
                     />
                   </SelectTrigger>
-                     <SelectContent className="rounded-sm">
+                  <SelectContent className="rounded-sm">
                     {contextValue?.classBySchool?.length > 0 ? (
-                     contextValue?.classBySchool?.map((item: any) => (
+                      contextValue?.classBySchool?.map((item: any) => (
                         <SelectItem key={item?._id} value={item?.classname}>
                           {item?.classname}
                         </SelectItem>

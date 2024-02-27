@@ -53,10 +53,10 @@ export function UserPforile() {
           </h3>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 mr-5">
+      <DropdownMenuContent className="w-56 mr-5 rounded-sm">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           <DropdownMenuItem onClick={handleProfileNavigate}>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
@@ -73,12 +73,12 @@ export function UserPforile() {
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleSupportNavigate}>
+        <DropdownMenuSeparator /> */}
+        {/* <DropdownMenuItem onClick={handleSupportNavigate}>
           <LifeBuoy className="mr-2 h-4 w-4" />
           <span>Support</span>
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator /> */}
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>

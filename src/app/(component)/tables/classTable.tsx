@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+"use client"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,12 +18,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
-import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { Edit, Eye, Hand, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
+import { DialogCloseButton } from "../DailogModal";
+import axiosInstance from "@/API/AXIOS";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const ClassTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
+  const router = useRouter()
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.classBySchool;
   const filteredData = Array.isArray(data)
@@ -42,6 +48,22 @@ const ClassTable = () => {
       return 0;
     }
   });
+
+  const handleDelete = async (id: any) => {
+    try {
+      const res = await axiosInstance.post("/delete-class", {
+        id: id,
+      });
+      if (res.status === 200) {
+        toast.success("Class Deleted Successfully");
+        router.refresh();
+      }
+    } catch (error: any) {
+      console.error("Error deleting class:", error);
+      toast.error("Failed to delete class");
+  
+    }
+  };
 
   return (
     <div
@@ -116,9 +138,7 @@ const ClassTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Delete")}>
-                          <Trash className="mr-2 text-brand-icon" /> Delete
-                        </DropdownMenuItem>
+                       <DialogCloseButton handleDelete ={handleDelete}  id={item._id}/>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

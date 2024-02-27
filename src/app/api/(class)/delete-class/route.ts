@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Class from "../../../../Model/Class/class";
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
     const { id } = await req.json();
 

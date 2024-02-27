@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (singleUser.role === "manager") {
+      console.log(singleUser)
       return NextResponse.json(
         {
           message: "login successfully",

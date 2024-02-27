@@ -5,14 +5,14 @@ export const TopHeaderStats = () => {
   const contextValue = useContext(UserContext);
   return (
     <div className="w-full lg:flex-row flex flex-col gap-5">
-      {contextValue?.ctx?.role === "admin" && (
+      {contextValue?.ctx?.role === "manager" && (
         <div className="w-full  bg-[#ef7f00]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
               <p className="text-[14px] font-Regular text-brand-icon">
                 Total Schools
               </p>
-              <h3 className="text-[35px] font-Medium">180.00k</h3>
+              <h3 className="text-[35px] font-Medium">{contextValue?.schoolData?.length>0? contextValue?.schoolData?.length: 0}</h3>
             </div>
             <div className="flex flex-col item-center leading-6">
               <Icon
@@ -30,7 +30,7 @@ export const TopHeaderStats = () => {
               Total Students
             </p>
             <h3 className="text-[35px] font-Medium">
-              {contextValue?.studentBySchool?.length}
+              {contextValue?.studentBySchool?.length > 0?contextValue?.studentBySchool?.length : 0 }
             </h3>
           </div>
           <div className="flex flex-col item-center leading-6">
@@ -48,7 +48,7 @@ export const TopHeaderStats = () => {
               Total Class
             </p>
             <h3 className="text-[35px] font-Medium">
-              {contextValue?.classBySchool?.length}
+              {contextValue?.classBySchool?.length > 0 ?contextValue?.classBySchool?.length:0}
             </h3>
           </div>
           <div className="flex flex-col item-center leading-6">
@@ -59,7 +59,7 @@ export const TopHeaderStats = () => {
           </div>
         </div>
       </div>
-      {contextValue?.ctx?.role !=="admin" && (
+      {contextValue?.ctx?.role !=="manager" && (
         <div className="w-full  bg-[#7a1a63]/10 white rounded-sm h-fit flex flex-col items-center gap-5 p-5">
           <div className="flex items-center justify-between w-full gap-5 ">
             <div className=" rounded-sm flex flex-col items-start justify-center">
@@ -67,7 +67,7 @@ export const TopHeaderStats = () => {
                 Total Sections
               </p>
               <h3 className="text-[35px] font-Medium">
-                {contextValue?.sectionBySchool?.length}
+                {contextValue?.sectionBySchool?.length > 0? contextValue?.sectionBySchool?.length:0}
               </h3>
             </div>
             <div className="flex flex-col item-center leading-6">
@@ -86,7 +86,7 @@ export const TopHeaderStats = () => {
               Total Teachers
             </p>
             <h3 className="text-[35px] font-Medium">
-              {contextValue?.teacherBySchool?.length}
+              {contextValue?.teacherBySchool?.length >0 ? contextValue?.teacherBySchool?.length: 0}
             </h3>
           </div>
           <div className="flex flex-col item-center leading-6">

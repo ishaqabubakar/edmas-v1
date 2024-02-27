@@ -360,7 +360,6 @@ export function UserProvider({ children }: UserProviderProps) {
   };
 
   useEffect(() => {
-    
     fetchOwnersData();
     fetchSchoolData();
     fetchSchoolById();
@@ -392,9 +391,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchNoticeBoardBySchoolId();
     fetchTeacherById(paramID);
     fetchCurrentSchoolById(paramID)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [creating, paramID]);
+  }, [creating, paramID,ctx?.schoolId]);
 
   return (
     <UserContext.Provider

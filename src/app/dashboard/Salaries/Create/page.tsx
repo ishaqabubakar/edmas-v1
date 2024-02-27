@@ -1,5 +1,6 @@
 "use client";
 import axiosInstance from "@/API/AXIOS";
+import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -48,7 +49,7 @@ const Page = () => {
         transactiondate: transactionDate,
         amount,
         status,
-        narration
+        narration,
       });
 
       if (response.status === 200) {
@@ -70,7 +71,10 @@ const Page = () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Salary</h4>
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">Create Salary</h4>
+          </div>
           <Button className="rounded-sm" onClick={handleSubmit}>
             Add Salary
             {contextValue?.creating && (
@@ -90,7 +94,7 @@ const Page = () => {
                 <div className="flex flex-col gap-5">
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Staff Name</Label>
-                    <Select onValueChange={(val)=>setName(val)}>
+                    <Select onValueChange={(val) => setName(val)}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Staff"
@@ -112,7 +116,7 @@ const Page = () => {
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Staff Type</Label>
-                    <Select onValueChange={(val)=>setType(val)}>
+                    <Select onValueChange={(val) => setType(val)}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Type"
@@ -128,7 +132,7 @@ const Page = () => {
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Description</Label>
                     <Textarea
-                    onChange={(e:any)=>setNarration(e.target.value)}
+                      onChange={(e: any) => setNarration(e.target.value)}
                       placeholder="Description"
                       className="text-sm focus-visible:outline-none"
                     />
@@ -139,7 +143,7 @@ const Page = () => {
                       type="number"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Amount"
-                      onChange={(e:any)=>setAmount(e.target.value)}
+                      onChange={(e: any) => setAmount(e.target.value)}
                     />
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -148,12 +152,12 @@ const Page = () => {
                       type="Date"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder=""
-                      onChange={(e:any)=>setTransactionDate(e.target.value)}
+                      onChange={(e: any) => setTransactionDate(e.target.value)}
                     />
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Status</Label>
-                    <Select onValueChange={(val)=>setStatus(val)}>
+                    <Select onValueChange={(val) => setStatus(val)}>
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Status"

@@ -1,5 +1,6 @@
 "use client";
 import axiosInstance from "@/API/AXIOS";
+import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +20,6 @@ import { toast } from "sonner";
 const Page = () => {
   const contextValue = useContext(UserContext);
 
-
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -28,28 +28,29 @@ const Page = () => {
   const allTeachers = contextValue?.teacherBySchool;
   const classData = contextValue?.classBySchool;
 
-
   const handleSubjectSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
       if (!name || !teacher) {
         return toast.error("Ensure all fields are filled correctly.");
       }
-  
+
       contextValue?.setCreating(true);
-  
+
       const response = await axiosInstance.post("/create-subject", {
         subjectname: name,
-        school:contextValue?.ctx?.schoolId,
+        school: contextValue?.ctx?.schoolId,
         teacher,
         classId: className,
       });
-  
+
       if (response.status === 200) {
         router.push("/dashboard/Subjects");
         contextValue?.setCreating(false);
-        toast.success("Subject is being created. Please wait for confirmation.");
+        toast.success(
+          "Subject is being created. Please wait for confirmation."
+        );
       } else {
         contextValue?.setCreating(false);
         toast.error("Failed to create subject. Please try again.");
@@ -57,13 +58,17 @@ const Page = () => {
     } catch (error: any) {
       contextValue?.setCreating(false);
       console.error("Error creating subject:", error);
-  
+
       if (error.response) {
         // The request was made, but the server responded with a status code
-        toast.error(`Server responded with status ${error.response.status}: ${error.response.data.message}`);
+        toast.error(
+          `Server responded with status ${error.response.status}: ${error.response.data.message}`
+        );
       } else if (error.request) {
         // The request was made but no response was received
-        toast.error("No response received from the server. Please check your internet connection.");
+        toast.error(
+          "No response received from the server. Please check your internet connection."
+        );
       } else {
         // Something happened in setting up the request that triggered an Error
         toast.error(`An error occurred: ${error.message}`);
@@ -75,7 +80,10 @@ const Page = () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Subject</h4>
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">Create Subject</h4>
+          </div>
           <Button className="rounded-sm" onClick={handleSubjectSubmit}>
             Add Subject
             {contextValue?.creating && (

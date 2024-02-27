@@ -20,10 +20,14 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import { DialogCloseButton } from "../DailogModal";
+import axiosInstance from "@/API/AXIOS";
+import { toast } from "sonner";
 
 const StudentTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
+
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.studentBySchool;
   const router = useRouter();
@@ -44,6 +48,23 @@ const StudentTable = () => {
       return 0;
     }
   });
+
+  const handleDelete = async (id: any) => {
+    try {
+      const res = await axiosInstance.post("/delete-student", {
+        id: id,
+      });
+      if (res.status === 200) {
+        toast.success("Student Deleted Successfully");
+        router.refresh();
+      }
+    } catch (error: any) {
+      console.error("Error deleting student:", error);
+      toast.error("Failed to delete student");
+      // Optionally, rethrow the error to propagate it further if needed
+      // throw error;
+    }
+  };
 
   return (
     <div
@@ -115,15 +136,15 @@ const StudentTable = () => {
                     <DropdownMenu>
                       <DropdownMenuTrigger
                         asChild
-                        className="w-fit mr-auto ml-auto"
+                        className="mr-auto ml-auto border p-2 w-[40px] h-[40px] rounded-sm cursor-pointer"
                       >
                         <MoreHorizontal className="text-brand-icon" />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 mr-7 rounded-sm">
+                      <DropdownMenuContent className="w-40 mr-[40px] rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          onSelect={async() => {
+                          onSelect={async () => {
                             await contxtValue?.fetchStudentById(item.userId);
                             router.push(
                               `/dashboard/Students?id=${item.userId}&mode=view`
@@ -133,8 +154,8 @@ const StudentTable = () => {
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onSelect={async() => {
-                           await contxtValue?.fetchStudentById(item.userId);
+                          onSelect={async () => {
+                            await contxtValue?.fetchStudentById(item.userId);
                             router.push(
                               `/dashboard/Students?id=${item.userId}&mode=edit`
                             );
@@ -142,9 +163,11 @@ const StudentTable = () => {
                         >
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Delete")}>
-                          <Trash className="mr-2 text-brand-icon" /> Delete
-                        </DropdownMenuItem>
+
+                        <DialogCloseButton
+                          handleDelete={handleDelete}
+                          id={item.userId}
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
