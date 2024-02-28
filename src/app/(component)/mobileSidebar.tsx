@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import MobileMainMenus from "./mobileMenus";
 import Image from "next/image";
 import truncateText from "@/helpers/Truncate";
+import { SheetClose } from "@/components/ui/sheet";
 
 const MobileSidebar = () => {
   const contextValue = useContext(UserContext);
@@ -48,11 +49,11 @@ const MobileSidebar = () => {
             onClick={()=>router.push('/dashboard/dashboard')}
           >
             <Icon icon="bxs:dashboard" className={`text-white text-[20px] `} />
-            <p
+            <SheetClose
               className={`text-[14px] text-white font-Regular`}
             >
               Dashboard
-            </p>
+            </SheetClose>
           </li>
           <MobileMainMenus />
           {/* <MainMenus /> */}
