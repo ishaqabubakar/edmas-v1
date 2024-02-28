@@ -11,10 +11,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useState } from "react";
 
 export function DialogCloseButton(props: any) {
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = () => {
+    // Close the dialog
+    setOpen(false);
+    // Perform delete action
+    props.handleDelete(props?.id);
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         asChild
         className="pl-[6px] cursor-pointer hover:bg-gray-100 rounded-sm"
@@ -43,13 +52,13 @@ export function DialogCloseButton(props: any) {
               Cancel
             </Button>
           </DialogClose>
-          <DialogClose  className="w-full">
+          <DialogClose className="w-full">
             <Button
-              onClick={() => props.handleDelete(props.id)}
+              onClick={handleDelete}
               type="button"
-              className="w-full rounded-sm bg-red-500 text-white"
+              variant="destructive"
+              className="w-full rounded-sm"
             >
-              {" "}
               Delete
             </Button>
           </DialogClose>

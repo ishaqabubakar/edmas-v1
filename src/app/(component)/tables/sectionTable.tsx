@@ -39,7 +39,7 @@ const SectionTable = () => {
   const sortedData = [...filteredData]?.sort((a, b) => {
     if (sortOption === "name") {
       return a.name.localeCompare(b.name);
-    }  else {
+    } else {
       return 0;
     }
   });
@@ -49,14 +49,11 @@ const SectionTable = () => {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("Student Deleted Successfully");
-       
+        toast.success("Section Deleted Successfully");
       }
     } catch (error: any) {
-      console.error("Error deleting student:", error);
-      toast.error("Failed to delete student");
-      // Optionally, rethrow the error to propagate it further if needed
-      // throw error;
+      console.error("Error deleting section:", error);
+      toast.error("Failed to delete section");
     }
   };
   return (
@@ -132,7 +129,10 @@ const SectionTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DialogCloseButton id ={item._id} handleDelete ={handleDelete}/>
+                        <DialogCloseButton
+                          id={item._id}
+                          handleDelete={handleDelete}
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

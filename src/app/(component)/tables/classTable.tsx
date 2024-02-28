@@ -51,20 +51,18 @@ const ClassTable = () => {
 
   const handleDelete = async (id: any) => {
     try {
-      const res = await axiosInstance.post("/delete-class", {
-        id: id,
-      });
+      const res = await axiosInstance.post("/delete-class", { id: id });
       if (res.status === 200) {
+        // Consume the response body only once
         toast.success("Class Deleted Successfully");
         router.refresh();
       }
     } catch (error: any) {
       console.error("Error deleting class:", error);
       toast.error("Failed to delete class");
-  
     }
   };
-
+  
   return (
     <div
       className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${
@@ -138,7 +136,7 @@ const ClassTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                       <DialogCloseButton handleDelete ={handleDelete}  id={item._id}/>
+                       <DialogCloseButton handleDelete ={handleDelete}  id={item?._id}/>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

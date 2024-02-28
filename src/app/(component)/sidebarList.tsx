@@ -6,6 +6,7 @@ import { sidebarMenus } from "../../../public/data/sidebarData";
 import { UserContext } from "@/contextAPI/generalContext";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { SheetClose } from "@/components/ui/sheet";
 
 const MainMenus = ({}) => {
   const contextValue = useContext(UserContext);
@@ -23,13 +24,21 @@ const MainMenus = ({}) => {
   return (
     <div>
       {sidebarMenus.map((menu, key) => (
-        <div  key={menu.id}>
+        <div key={menu.id}>
           <div className="w-full">
             <li
-             key={menu.id}
+              key={menu.id}
               className={`flex flex-row items-center justify-between cursor-pointer px-[10px] hover:bg-zinc-700 rounded-sm gap-[10px] h-[40px] text-[14px] font-Medium w-full transition-all ease-in-out duration-500  ${
                 !collapse &&
                 "hover:bg-zinc-700 rounded-sm transition-all ease-in-out duration-500"
+              } ${
+                contextValue?.ctx?.role != "manager" &&
+                menu.menu === "Manage Schools" &&
+                "hidden"
+              } ${
+                contextValue?.ctx?.role != "manager" &&
+                menu.menu === "Super Admin" &&
+                "hidden"
               }`}
               onClick={() => handleToggle(key)}
             >
@@ -60,7 +69,7 @@ const MainMenus = ({}) => {
                 href={`${sub.path}`}
                 prefetch={false}
               >
-                {sub.menus}
+               {sub.menus}
               </Link>
             ))}
           </div>

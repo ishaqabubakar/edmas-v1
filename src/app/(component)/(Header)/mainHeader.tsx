@@ -10,7 +10,6 @@ import { usePathname } from "next/navigation";
 import useUserHook from "@/hooks/useUserHook";
 import AllSchoolListData from "../schoolDropdowns";
 
-
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -25,7 +24,6 @@ const MainHeader = () => {
 
   const contextValue = useContext(UserContext);
   const setCollapse = contextValue?.setCollapse;
-
 
   return (
     <div className="py-5 h-[90px] border-b w-full px-5 flex items-center bg-white">
@@ -42,7 +40,7 @@ const MainHeader = () => {
         </div>
 
         <div className="flex gap-2">
-          <AllSchoolListData />
+          {contextValue?.ctx?.role === "manager" && <AllSchoolListData />}
           <NotificationCenter />
           <UserProfile />
         </div>
