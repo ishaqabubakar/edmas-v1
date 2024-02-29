@@ -1,6 +1,6 @@
 type sidebarProps = {
-  id:number,
-  icon: String|any;
+  id: number;
+  icon: String | any;
   menu: String;
   sub: {
     path: String;
@@ -10,32 +10,26 @@ type sidebarProps = {
 
 export const sidebarMenus: sidebarProps[] = [
   {
-    id:1,
+    id: 1,
     icon: "ri:school-line",
     menu: "Manage Schools",
-    
-    sub: [
-      { path: "/dashboard/Schools", menus: "Schools" },
-    ],
+
+    sub: [{ path: "/dashboard/Schools", menus: "Schools" }],
   },
   {
-    id:2,
+    id: 2,
     icon: "lucide:user-round",
     menu: "Super Admin",
-    sub: [
-      { path: "/dashboard/Owners", menus: "Owners" },
-    ],
+    sub: [{ path: "/dashboard/Owners", menus: "Owners" }],
   },
   {
-    id:3,
+    id: 3,
     icon: "lucide:user-round",
     menu: "Admin/Master",
-    sub: [
-      { path: "/dashboard/Account", menus: "Account" },
-    ],
+    sub: [{ path: "/dashboard/Account", menus: "Account" }],
   },
   {
-    id:4,
+    id: 4,
     icon: "lucide:users-round",
     menu: "Students/Parents",
     sub: [
@@ -44,7 +38,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    id:5,
+    id: 5,
     icon: "lucide:users-round",
     menu: "Manage Users",
     sub: [
@@ -55,7 +49,7 @@ export const sidebarMenus: sidebarProps[] = [
   },
 
   {
-    id:6,
+    id: 6,
     icon: "fluent-emoji-high-contrast:classical-building",
     menu: "Classes & Subject",
     sub: [
@@ -68,7 +62,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    id:7,
+    id: 7,
     icon: "codicon:book",
     menu: "Examination",
     sub: [
@@ -77,7 +71,6 @@ export const sidebarMenus: sidebarProps[] = [
       { path: "/dashboard/Grade", menus: "Test" },
       { path: "/dashboard/Grade", menus: "Gradebook" },
       { path: "/dashboard/Grade", menus: "Report" },
-     
     ],
   },
   // {
@@ -88,7 +81,7 @@ export const sidebarMenus: sidebarProps[] = [
   //   ],
   // },
   {
-    id:8,
+    id: 8,
     icon: "heroicons:building-office-2",
     menu: "Manage Office",
     sub: [
@@ -98,7 +91,7 @@ export const sidebarMenus: sidebarProps[] = [
     ],
   },
   {
-    id:9,
+    id: 9,
     icon: "material-symbols:payments-outline-sharp",
     menu: "Payment",
     sub: [
@@ -106,5 +99,60 @@ export const sidebarMenus: sidebarProps[] = [
       { path: "/dashboard/Fees", menus: "Fees" },
     ],
   },
-
 ];
+
+export const BillingData = {
+  starter1: {
+    price: "800",
+    plan: "Golden Package",
+    numberOfStudent: "200",
+    features: [
+      "Number of students : 200",
+      "Student Enrollment Management",
+      "  Attendance Tracking",
+      " Grade and Transcript Management",
+      " Communication Portal (Teachers, Parents, and Students)",
+      "  Basic Reporting",
+      "  Announcements and Events Calendar",
+      "  Timetable Creation and Management",
+      " Student Behavior Tracking",
+    ],
+  },
+  starter2: {
+    price: "1750",
+    plan: "Silver Package",
+    numberOfStudent: "500",
+    features: [
+      "Number of students : 500",
+      "Exam and Assignment Management",
+      "Library Management",
+      "Event Calendar",
+    ],
+  },
+  starter3: {
+    price: "3000",
+    plan: "Diamond Package",
+    numberOfStudent: "1000",
+    features: [
+      "Number of students : 1000",
+      " Online Exam and Quiz Platform",
+      " Parent-Teacher Meeting Scheduling",
+      " Advanced Reporting and Analytics",
+      " Customizable Dashboards",
+    ],
+  },
+
+  starter4: {
+    price: "5000",
+    plan: "Premium Package",
+    numberOfStudent: "2000",
+    features: [
+      "Number of students : 2000",
+      " Online Exam and Quiz Platform",
+      " Parent-Teacher Meeting Scheduling",
+      " Advanced Reporting and Analytics",
+      "  Customizable Dashboards",
+      "  School Financial Management (Fee Collection, Expense Tracking)",
+    ],
+  },
+};

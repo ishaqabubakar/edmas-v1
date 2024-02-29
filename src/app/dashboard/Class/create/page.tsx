@@ -45,9 +45,6 @@ const Dashboard = () => {
 
       if (response.status === 200) {
         router.push("/dashboard/Class");
-        setName("");
-        setSize("");
-        setTeacher("");
         contextValue?.setCreating(false);
         toast.success("Class created successfully");
       } else {

@@ -56,12 +56,12 @@ export function UserPforile() {
       <DropdownMenuContent className="w-56 mr-5 rounded-sm">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuGroup>
-          <DropdownMenuItem onClick={handleProfileNavigate}>
+        <DropdownMenuGroup>
+          {/* <DropdownMenuItem onClick={handleProfileNavigate}>
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem onClick={handleBillingNavigate}>
             <CreditCard className="mr-2 h-4 w-4" />
             <span>Billing</span>
@@ -73,12 +73,12 @@ export function UserPforile() {
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator /> */}
+        <DropdownMenuSeparator /> 
         {/* <DropdownMenuItem onClick={handleSupportNavigate}>
           <LifeBuoy className="mr-2 h-4 w-4" />
           <span>Support</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator /> */}
+        </DropdownMenuItem> */}
+        <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
