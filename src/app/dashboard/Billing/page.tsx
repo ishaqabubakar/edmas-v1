@@ -31,8 +31,8 @@ const page = () => {
           <Button className="rounded-sm">GET STARTED</Button>
           <div>
             <ul className="flex gap-2 flex-col">
-              {BillingData.starter1.features.map((c) => (
-                <li className="flex items-center gap-2">
+              {BillingData.starter1.features.map((c, key) => (
+                <li key={key} className="flex items-center gap-2">
                   <Check fontSize={24} className="text-green-500" />
                   <span className="text-[14px] font-Regular">{c}</span>
                 </li>
@@ -56,8 +56,8 @@ const page = () => {
           <Button className="rounded-sm">GET STARTED</Button>
           <div>
             <ul className="flex gap-2 flex-col">
-              {BillingData.starter2.features.map((c) => (
-                <li className="flex items-center gap-2">
+              {BillingData.starter2.features.map((c, key) => (
+                <li key={key} className="flex items-center gap-2">
                   <Check fontSize={24} className="text-green-500" />
                   <span className="text-[14px] font-Regular">{c}</span>
                 </li>
@@ -81,8 +81,8 @@ const page = () => {
           <Button className="rounded-sm">GET STARTED</Button>
           <div>
             <ul className="flex gap-2 flex-col">
-              {BillingData.starter3.features.map((c) => (
-                <li className="flex items-center gap-2">
+              {BillingData.starter3.features.map((c, key) => (
+                <li key={key} className="flex items-center gap-2">
                   <Check fontSize={24} className="text-green-500" />
                   <span className="text-[14px] font-Regular">{c}</span>
                 </li>
@@ -106,8 +106,8 @@ const page = () => {
           <Button className="rounded-sm">GET STARTED</Button>
           <div>
             <ul className="flex gap-2 flex-col">
-              {BillingData.starter4.features.map((c) => (
-                <li className="flex items-center gap-2">
+              {BillingData.starter4.features.map((c, key) => (
+                <li key={key} className="flex items-center gap-2">
                   <Check fontSize={24} className="text-green-500" />
                   <span className="text-[14px] font-Regular">{c}</span>
                 </li>
