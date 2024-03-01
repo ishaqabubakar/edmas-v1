@@ -35,10 +35,7 @@ const Page = () => {
 
       if (res.status === 200) {
         contextValue?.setCreating(false);
-        toast.success("School created successfully");
         return router.push("/dashboard/Schools");
-      } else {
-        return toast.error("Something went wrong. Please try again.");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);
