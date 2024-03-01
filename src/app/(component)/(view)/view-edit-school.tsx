@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
+import Back from "../Back";
 
 const ViewAndEditSchool = () => {
   const contextValue = useContext(UserContext);
@@ -22,14 +23,13 @@ const ViewAndEditSchool = () => {
 
   const handleFormSubmission = async () => {
     try {
-    
       contextValue?.setCreating(true);
       const res = await axiosInstance.put("/update-school", {
         fullname: schoolName,
         location,
         phone: contact,
         email,
-        _id:contextValue?.paramID
+        _id: contextValue?.paramID,
       });
 
       if (res.status === 200) {
@@ -49,16 +49,17 @@ const ViewAndEditSchool = () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-        <h4 className="text-[20px] font-Regular">
+          <div className="flex gap-2 items-center">
+            <Back />
             {contextValue?.paramMode === "view" ? (
               <p>View School</p>
             ) : (
               <p>Edit School</p>
             )}
-          </h4>
+          </div>
           {contextValue?.paramMode === "edit" && contextValue?.paramID && (
             <Button className="rounded-sm" onClick={handleFormSubmission}>
-             Update School
+              Update School
               {contextValue?.creating && (
                 <LoaderIcon className="mr-2 animate-spin" size={14} />
               )}
@@ -81,7 +82,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="School name"
                     value={schoolName}
-                    disabled={contextValue?.paramMode==='view'}
+                    disabled={contextValue?.paramMode === "view"}
                     onChange={(e) => setSchoolName(e.target.value)}
                   />
                 </div>
@@ -92,7 +93,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Email"
                     value={email}
-                    disabled={contextValue?.paramMode==='view'}
+                    disabled={contextValue?.paramMode === "view"}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -105,7 +106,7 @@ const ViewAndEditSchool = () => {
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Location"
                     value={location}
-                    disabled={contextValue?.paramMode==='view'}
+                    disabled={contextValue?.paramMode === "view"}
                     onChange={(e) => setLocation(e.target.value)}
                   />
                 </div>
@@ -118,7 +119,7 @@ const ViewAndEditSchool = () => {
                     value={contact}
                     className="rounded-sm focus-visible:outline-none"
                     placeholder="Phone"
-                    disabled={contextValue?.paramMode==='view'}
+                    disabled={contextValue?.paramMode === "view"}
                     onChange={(e) => setcontact(e.target.value)}
                   />
                 </div>
