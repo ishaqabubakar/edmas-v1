@@ -110,7 +110,7 @@ export function UserProvider({ children }: UserProviderProps) {
       const res = await axiosInstance.post("/get-school-by-id", {
         id: ctx?.schoolId,
       });
-      console.log("Response from /get-school-by-id:", res);
+      // console.log("Response from /get-school-by-id:", res);
 
       if (res.status === 200) {
         const data = res.data;
@@ -133,7 +133,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setSchoolData(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -147,7 +147,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setOwnersData(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -163,7 +163,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setStudentBySchool(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -179,7 +179,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setTeacherBySchool(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -196,7 +196,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setClassBySchool(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -212,7 +212,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setSectionBySchool(newData.data);
-          console.log(newData.data);
+          // console.log(newData.data);
         }
       }
     } catch (error) {
@@ -246,7 +246,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setSubjectBySchoolId(newData.data);
-          console.log(subjectBySchoolId);
+          // console.log(subjectBySchoolId);
         }
       }
     } catch (error) {
@@ -264,7 +264,7 @@ export function UserProvider({ children }: UserProviderProps) {
         const newData = res.data;
         if (newData) {
           setRoutineBySchoolId(newData.data);
-          console.log(subjectBySchoolId);
+          // console.log(subjectBySchoolId);
         }
       }
     } catch (error) {
@@ -348,7 +348,7 @@ export function UserProvider({ children }: UserProviderProps) {
         });
         if (res.status === 200) {
           const newData = res.data;
-          console.log(JSON.stringify(newData))
+          // console.log(JSON.stringify(newData))
           if (newData) {
             setSingleSchoolById(newData.data);
           }
