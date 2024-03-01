@@ -24,16 +24,7 @@ const Page = () => {
           </Link>
         </div>
       </div>
-      {contextValue?.noticeboardBySchoolId?.length == 0 && (
-        <div className="w-full flex flex-col gap-5 h-full">
-          <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-            <p className="text-gray-400">No Notice records yet</p>
-          </div>
-        </div>
-      )}
-
       {contextValue?.noticeboardBySchoolId?.length > 0 && <NoticeTable />}
-
       {contextValue?.noticeboardBySchoolId?.length == 0 && (
         <EmptyData message="You do not have class yet" />
       )}
