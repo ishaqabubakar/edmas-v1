@@ -26,6 +26,7 @@ import Back from "@/app/(component)/Back";
         </div>
       </div>
       <TableComponent />
+      
     </div>}
     {contextValue?.paramID && contextValue?.paramMode && <ViewAndEditAccount />}
     </>

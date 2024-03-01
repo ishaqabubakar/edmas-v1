@@ -36,9 +36,8 @@ const Dashboard = () => {
       contextValue?.setCreating(true);
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
-        router.push("/dashboard/Owners");
         contextValue?.setCreating(false);
-        return toast.success("Dataa saved successfully");
+        return router.push("/dashboard/Owners");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);

@@ -8,6 +8,7 @@ import TopHeaderStats from "./topHeader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
+import EmptyData from "@/app/(component)/emptyData";
 
 const Page = () => {
   const [hideWelcomeMessage, setHideWelcomeMessage] = useState(true);
@@ -93,12 +94,7 @@ const Page = () => {
                   ))}
 
               {contextValue?.noticeboardBySchoolId?.length == 0 && (
-                <div className="flex w-full items-center  justify-center h-full">
-                  <div className="flex flex-col items-center justify-center gap-2 ">
-                    <Icon icon="codicon:empty-window" fontSize={40} className="text-gray-400" />
-                    <p className="text-gray-400">Empty Noticeboard</p>
-                  </div>
-                </div>
+                <EmptyData message="Emtpty Noticeboard"/>
               )}
             </div>
           </div>

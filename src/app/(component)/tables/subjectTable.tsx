@@ -1,3 +1,5 @@
+
+"use client"
 import axiosInstance from "@/API/AXIOS";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,11 +24,13 @@ import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
 import { DialogCloseButton } from "../DailogModal";
+import { useRouter } from "next/navigation";
 
 const SubjectTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
+  const router = useRouter();
   const data = contxtValue?.subjectBySchoolId;
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
@@ -49,13 +53,10 @@ const SubjectTable = () => {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("Subject Deleted Successfully");
+        return router.refresh();
       }
     } catch (error: any) {
-      console.error("Error deleting subject:", error);
-      toast.error("Failed to delete subject");
-      // Optionally, rethrow the error to propagate it further if needed
-      // throw error;
+      return toast.error("Failed to delete subject");
     }
   };
   return (

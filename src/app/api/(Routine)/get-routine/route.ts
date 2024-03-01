@@ -31,6 +31,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
           className: classInfo?.classname,
           subjectName: subjectInfo?.subjectname,
           sectionName: sectionInfo?.name,
+          _id:routine?._id
         };
       })
     );

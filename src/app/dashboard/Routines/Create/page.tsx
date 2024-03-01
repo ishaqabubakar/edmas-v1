@@ -49,18 +49,18 @@ const Page = () => {
         endtime: endTime,
       });
       if (response.status === 200) {
-        router.push("/dashboard/Routines");
-
+        
         contextValue?.setCreating(false);
         toast.success("Routine created successfully");
+        return router.push("/dashboard/Routines");
       } else {
         contextValue?.setCreating(false);
-        toast.error("Failed to create routine. Please try again.");
+        return toast.error("Failed to create routine. Please try again.");
       }
     } catch (error) {
       contextValue?.setCreating(false);
       console.error("Error creating routine:", error);
-      toast.error("An error occurred while creating the routine.");
+      return toast.error("An error occurred while creating the routine.");
     }
   };
   return (

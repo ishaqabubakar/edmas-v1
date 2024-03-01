@@ -2,6 +2,7 @@
 
 import ViewAndEditSchool from "@/app/(component)/(view)/view-edit-school";
 import Back from "@/app/(component)/Back";
+import EmptyData from "@/app/(component)/emptyData";
 import SchoolTable from "@/app/(component)/tables/schoolTable";
 import { Button } from "@/components/ui/button";
 import { UserContext } from "@/contextAPI/generalContext";
@@ -27,7 +28,11 @@ const Page = () => {
           </div>
           <div className="w-full flex flex-col gap-5 h-full">
             <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-              <SchoolTable />
+              {contextValue?.schoolData?.length > 0 && <SchoolTable />}
+
+              {contextValue?.schoolData?.length == 0 && (
+                <EmptyData message="No data at the moment" />
+              )}
             </div>
           </div>
         </div>

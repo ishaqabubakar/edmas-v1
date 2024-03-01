@@ -56,11 +56,11 @@ const StudentTable = () => {
       });
       if (res.status === 200) {
         toast.success("Student Deleted Successfully");
-        router.refresh();
+        return router.refresh();
       }
     } catch (error: any) {
       console.error("Error deleting student:", error);
-      toast.error("Failed to delete student");
+      return toast.error("Failed to delete student");
       // Optionally, rethrow the error to propagate it further if needed
       // throw error;
     }

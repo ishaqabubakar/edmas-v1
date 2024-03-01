@@ -49,11 +49,11 @@ const SectionTable = () => {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("Section Deleted Successfully");
+        return toast.success("Section Deleted Successfully");
       }
     } catch (error: any) {
       console.error("Error deleting section:", error);
-      toast.error("Failed to delete section");
+      return toast.error("Failed to delete section");
     }
   };
   return (

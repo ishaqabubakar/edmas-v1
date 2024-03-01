@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,12 +54,12 @@ const TeachersTable = () => {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("teacher Deleted Successfully");
-        router.refresh();
+        // toast.success("teacher Deleted Successfully");
+        return router.refresh();
       }
     } catch (error: any) {
       console.error("Error deleting teacher:", error);
-      toast.error("Failed to delete teacher");
+      return toast.error("Failed to delete teacher");
       // Optionally, rethrow the error to propagate it further if needed
       // throw error;
     }

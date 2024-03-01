@@ -34,15 +34,15 @@ const Page = () => {
       });
 
       if (res.status === 200) {
-        router.push("/dashboard/Schools");
         contextValue?.setCreating(false);
-        return toast.success("School created successfully");
+        toast.success("School created successfully");
+        return router.push("/dashboard/Schools");
       } else {
         return toast.error("Something went wrong. Please try again.");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);
-      toast.error(error.response.message);
+      return toast.error(error.response.message);
     }
   };
 

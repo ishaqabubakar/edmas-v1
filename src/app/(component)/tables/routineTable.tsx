@@ -1,5 +1,6 @@
+"use client";
+
 import axiosInstance from "@/API/AXIOS";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,12 +23,15 @@ import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
 import { DialogCloseButton } from "../DailogModal";
+import { useRouter } from "next/navigation";
 
 const RoutineTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
   const contxtValue = useContext(UserContext);
   const data = contxtValue?.routineBySchoolId;
+  const router = useRouter();
+
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -46,19 +50,16 @@ const RoutineTable = () => {
     }
   });
   const handleDelete = async (id: any) => {
+    alert(id);
     try {
       const res = await axiosInstance.post("/delete-routine", {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("Routine Deleted Successfully");
-       
+        return router.push("/dashboard/Routines");
       }
     } catch (error: any) {
       console.error("Error deleting Routine:", error);
-      toast.error("Failed to delete Routine");
-      // Optionally, rethrow the error to propagate it further if needed
-      // throw error;
     }
   };
   return (
@@ -90,7 +91,7 @@ const RoutineTable = () => {
                 Name
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={() => setSortOption("day")}>
-               Day
+                Day
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -139,10 +140,15 @@ const RoutineTable = () => {
                         <DropdownMenuItem onSelect={() => alert(item._id)}>
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Edit")}>
+                        <DropdownMenuItem
+                          onSelect={async () => await alert(item.id)}
+                        >
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                       <DialogCloseButton  id ={item._id} handleDelete={handleDelete}/>
+                        <DialogCloseButton
+                          handleDelete={handleDelete}
+                          id={item._id}
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

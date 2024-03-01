@@ -1,12 +1,15 @@
 "use client";
 
 import Back from "@/app/(component)/Back";
+import EmptyData from "@/app/(component)/emptyData";
 import RoutineTable from "@/app/(component)/tables/routineTable";
 import { Button } from "@/components/ui/button";
+import { UserContext } from "@/contextAPI/generalContext";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
-const page = () => {
+const Page = () => {
+  const contextValue = useContext(UserContext);
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
@@ -20,9 +23,13 @@ const page = () => {
           </Link>
         </div>
       </div>
-      <RoutineTable />
+      {contextValue?.routineBySchoolId?.length > 0 && <RoutineTable />}
+
+      {contextValue?.routineBySchoolId?.length == 0 && (
+        <EmptyData message="You do not have Routine yet" />
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;

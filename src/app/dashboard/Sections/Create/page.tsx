@@ -23,7 +23,7 @@ const Page = () => {
   const [name, setName] = useState("");
   const [nickName, setNickname] = useState("");
   const [teacher, setTeacher] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
@@ -48,8 +48,8 @@ const Page = () => {
 
       if (res.status === 200) {
         contextValue?.setCreating(false);
-        router.push("/dashboard/Sections");
-        return toast.success("Section created successfully");
+        toast.success("Section created successfully");
+        return router.push("/dashboard/Sections");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);
@@ -69,9 +69,9 @@ const Page = () => {
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <div className="flex gap-2 items-center">
-              <Back />
-              <h4 className="text-[20px] font-Regular">Create Section</h4>
-            </div>
+            <Back />
+            <h4 className="text-[20px] font-Regular">Create Section</h4>
+          </div>
           <Button className="rounded-sm" onClick={handleClassSubmit}>
             Add Section
             {contextValue?.creating && (
