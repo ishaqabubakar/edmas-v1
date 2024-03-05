@@ -51,9 +51,9 @@ const Page = () => {
       });
 
       if (response.status === 200) {
-        router.push("/dashboard/Materials");
         contextValue?.setCreating(false);
-        toast.success("Material created successfully");
+        router.push("/dashboard/Materials");
+        // toast.success("Material created successfully");
       } else {
         contextValue?.setCreating(false);
         toast.error("Failed to create material. Please try again.");

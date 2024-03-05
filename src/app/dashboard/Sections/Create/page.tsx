@@ -14,7 +14,7 @@ import {
 import { UserContext } from "@/contextAPI/generalContext";
 import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
 const Page = () => {
@@ -28,15 +28,10 @@ const Page = () => {
   const handleClassSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      console.log("Name:", name);
-      console.log("Teacher:", teacher);
-
       if (!name || !teacher) {
-        return toast.error("Ensure all fields are filled correctly.");
+       return toast.error("Ensure all fields are filled correctly.");
       }
-
       contextValue?.setCreating(true);
-
       const res = await axiosInstance.post("/create-section", {
         name,
         school: contextValue?.ctx?.schoolId,
@@ -44,26 +39,17 @@ const Page = () => {
         nickname: nickName,
       });
 
-      console.log("Response:", res);
-
       if (res.status === 200) {
         contextValue?.setCreating(false);
-        toast.success("Section created successfully");
+        // toast.success("Section created successfully");
         return router.push("/dashboard/Sections");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);
-      console.log("Error:", error);
       return toast.error(error.message);
     }
   };
-  useEffect(() => {
-    if (!contextValue?.creating) {
-      setName("");
-      setNickname("");
-      setTeacher("");
-    }
-  }, [contextValue?.creating]);
+
   return (
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">

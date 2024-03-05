@@ -42,9 +42,9 @@ const Page = () => {
       });
 
       if (response.status === 200) {
-        router.push("/dashboard/NoticeBoard");
         contextValue?.setCreating(false);
-        toast.success("Notice created successfully");
+        router.push("/dashboard/NoticeBoard");
+        // toast.success("Notice created successfully");
       } else {
         contextValue?.setCreating(false);
         toast.error("Failed to create notice. Please try again.");

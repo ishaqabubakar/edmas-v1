@@ -53,13 +53,10 @@ const Page = () => {
       });
 
       if (response.status === 200) {
+        // toast.success("Salary created successfully");
+        contextValue?.setCreating(false);
         router.push("/dashboard/Salaries");
-        contextValue?.setCreating(false);
-        toast.success("Salary created successfully");
-      } else {
-        contextValue?.setCreating(false);
-        toast.error("Failed to create salary. Please try again.");
-      }
+      } 
     } catch (error) {
       contextValue?.setCreating(false);
       console.error("Error creating salary:", error);

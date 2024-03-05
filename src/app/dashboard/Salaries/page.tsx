@@ -1,4 +1,5 @@
 import Back from "@/app/(component)/Back";
+import SalariesTable from "@/app/(component)/tables/salariesTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
@@ -17,11 +18,7 @@ const page = () => {
           </Link>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-5 h-full">
-        <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-          <p className="text-gray-400">No salary records yet</p>
-        </div>
-      </div>
+      <SalariesTable />
     </div>
   );
 };

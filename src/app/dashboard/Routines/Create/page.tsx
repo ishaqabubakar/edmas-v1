@@ -51,7 +51,7 @@ const Page = () => {
       if (response.status === 200) {
         
         contextValue?.setCreating(false);
-        toast.success("Routine created successfully");
+        // toast.success("Routine created successfully");
         return router.push("/dashboard/Routines");
       } else {
         contextValue?.setCreating(false);

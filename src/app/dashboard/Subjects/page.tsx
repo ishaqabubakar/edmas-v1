@@ -24,9 +24,9 @@ const Page = () => {
           </Link>
         </div>
       </div>
-      {contextValue?.studentBySchool?.length > 0 && <SubjectTable />}
+      {contextValue?.subjectBySchoolId?.length > 0 && <SubjectTable />}
 
-      {contextValue?.studentBySchool?.length == 0 && (
+      {contextValue?.subjectBySchoolId?.length == 0 && (
         <EmptyData message="You do not have subject yet" />
       )}
     </div>

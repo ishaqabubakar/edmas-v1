@@ -43,17 +43,18 @@ const SectionTable = () => {
       return 0;
     }
   });
+
   const handleDelete = async (id: any) => {
     try {
       const res = await axiosInstance.post("/delete-section", {
         id: id,
       });
       if (res.status === 200) {
-        return contxtValue?.setCreating(true);
+        contxtValue?.setCreating(true);
       }
     } catch (error: any) {
       console.error("Error deleting section:", error);
-      return toast.error("Failed to delete section");
+      return console.log("Failed to delete section");
     }
   };
   return (

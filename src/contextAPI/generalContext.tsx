@@ -49,6 +49,7 @@ interface UserContextProps {
   fetchAcountByOwner: any;
   singleSchoolById: any;
   fetchCurrentSchoolById: any;
+  salariesBySchool:any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -93,6 +94,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [fetchAcountById, setFetchAcountById] = useState<any[] | undefined>();
   const [singleSchoolById, setSingleSchoolById] = useState<any[] | undefined>();
   const [trigger, setTrigger] = useState(false);
+  const [salariesBySchool, setSalariesBySchool] = useState()
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
   >();
@@ -359,6 +361,25 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
+  const fetchSalariesBySchoolId = async () => {
+    {
+      try {
+        const res = await axiosInstance.post("/get-salaries", {
+          schoolId: ctx?.schoolId,
+        });
+        if (res.status === 200) {
+          const newData = res.data;
+          // console.log(JSON.stringify(newData))
+          if (newData) {
+           setSalariesBySchool(newData);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchOwnersData();
     fetchSchoolData();
@@ -374,6 +395,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchNoticeBoardById(noticeID);
     fetchTeacherById(paramID);
     fetchCurrentSchoolById(paramID)
+    fetchSalariesBySchoolId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -391,6 +413,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchNoticeBoardBySchoolId();
     fetchTeacherById(paramID);
     fetchCurrentSchoolById(paramID)
+    fetchSalariesBySchoolId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [creating, paramID,ctx?.schoolId]);
 
@@ -433,6 +456,7 @@ export function UserProvider({ children }: UserProviderProps) {
         fetchAcountByOwner,
         singleSchoolById,
         fetchCurrentSchoolById,
+        salariesBySchool
       }}
     >
       {children}

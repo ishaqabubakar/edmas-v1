@@ -50,9 +50,9 @@ const Page = () => {
       contextValue?.setCreating(true);
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
-        toast.success(res.data.message);
-        router.push("/dashboard/Teachers");
+        // toast.success(res.data.message);
         contextValue?.setCreating(false);
+        router.push("/dashboard/Teachers");
       }
     } catch (error: any) {
       contextValue?.setCreating(false);

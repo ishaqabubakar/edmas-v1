@@ -16,6 +16,7 @@ const MainHeader = () => {
     const isMobile = window.innerWidth <= 1024;
     isMobile ? setIsMobile(true) : setIsMobile(false);
   }, [isMobile]);
+  
   const pathName = usePathname();
   const lastSlashIndex = pathName.lastIndexOf("/");
   const lastPathname = pathName.substring(lastSlashIndex + 1);

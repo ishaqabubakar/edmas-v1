@@ -72,7 +72,7 @@ import { toast } from "sonner";
       setCreating(true);
       const res = await axiosInstance.post("/register", { data: payLoad });
       if (res.status === 201) {
-        toast.success(res.data.message);
+        // toast.success(res.data.message);
         setCreating(false);
         return router.push('/dashboard/Students')
       }
