@@ -51,7 +51,7 @@ import {
   
     const handleDelete = async (id: any) => {
       try {
-        const res = await axiosInstance.post("/delete-teacher", {
+        const res = await axiosInstance.post("/", {
           id: id,
         });
         if (res.status === 200) {
@@ -122,13 +122,13 @@ import {
                     className={`h-[20px] p-0 ${
                       index % 2 === 0 ? "bg-gray-50" : ""
                     }`}
-                    key={item.id}
+                    key={index}
                   >
                     <TableCell className="py-2">{item.staffname}</TableCell>
                     <TableCell className="py-2">{item.stafftype}</TableCell>
                     <TableCell className="py-2 ">{item.amount}</TableCell>
                     <TableCell className="py-2 ">{item.narration}</TableCell>
-                    <TableCell className="py-2 ">{item.transactionDate}</TableCell>
+                    <TableCell className="py-2 ">{item.transactiondate}</TableCell>
                     <TableCell className="py-2 ">{item.status}</TableCell>
                     <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                       <DropdownMenu>
@@ -145,7 +145,7 @@ import {
                             onSelect={async () => {
                               await contxtValue?.fetchTeacherById(item?.userId);
                               router.push(
-                                `/dashboard/Teachers?id=${item?.userId}&mode=view`
+                                `/dashboard/Salaries?id=${item?._id}&mode=view`
                               );
                             }}
                           >
@@ -153,9 +153,9 @@ import {
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             onSelect={async () => {
-                              await contxtValue?.fetchTeacherById(item?.userId);
+                              // await contxtValue?.fetchTeacherById(item?.userId);
                               router.push(
-                                `/dashboard/Teachers?id=${item?.userId}&mode=edit`
+                                `/dashboard/Salaries?id=${item?._id}&mode=edit`
                               );
                             }}
                           >

@@ -371,7 +371,7 @@ export function UserProvider({ children }: UserProviderProps) {
           const newData = res.data;
           // console.log(JSON.stringify(newData))
           if (newData) {
-           setSalariesBySchool(newData);
+           setSalariesBySchool(newData.data);
           }
         }
       } catch (error) {

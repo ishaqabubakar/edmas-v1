@@ -1,7 +1,6 @@
 import Salaries from "@/Model/Salaries/salary";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const { schoolId } = await req.json();
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const salaries = await Salaries.find({ school:schoolId });
+    const salaries = await Salaries.find({ school: schoolId });
 
     if (!salaries) {
       return NextResponse.json(
@@ -34,7 +33,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
       { status: 200 }
     );
-  } catch (error :any) {
+  } catch (error: any) {
     console.error("Error:", error.message);
     return NextResponse.json(
       {
