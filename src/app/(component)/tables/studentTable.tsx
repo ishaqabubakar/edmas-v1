@@ -55,7 +55,7 @@ const StudentTable = () => {
         id: id,
       });
       if (res.status === 200) {
-        toast.success("Student Deleted Successfully");
+        // toast.success("Student Deleted Successfully");
         return router.refresh();
       }
     } catch (error: any) {
@@ -127,10 +127,10 @@ const StudentTable = () => {
                   <TableCell className="py-2">{item.class}</TableCell>
                   <TableCell className="py-2">{item.section}</TableCell>
                   <TableCell className="py-2 ">
-                    {item.parent.parentemail}
+                    {item.parent?.parentemail}
                   </TableCell>
                   <TableCell className="py-2 ">
-                    {item.parent.fullname}
+                    {item.parent?.fullname}
                   </TableCell>
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                     <DropdownMenu>
