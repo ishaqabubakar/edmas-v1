@@ -3,9 +3,10 @@ import { Poppins } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import UserProvider from "@/contextAPI/generalContext";
+
 import 'devextreme/dist/css/dx.light.css';
 import { Toaster } from "sonner";
+import { UserProvider } from "@/contextAPI/generalContext";
 
 const fontSans = Poppins({
   subsets: ["latin"],

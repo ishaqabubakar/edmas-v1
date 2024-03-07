@@ -1,14 +1,14 @@
 "use client";
 
-import { UserContext } from "@/contextAPI/generalContext";
+
 import { MenuIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import UserProfile from "../userProfile";
 import MobileSidebar from "../mobileSideView";
 import NotificationCenter from "../Notification";
-import { usePathname } from "next/navigation";
-import useUserHook from "@/hooks/useUserHook";
+import { usePathname } from "next/navigation";;
 import AllSchoolListData from "../schoolDropdowns";
+import { UserContext } from "@/contextAPI/generalContext";
 
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);

@@ -1,34 +1,13 @@
 "use client";
 
 import {
-  AlertCircle,
-  Cloud,
-  CreditCard,
-  DeleteIcon,
-  FileQuestion,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
   MailQuestion,
-  MessageSquare,
-  PanelTopClose,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
   X,
 } from "lucide-react";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Icon } from "@iconify/react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export function NotificationCenter() {
   return (
