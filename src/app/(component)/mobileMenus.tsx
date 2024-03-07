@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import { sidebarMenus } from "../../../public/data/sidebarData";
-import { UserContext } from "@/contextAPI/generalContext";
-import { ArrowDown, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { SheetClose } from "@/components/ui/sheet";
+import { UserContext } from "@/contextAPI/generalContext";
 
 const MobileMainMenus = ({}) => {
   const contextValue = useContext(UserContext);

@@ -3,12 +3,13 @@
 
 import { MenuIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
-import UserProfile from "../userProfile";
-import MobileSidebar from "../mobileSideView";
-import NotificationCenter from "../Notification";
-import { usePathname } from "next/navigation";;
-import AllSchoolListData from "../schoolDropdowns";
+
 import { UserContext } from "@/contextAPI/generalContext";
+import { usePathname } from "next/navigation";
+import MobileSidebar from "../mobileSidebar";
+import AllSchoolListData from "../schoolDropdowns";
+import NotificationCenter from "../Notification";
+import UserProfile from "../userProfile";
 
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
