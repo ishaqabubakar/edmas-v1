@@ -1,7 +1,7 @@
 import Fees from "@/Model/Fees/fees";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST() {
   try {
     
     const fees = await Fees.find()

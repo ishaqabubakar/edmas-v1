@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const { classname, school, student, amount, narration, status } =
+    const { classname, school, student, amount, narration, status,transactionDate } =
       await req.json();
 
     if (!classname || !school || !student || !amount || !status) {
@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
       amount,
       status,
       narration,
+      transactionDate
     });
 
     const savedFees = await newFees.save();

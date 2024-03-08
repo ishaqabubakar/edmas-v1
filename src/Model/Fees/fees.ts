@@ -15,6 +15,9 @@ const feeSchema = new mongoose.Schema(
     narration: {
       type: String,
     },
+    transactionDate: {
+      type: Date,
+    },
     status: {
       type: String,
     },
