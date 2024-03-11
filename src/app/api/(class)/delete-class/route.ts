@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         },
         { status: 400 }
       );
-    }
+    }   
 
     const deletedClass = await Class.findByIdAndDelete(id);
 

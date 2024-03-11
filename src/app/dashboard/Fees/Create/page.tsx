@@ -25,7 +25,6 @@ const Page = () => {
 
   const [feesData, setFeesData] = useState({
     classname: "",
-    school: "",
     student: "",
     amount: "",
     status: "",
@@ -43,22 +42,22 @@ const Page = () => {
     transactionDate: feesData.transactionDate,
   };
 
-  const handleFormSubmission = async (e: any) => {
+  const handleFormSubmission = async (e:any) => {
     e.preventDefault();
     try {
-      if (!feesData.amount || !feesData.school) {
-        // return toast.error("Please ensure all fieds are correctly filled");
-        return
+      if (feesData.amount === '' || feesData.classname==='') {
+        // return toast.error("Please ensure all fields are correctly filled");
+        return alert('Please all must be filled')
       }
       setCreating(true);
-      const res = await axiosInstance.post("/create-fees", { data: payLoad });
-      if (res.status === 201) {
+      const res = await axiosInstance.post("/create-fees",  payLoad );
+      if (res.status === 200) {
         setCreating(false);
-        return router.push("/dashboard/Fees");
+       return router.push("/dashboard/Fees");
       }
-    } catch (error: any) {
+    } catch (error:any) {
       setCreating(false);
-      return toast.error(error.response.mesage);
+      return toast.error(error.response.message || "An error occurred while submitting the form");
     }
   };
 

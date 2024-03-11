@@ -2,7 +2,6 @@ import { Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -12,11 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 
-
-
 export function DialogCloseButton(props: any) {
   const [open, setOpen] = useState(false);
-
 
   return (
     <div>
@@ -50,8 +46,8 @@ export function DialogCloseButton(props: any) {
             <Button
               variant="destructive"
               className="w-full rounded-sm"
-              onClick={async  () => {
-                 props.handleDelete(props.id);
+              onClick={async () => {
+                props.handleDelete(props.id);
                 setOpen(false);
               }}
             >

@@ -129,7 +129,17 @@ import {
                     <TableCell className="py-2 ">{item.amount}</TableCell>
                     <TableCell className="py-2 ">{item.narration}</TableCell>
                     <TableCell className="py-2 ">{item.transactiondate}</TableCell>
-                    <TableCell className="py-2 ">{item.status}</TableCell>
+                    <TableCell className="py-2 ">
+                    <p
+                      className={`text-center ${
+                        item?.status ==("Paid")
+                          ? "bg-green-100 p-1 w-[100px] rounded-sm text-green-700"
+                          : "bg-red-100 p-1 w-[100px] rounded-sm text-red-700"
+                      } `}
+                    >
+                      {item?.status}
+                    </p>
+                    </TableCell>
                     <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                       <DropdownMenu>
                         <DropdownMenuTrigger

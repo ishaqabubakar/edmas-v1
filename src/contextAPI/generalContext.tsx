@@ -50,6 +50,7 @@ interface UserContextProps {
   singleSchoolById: any;
   fetchCurrentSchoolById: any;
   salariesBySchool:any
+  feesBySchool:any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -95,6 +96,7 @@ export function UserProvider({ children }: UserProviderProps) {
   const [singleSchoolById, setSingleSchoolById] = useState<any[] | undefined>();
   const [trigger, setTrigger] = useState(false);
   const [salariesBySchool, setSalariesBySchool] = useState()
+  const [feesBySchool, setFeesBySchool] = useState()
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
   >();
@@ -379,6 +381,24 @@ export function UserProvider({ children }: UserProviderProps) {
       }
     }
   };
+  const fetchFeesBySchoolId = async () => {
+    {
+      try {
+        const res = await axiosInstance.post("/get-fees", {
+          schoolId: ctx?.schoolId,
+        });
+        if (res.status === 200) {
+          const newData = res.data;
+          console.log(JSON.stringify(newData))
+          if (newData) {
+           setFeesBySchool(newData.data);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     fetchOwnersData();
@@ -396,6 +416,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchTeacherById(paramID);
     fetchCurrentSchoolById(paramID)
     fetchSalariesBySchoolId()
+    fetchFeesBySchoolId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -414,6 +435,7 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchTeacherById(paramID);
     fetchCurrentSchoolById(paramID)
     fetchSalariesBySchoolId()
+  fetchFeesBySchoolId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [creating, paramID,ctx?.schoolId]);
 
@@ -456,7 +478,8 @@ export function UserProvider({ children }: UserProviderProps) {
         fetchAcountByOwner,
         singleSchoolById,
         fetchCurrentSchoolById,
-        salariesBySchool
+        salariesBySchool,
+        feesBySchool
       }}
     >
       {children}

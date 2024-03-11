@@ -1,3 +1,4 @@
+import FeesTable from "@/app/(component)/tables/feesTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,11 +22,7 @@ const page= () => {
          <Link href={"/dashboard/Fees/Create"} ><Button className="rounded-sm">Create Fees</Button></Link>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-5 h-full">
-        <div className="w-full bg-white h-full border rounded-sm flex items-center justify-center">
-          <p className="text-gray-400">No fees records yet</p>
-        </div>
-      </div>
+      <FeesTable />
     </div>
   );
 };
