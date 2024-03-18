@@ -3,7 +3,7 @@ import axios from "axios";
 export const API_BASE_URL =
   process.env.NODE_ENV ==="production"
     ? "https://edmas-mus6a.ondigitalocean.app/api"
-    : "http://localhost:3000/api";
+    : "http://localhost:3001/api";
 
 export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,

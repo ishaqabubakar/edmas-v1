@@ -24,13 +24,13 @@ const Dashboard = () => {
       email: email,
       password,
       role: "owner",
-      school: contextValue?.ctx?.schoolId,
+      school: contextValue?.ctx?.name
     };
     e.preventDefault();
 
     try {
       if (!fullName || !email || !password) {
-        return toast.error("Ensure all fieds are correctly filled");
+        return alert("Ensure all fieds are correctly filled");
       }
 
       contextValue?.setCreating(true);

@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
+import Back from "../Back";
 
 const ViewAndEditAccount = () => {
   const contextValue = useContext(UserContext);
@@ -26,10 +27,18 @@ const ViewAndEditAccount = () => {
   const [email, setEmail] = useState(contextValue?.fetchAcountById?.email);
   const [password, setPassword] = useState("");
   const [dob, setDob] = useState(contextValue?.fetchAcountById?.dob);
-  const [gender, setGender] = useState(contextValue?.fetchAcountById?.gender) as any;
-  const [contact, setContact] = useState(contextValue?.fetchAcountById?.phonenumber);
-  const [school, setSchool] = useState(contextValue?.fetchAcountById?.school) as any;
-  const [address, setAddress] = useState(contextValue?.fetchAcountById?.address) as any;
+  const [gender, setGender] = useState(
+    contextValue?.fetchAcountById?.gender
+  ) as any;
+  const [contact, setContact] = useState(
+    contextValue?.fetchAcountById?.phonenumber
+  );
+  const [school, setSchool] = useState(
+    contextValue?.fetchAcountById?.school
+  ) as any;
+  const [address, setAddress] = useState(
+    contextValue?.fetchAcountById?.address
+  ) as any;
 
   const router = useRouter();
 
@@ -44,11 +53,10 @@ const ViewAndEditAccount = () => {
       school: school,
       dob: dob,
       gender,
-      phonenumber:contact,
-      address
+      phonenumber: contact,
+      address,
     };
     e.preventDefault();
-   
 
     try {
       // if (!fullName || !email || !password || !contact || !dob) {
@@ -80,11 +88,14 @@ const ViewAndEditAccount = () => {
     <div className="p-5  overflow-y-scroll no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">
-            {
-              contextValue?.paramMode ==='edit'? 'Edit Account':"View Account"
-            }
-          </h4>
+          <div className="flex gap-2 items-center">
+            <Back />
+            <h4 className="text-[20px] font-Regular">
+              {contextValue?.paramMode === "edit"
+                ? "Edit Account"
+                : "View Account"}
+            </h4>
+          </div>
           {contextValue?.paramMode !== "view" && (
             <Button className="rounded-sm" onClick={handleFormData}>
               Update Owner{" "}
@@ -110,7 +121,7 @@ const ViewAndEditAccount = () => {
                   placeholder="Full Name"
                   value={fullName}
                   onChange={(e) => setFullname(e.target.value)}
-                  disabled={contextValue?.paramMode==='view'}
+                  disabled={contextValue?.paramMode === "view"}
                 />
               </div>
             </div>
@@ -123,7 +134,7 @@ const ViewAndEditAccount = () => {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={contextValue?.paramMode==='view'}
+                  disabled={contextValue?.paramMode === "view"}
                 />
               </div>
               {/* <div className="flex flex-col lg:gap-5 gap-3 items-start lg:w-[500px] w-full ">
@@ -165,12 +176,16 @@ const ViewAndEditAccount = () => {
                   placeholder="Teacher's Name"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
-                  disabled={contextValue?.paramMode==='view'}
+                  disabled={contextValue?.paramMode === "view"}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">Gender</Label>
-                <Select onValueChange={(val) => setGender(val)} value={gender}   disabled={contextValue?.paramMode==='view'}>
+                <Select
+                  onValueChange={(val) => setGender(val)}
+                  value={gender}
+                  disabled={contextValue?.paramMode === "view"}
+                >
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select gender"
@@ -193,7 +208,7 @@ const ViewAndEditAccount = () => {
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Phone"
                   value={contact}
-                  disabled={contextValue?.paramMode==='view'}
+                  disabled={contextValue?.paramMode === "view"}
                   onChange={(e) => setContact(e.target.value)}
                 />
               </div>
@@ -205,13 +220,17 @@ const ViewAndEditAccount = () => {
                   className="rounded-sm focus-visible:outline-none"
                   placeholder="Address"
                   value={address}
-                  disabled={contextValue?.paramMode==='view'}
+                  disabled={contextValue?.paramMode === "view"}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
               <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                 <Label className="w-[200px]">School</Label>
-                <Select onValueChange={(val) => setSchool(val)} value={school}  disabled={contextValue?.paramMode==='view'}>
+                <Select
+                  onValueChange={(val) => setSchool(val)}
+                  value={school}
+                  disabled={contextValue?.paramMode === "view"}
+                >
                   <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                     <SelectValue
                       placeholder="Select School"
