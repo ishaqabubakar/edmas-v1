@@ -23,7 +23,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
-import { DialogCloseButton } from "../DailogModal";
+import {ModalDelete } from "../DailogModal";
 import { useRouter } from "next/navigation";
 
 const SubjectTable = () => {
@@ -132,7 +132,7 @@ const SubjectTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DialogCloseButton
+                        <ModalDelete
                           id={item._id}
                           handleDelete={handleDelete}
                         />

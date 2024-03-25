@@ -17,29 +17,21 @@ const page= () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">Create Exam</h4>
-          <Button className="rounded-sm">Add Exam</Button>
+          <h4 className="text-[20px] font-Regular">Create Grade</h4>
+          <Button className="rounded-sm">Add Grade</Button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
         <div className="w-full bg-white h-fit border rounded-sm ">
           <div className="border-b pb-3 w-full flex items-center h-[60px] p-5 justify-between">
-            <p className="p-0 font-Regular">Examination Details</p>
+            <p className="p-0 font-Regular">Grade Details</p>
           </div>
           <form className="flex flex-col gap-5 p-5">
             <div className="flex flex-col gap-5">
               <div className=" flex flex-col gap-5">
                 <div className="flex flex-col gap-5">
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Exam Title</Label>
-                  <Input
-                    type="text"
-                    className="rounded-sm focus-visible:outline-none"
-                    placeholder="Exam Title"
-                  />
-                </div>
-                <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Class Name</Label>
+                  <Label className="w-[200px]">Student Name</Label>
                   <Select>
                     <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                       <SelectValue
@@ -54,7 +46,7 @@ const page= () => {
                   </Select>
                 </div>
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Class Section</Label>
+                  <Label className="w-[200px]">Subject</Label>
                   <Select>
                     <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                       <SelectValue
@@ -85,8 +77,12 @@ const page= () => {
                 </div>
         
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
-                  <Label className="w-[200px]">Instruction</Label>
-                  <Textarea placeholder="Exams Instruction" className="text-sm focus-visible:outline-none" />
+                  <Label className="w-[200px]">Grade</Label>
+                  <Input
+                    type="text"
+                    className="rounded-sm focus-visible:outline-none"
+                    placeholder="Grade eg. B+"
+                  />
                 </div>
                 <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                   <Label className="w-[200px]">Start Date</Label>

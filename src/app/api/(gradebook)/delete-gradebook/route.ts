@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Gradebook from "@/Model/Gradebook/gradebook";
+import Grade from "@/Model/Grade/grade";
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
     
   try {
     const { id } = await req.json();
@@ -16,7 +17,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const deletedGradebook = await Gradebook.findByIdAndDelete(id);
+    const deletedGradebook = await Grade.findByIdAndDelete(id);
 
     if (!deletedGradebook) {
       return NextResponse.json(

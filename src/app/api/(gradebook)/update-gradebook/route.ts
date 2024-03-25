@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import Gradebook from "@/Model/Gradebook/gradebook";
+import Grade from "@/Model/Grade/grade";
 
 export async function PUT(req: NextRequest) {
   try {
@@ -8,14 +8,15 @@ export async function PUT(req: NextRequest) {
     if (!id) {
       return NextResponse.json(
         {
-          message: "Invalid request. 'id' is required for updating a Gradebook Info.",
+          message:
+            "Invalid request. 'id' is required for updating a Gradebook Info.",
         },
         { status: 400 }
       );
     }
 
-    const updatedGradebook = await Gradebook.findByIdAndUpdate(id, data, {
-      new: true, 
+    const updatedGradebook = await Grade.findByIdAndUpdate(id, data, {
+      new: true,
       runValidators: true,
     });
 
@@ -35,7 +36,7 @@ export async function PUT(req: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error:any) {
+  } catch (error: any) {
     console.error("Error:", error.message);
     return NextResponse.json(
       {

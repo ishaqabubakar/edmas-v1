@@ -20,7 +20,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import { DialogCloseButton } from "../DailogModal";
+import {  ModalDelete } from "../DailogModal";
 import axiosInstance from "@/API/AXIOS";
 import { toast } from "sonner";
 
@@ -164,7 +164,7 @@ const StudentTable = () => {
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
 
-                        <DialogCloseButton
+                        <ModalDelete
                           handleDelete={handleDelete}
                           id={item.userId}
                         />

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 
-export function DialogCloseButton(props: any) {
+export function ModalDelete(props: any) {
   const [open, setOpen] = useState(false);
 
   return (

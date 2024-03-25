@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,20 +17,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
-import { Edit, Eye, Hand, MoreHorizontal, SortAsc, Trash } from "lucide-react";
+import { Edit, Eye, MoreHorizontal, SortAsc } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-
+import { ModalDelete } from "../DailogModal";
 import axiosInstance from "@/API/AXIOS";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { ModalDelete } from "../DailogModal";
 
-const ClassTable = () => {
+const GradeTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const [sortOption, setSortOption] = useState() as any;
-  const router = useRouter()
   const contxtValue = useContext(UserContext);
-  const data = contxtValue?.classBySchool;
+  const data = contxtValue?.gradeBySchool;
+
+  const router = useRouter();
   const filteredData = Array.isArray(data)
     ? data.filter((item: any) =>
         Object.values(item).some((value) =>
@@ -40,27 +39,34 @@ const ClassTable = () => {
       )
     : [];
 
-  const sortedData = [...filteredData]?.sort((a, b) => {
-    if (sortOption === "classname") {
-      return a.classname.localeCompare(b.classname);
-    } else if (sortOption === "size") {
-      return a.size.localeCompare(b.size);
-    } else {
-      return 0;
-    }
-  });
+    const sortedData = [...filteredData]?.sort((a, b) => {
+      if (sortOption === "studentName") {
+        return (a.studentName || "").localeCompare(b.studentName || "");
+      } else if (sortOption === "marks") {
+        // Assuming marks are numbers, so comparing them directly
+        return (a.marks || 0) - (b.marks || 0);
+      } else {
+        return 0;
+      }
+    });
 
   const handleDelete = async (id: any) => {
     try {
-      const res = await axiosInstance.post("/delete-class", { id: id });
+      const res = await axiosInstance.post("/delete-gradebook", {
+        id: id,
+      });
       if (res.status === 200) {
-        // Consume the response body only once
-        router.push('/dashboard/Class');
+        // toast.success("teacher Deleted Successfully");
+        return router.refresh();
       }
     } catch (error: any) {
-      console.error("Error deleting class:", error);
+      console.error("Error deleting teacher:", error);
+      return toast.error("Failed to delete teacher");
+      // Optionally, rethrow the error to propagate it further if needed
+      // throw error;
     }
   };
+
   return (
     <div
       className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${
@@ -86,11 +92,11 @@ const ClassTable = () => {
             <DropdownMenuContent className="w-40 mr-7 rounded-sm">
               <DropdownMenuLabel>Sort By</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => setSortOption("classname")}>
-                Name
+              <DropdownMenuItem onSelect={() => setSortOption("studentName")}>
+               name
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => setSortOption("size")}>
-               Size
+              <DropdownMenuItem onSelect={() => setSortOption("marks")}>
+             marks
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -101,22 +107,43 @@ const ClassTable = () => {
           <Table className="bg-white w-full border-b">
             <TableHeader className="rounded-sm">
               <TableRow>
-                <TableHead>Class Name</TableHead>
-                <TableHead>Class Size</TableHead>
+                <TableHead>Student Name</TableHead>
+                <TableHead>Class</TableHead>
+                <TableHead>Subject</TableHead>
+                <TableHead>Term</TableHead>
+                <TableHead className="">Exam Marks</TableHead>
+                <TableHead className="">Exam Grade</TableHead>
                 <TableHead className="text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
 
             <TableBody className="overflow-y-scroll">
-              {sortedData.map((item: any, index: number) => (
+              {sortedData?.map((item: any, index: number) => (
                 <TableRow
                   className={`h-[20px] p-0 ${
                     index % 2 === 0 ? "bg-gray-50" : ""
                   }`}
-                  key={item.id}
+                  key={index}
                 >
-                  <TableCell className="py-2">{item.classname}</TableCell>
-                  <TableCell className="py-2 ">{item.size}</TableCell>
+                  <TableCell className="py-2">
+                    {item?.studentName}
+                  </TableCell>
+                  <TableCell className="py-2">
+                    {item?.className}
+                  </TableCell>
+                
+                  <TableCell className="py-2 ">
+                    {item?.subjectName}
+                  </TableCell>
+                  <TableCell className="py-2 ">
+                    {item?.term}
+                  </TableCell>
+                  <TableCell className="py-2 ">
+                    {item?.marks}
+                  </TableCell>
+                  <TableCell className={`py-2 `}>  
+                      {item?.grade}
+                  </TableCell>
                   <TableCell className="font-Medium text-[16px] w-[40px] py-2 text-center">
                     <DropdownMenu>
                       <DropdownMenuTrigger
@@ -128,13 +155,30 @@ const ClassTable = () => {
                       <DropdownMenuContent className="w-40 mr-7 rounded-sm">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onSelect={() => alert(item._id)}>
+                        <DropdownMenuItem
+                          onSelect={async () => {
+                            await contxtValue?.fetchGradeById(item?._id);
+                            router.push(
+                              `/dashboard/Grade?id=${item?._id}&mode=view`
+                            );
+                          }}
+                        >
                           <Eye className="mr-2 text-brand-icon" /> View
                         </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => alert("Edit")}>
+                        <DropdownMenuItem
+                          onSelect={async () => {
+                            await contxtValue?.fetchGradeById(item?._id);
+                            router.push(
+                              `/dashboard/Grade?id=${item?._id}&mode=edit`
+                            );
+                          }}
+                        >
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                       <ModalDelete handleDelete={handleDelete} id={item?._id}/>
+                        <ModalDelete
+                          id={item._id}
+                          handleDelete={handleDelete}
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
@@ -153,4 +197,4 @@ const ClassTable = () => {
   );
 };
 
-export default ClassTable;
+export default GradeTable;

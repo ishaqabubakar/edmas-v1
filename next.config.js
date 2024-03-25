@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const corsOrigins = process.env.NODE_ENV==="production"? 'https://edmas-app-nifad.ondigitalocean.app':'http://localhost:3001/'
+const corsOrigins = process.env.NODE_ENV==="production"? 'https://dashboard.edmas.app':'http://localhost:3000/'
 const nextConfig = {
     typescript: {
         // !! WARN !!

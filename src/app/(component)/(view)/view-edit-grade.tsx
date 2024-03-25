@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { toast } from "sonner";
 
-const Page = () => {
+const ViewAndEditGrade = () => {
   const contextValue = useContext(UserContext);
   const subjectData = contextValue?.subjectBySchoolId;
   const schoolId = contextValue?.ctx?.schoolId;
@@ -26,12 +26,12 @@ const Page = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    student: "",
-    subject: "",
-    examMark: "",
-    examGrade: "",
-    term: "",
-    classname: "",
+    student: contextValue?.gradeById?.studentName,
+    subject: contextValue?.gradeById?.subjectname,
+    examMark: contextValue?.gradeById?.marks,
+    examGrade: contextValue?.gradeById?.grade,
+    term: contextValue?.gradeById?.term,
+    classname: contextValue?.gradeById?.classname,
   });
 
   const handleGradeSubmit = async (e: any) => {
@@ -48,14 +48,17 @@ const Page = () => {
       }
 
       contextValue?.setCreating(true);
-      const response = await axiosInstance.post("/create-gradebook", {
-        school: schoolId,
-        student: formData.student,
-        classname: formData.classname,
-        subject: formData.subject,
-        grade: formData.examGrade,
-        marks:formData.examMark,
-        term: formData.term,
+      const response = await axiosInstance.put("/update-gradebook", {
+        id: contextValue?.paramID,
+        data: {
+          school: schoolId,
+          student: formData.student,
+          classname: formData.classname,
+          subject: formData.subject,
+          grade: formData.examGrade,
+          marks: formData.examMark,
+          term: formData.term,
+        },
       });
 
       if (response.status === 200) {
@@ -64,12 +67,12 @@ const Page = () => {
         // toast.success("Material created successfully");
       } else {
         contextValue?.setCreating(false);
-       console.log("Failed to create grade. Please try again.");
+        console.log("updated");
       }
     } catch (error) {
       contextValue?.setCreating(false);
-      console.error("Error creating material:", error);
-      toast.error("An error occurred while creating the grade.");
+      console.error("error updating grade:", error);
+      toast.error("An error occurred while updating the grade.");
     }
   };
   return (
@@ -78,14 +81,20 @@ const Page = () => {
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <div className="flex gap-2 items-center">
             <Back />
-            <h4 className="text-[20px] font-Regular">Create Grade</h4>
-          </div>
-          <Button className="rounded-sm" onClick={handleGradeSubmit}>
-            Add Grade
-            {contextValue?.creating && (
-              <LoaderIcon className="mr-2 animate-spin" size={14} />
+            {contextValue?.paramMode === "view" ? (
+              <p>View Grade</p>
+            ) : (
+              <p>Edit Gradel</p>
             )}
-          </Button>
+          </div>
+          {contextValue?.paramMode === "edit" && contextValue?.paramID && (
+            <Button className="rounded-sm" onClick={handleGradeSubmit}>
+              Update Grade
+              {contextValue?.creating && (
+                <LoaderIcon className="mr-2 animate-spin" size={14} />
+              )}
+            </Button>
+          )}
         </div>
       </div>
       <div className="w-full flex flex-col gap-5 h-full">
@@ -99,7 +108,13 @@ const Page = () => {
                 <div className="flex flex-col gap-5">
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Student Name</Label>
-                    <Select onValueChange={(val)=>setFormData({...formData, student:val})}>
+                    <Select
+                      onValueChange={(val) =>
+                        setFormData({ ...formData, student: val })
+                      }
+                      value={formData.student}
+                      disabled={contextValue?.paramMode === "view"}
+                    >
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Student"
@@ -122,7 +137,13 @@ const Page = () => {
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Class</Label>
-                    <Select onValueChange={(val)=>setFormData({...formData, classname:val})}>
+                    <Select
+                      onValueChange={(val) =>
+                        setFormData({ ...formData, classname: val })
+                      }
+                      value={formData.subject}
+                      disabled={contextValue?.paramMode === "view"}
+                    >
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Class"
@@ -144,7 +165,14 @@ const Page = () => {
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Subject</Label>
-                    <Select onValueChange={(val)=>setFormData({...formData, subject:val})}>
+                    <Select
+                      onValueChange={(val) =>
+                        setFormData({ ...formData, subject: val })
+
+                      }
+                      value={formData.classname}
+                      disabled={contextValue?.paramMode === "view"}
+                    >
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Subject"
@@ -169,7 +197,13 @@ const Page = () => {
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
                     <Label className="w-[200px]">Term</Label>
-                    <Select onValueChange={(val)=>setFormData({...formData, term:val})}>
+                    <Select
+                      onValueChange={(val) =>
+                        setFormData({ ...formData, term: val })
+                      }
+                      value={formData.term}
+                      disabled={contextValue?.paramMode === "view"}
+                    >
                       <SelectTrigger className="w-full h-10 border py-3 rounded-sm font-Medium">
                         <SelectValue
                           placeholder="Select Term "
@@ -188,7 +222,11 @@ const Page = () => {
                       type="number"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="eg. 89%"
-                      onChange={(e:any)=>setFormData({...formData, examMark:e.target.value})}
+                      value={formData.examMark}
+                      disabled={contextValue?.paramMode === "view"}
+                      onChange={(e: any) =>
+                        setFormData({ ...formData, examMark: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex lg:flex-row lg:gap-5 gap-2 lg:items-center items-start lg:w-[500px] w-full flex-col">
@@ -197,7 +235,11 @@ const Page = () => {
                       type="text"
                       className="rounded-sm focus-visible:outline-none"
                       placeholder="Grade eg.B+"
-                      onChange={(e:any)=>setFormData({...formData, examGrade:e.target.value})}
+                      value={formData.examGrade}
+                      disabled={contextValue?.paramMode === "view"}
+                      onChange={(e: any) =>
+                        setFormData({ ...formData, examGrade: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -210,4 +252,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ViewAndEditGrade;

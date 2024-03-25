@@ -51,6 +51,9 @@ interface UserContextProps {
   fetchCurrentSchoolById: any;
   salariesBySchool:any
   feesBySchool:any
+  gradeBySchool:any
+  gradeById:any
+  fetchGradeById :any
 }
 
 export const UserContext = createContext<UserContextProps | undefined>(
@@ -97,6 +100,8 @@ export function UserProvider({ children }: UserProviderProps) {
   const [trigger, setTrigger] = useState(false);
   const [salariesBySchool, setSalariesBySchool] = useState()
   const [feesBySchool, setFeesBySchool] = useState()
+  const [gradeBySchool, setGradeBySchool] = useState()
+  const [gradeById, setFetchGradeById] = useState()
   const [routineBySchoolId, setRoutineBySchoolId] = useState<
     any[] | undefined
   >();
@@ -399,6 +404,40 @@ export function UserProvider({ children }: UserProviderProps) {
       }
     }
   };
+  const fetchGradeBySchoolId = async () => {
+    {
+      try {
+        const res = await axiosInstance.post("/get-gradebooks", {
+          id: ctx?.schoolId,
+        });
+        if (res.status === 200) {
+          const newData = res.data;
+          console.log(JSON.stringify(newData))
+          if (newData) {
+           setGradeBySchool(newData.data);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const fetchGradeById = async (id: any) => {
+    try {
+      const res = await axiosInstance.post("/get-gradebook-by-id", {
+        id: id,
+      });
+      if (res.status === 200) {
+        const newData = res.data;
+        if (newData) {
+         setFetchGradeById(newData.data);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchOwnersData();
@@ -417,6 +456,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchCurrentSchoolById(paramID)
     fetchSalariesBySchoolId()
     fetchFeesBySchoolId()
+    fetchGradeBySchoolId()
+    fetchGradeById(paramID)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -436,6 +477,8 @@ export function UserProvider({ children }: UserProviderProps) {
     fetchCurrentSchoolById(paramID)
     fetchSalariesBySchoolId()
   fetchFeesBySchoolId()
+  fetchGradeBySchoolId()
+  fetchGradeById(paramID)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [creating, paramID,ctx?.schoolId]);
 
@@ -479,7 +522,11 @@ export function UserProvider({ children }: UserProviderProps) {
         singleSchoolById,
         fetchCurrentSchoolById,
         salariesBySchool,
-        feesBySchool
+        feesBySchool,
+        gradeBySchool,
+        gradeById,
+        fetchGradeById 
+        
       }}
     >
       {children}
