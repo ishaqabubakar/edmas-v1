@@ -21,7 +21,7 @@ const Dashboard = () => {
                 <Back />
                 <h4 className="text-[20px] font-Regular">View Grade</h4>
               </div>
-              <Link href={"/dashboard/Grade/create"}>
+              <Link href={"/dashboard/Grade/Create"}>
                 <Button className="rounded-sm">Create Grade</Button>
               </Link>
             </div>
