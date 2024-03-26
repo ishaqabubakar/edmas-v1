@@ -44,7 +44,7 @@ export const sidebarMenus: sidebarProps[] = [
     sub: [
       // { path: "/dashboard/Staffs/", menus: "Staffs" },
       { path: "/dashboard/Teachers", menus: "Teachers" },
-      { path: "/dashboard/Others", menus: "Others" },
+      // { path: "/dashboard/Others", menus: "Others" },
     ],
   },
 
