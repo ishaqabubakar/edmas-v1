@@ -134,7 +134,7 @@ const ClassTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                       <ModalDelete handleDelete={handleDelete} id={item?._id}/>
+                       {/* <ModalDelete handleDelete={handleDelete} id={item?._id}/> */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

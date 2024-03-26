@@ -22,7 +22,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
-import { DialogCloseButton } from "../DailogModal";
+
 import { useRouter } from "next/navigation";
 
 const RoutineTable = () => {
@@ -145,10 +145,10 @@ const RoutineTable = () => {
                         >
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <DialogCloseButton
+                        {/* <DialogCloseButton
                           handleDelete={handleDelete}
                           id={item._id}
-                        />
+                        /> */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

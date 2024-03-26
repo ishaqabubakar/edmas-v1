@@ -132,10 +132,10 @@ const SubjectTable = () => {
                         <DropdownMenuItem onSelect={() => alert("Edit")}>
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
-                        <ModalDelete
+                        {/* <ModalDelete
                           id={item._id}
                           handleDelete={handleDelete}
-                        />
+                        /> */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

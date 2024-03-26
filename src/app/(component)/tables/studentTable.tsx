@@ -164,10 +164,10 @@ const StudentTable = () => {
                           <Edit className="mr-2 text-brand-icon" /> Edit
                         </DropdownMenuItem>
 
-                        <ModalDelete
+                        {/* <ModalDelete
                           handleDelete={handleDelete}
                           id={item.userId}
-                        />
+                        /> */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
