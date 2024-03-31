@@ -21,7 +21,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
-import {  ModalDelete } from "../DailogModal";
+// import {  ModalDelete } from "../DailogModal";
 
 const SectionTable = () => {
   const [searchInput, setSearchInput] = useState("");

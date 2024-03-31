@@ -20,7 +20,7 @@ import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import {ModalDelete } from "../DailogModal";
+// import {ModalDelete } from "../DailogModal";
 import axiosInstance from "@/API/AXIOS";
 import { toast } from "sonner";
 

@@ -14,7 +14,7 @@ import Image from "next/image";
 
 export default function Home() {
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const contextVaue = useContext(UserContext);
@@ -29,12 +29,12 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      if (!password || !email) {
+      if (!password || !usernameOrEmail) {
         return toast.error("Invalid email or password");
       }
       setLoading(true);
 
-      const response = await axiosInstance.post("/login", { email, password });
+      const response = await axiosInstance.post("/login", { email:usernameOrEmail, password });
 
       if (response.status === 200) {
         const resData = response.data.data;
@@ -81,8 +81,8 @@ export default function Home() {
             <InputField
               type="email"
               border={"border rounded-sm px-3"}
-              placeholder="Email"
-              onChange={setEmail}
+              placeholder="Email or Username"
+              onChange={setUsernameOrEmail}
               width={"w-full"}
               required={true}
               defaultValue={undefined}

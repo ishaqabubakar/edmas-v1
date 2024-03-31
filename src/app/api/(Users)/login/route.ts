@@ -13,7 +13,7 @@ import Manager from "@/Model/Admin/admin";
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
-    const { email, password } = await req.json();
+    const { email,username, password } = await req.json();
     const singleStudent = await Student.findOne({ email });
     const singleTeacher = await Teacher.findOne({ email });
     const singleAdmin = await Manager.findOne({ email });
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
 
 
-    if (!email || !password) {
+    if (!(email || username) || !password) {
       return NextResponse.json(
         {
           message: "Invalid email or password",

@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
     const { data } = await req.json();
-    const existingUser = await User.findOne({ email: data.email });
+    const existingUser = await User.findOne({ email: data.email});
     const singleSchool = await School.findOne({ fullname: data.school })
 
     if (existingUser) {

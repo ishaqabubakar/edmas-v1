@@ -24,7 +24,7 @@ import { useContext, useState } from "react";
 import axiosInstance from "@/API/AXIOS";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { ModalDelete } from "../DailogModal";
+// import { ModalDelete } from "../DailogModal";
 
 const ClassTable = () => {
   const [searchInput, setSearchInput] = useState("");
