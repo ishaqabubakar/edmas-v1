@@ -49,11 +49,11 @@ const MobileSidebar = () => {
             onClick={()=>router.push('/dashboard/dashboard')}
           >
             <Icon icon="bxs:dashboard" className={`text-white text-[20px] `} />
-            <SheetClose
+            
               className={`text-[14px] text-white font-Regular`}
-            >
+          
               Dashboard
-            </SheetClose>
+           
           </li>
           <MobileMainMenus />
           {/* <MainMenus /> */}

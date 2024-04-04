@@ -46,7 +46,7 @@ const TableComponent = (props: any) => {
   return (
     <div className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${!data && 'item-center justify-center'}`}>
       {data && (
-        <div className="flex justify-between items-center py-3 px-3">
+        <div className="flex justify-between items-center py-3 px-3 gap-2">
           <Input
             type="search"
             placeholder="Search"
@@ -76,7 +76,7 @@ const TableComponent = (props: any) => {
       )}
       {data && (
         <div className="w-full h-full overflow-y-scroll no-scrollbar pb-[100px]">
-          <Table className="bg-white w-full border-b">
+          <Table className="bg-white w-full border-b overflow-x-scroll sm:overflow-hidden">
             <TableHeader className="rounded-sm">
               <TableRow>
                 <TableHead>Name</TableHead>

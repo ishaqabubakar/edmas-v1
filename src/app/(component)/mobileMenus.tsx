@@ -63,7 +63,7 @@ const MobileMainMenus = ({}) => {
                 }`}
                 href={`/dashboard/${sub.menus}`}
               >
-                <SheetClose>{sub.menus}</SheetClose>
+                {sub.menus}
               </Link>
             ))}
           </div>

@@ -1,15 +1,14 @@
 "use client";
 
-
 import { MenuIcon } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "@/contextAPI/generalContext";
 import { usePathname } from "next/navigation";
-import MobileSidebar from "../mobileSidebar";
 import AllSchoolListData from "../schoolDropdowns";
 import NotificationCenter from "../Notification";
 import UserProfile from "../userProfile";
+import ViewSidebar from "../mobileSideView";
 
 const MainHeader = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -17,7 +16,7 @@ const MainHeader = () => {
     const isMobile = window.innerWidth <= 1024;
     isMobile ? setIsMobile(true) : setIsMobile(false);
   }, [isMobile]);
-  
+
   const pathName = usePathname();
   const lastSlashIndex = pathName.lastIndexOf("/");
   const lastPathname = pathName.substring(lastSlashIndex + 1);
@@ -35,10 +34,10 @@ const MainHeader = () => {
             {!isMobile ? (
               <MenuIcon onClick={() => setCollapse((prev: any) => !prev)} />
             ) : (
-              <MobileSidebar />
+              <ViewSidebar />
             )}
           </div>
-          <p className="font-Medium">{lastPathname} </p>
+          <p className="font-Medium hidden sm:block">{lastPathname} </p>
         </div>
 
         <div className="flex gap-2">

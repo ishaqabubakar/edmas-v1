@@ -11,7 +11,7 @@ const page = () => {
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <div className="flex gap-2 items-center">
             <Back />
-            <h4 className="text-[20px] font-Regular">View Salaries</h4>
+            <h4 className="text-[20px] font-Regular sm:block hidden">View Salaries</h4>
           </div>
           <Link href={"/dashboard/Salaries/Create"}>
             <Button className="rounded-sm">Create Salary</Button>

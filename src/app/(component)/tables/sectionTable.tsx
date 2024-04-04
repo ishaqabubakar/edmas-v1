@@ -64,7 +64,7 @@ const SectionTable = () => {
       }`}
     >
       {data && (
-        <div className="flex justify-between items-center py-3 px-3">
+        <div className="flex justify-between items-center py-3 px-3 gap-2">
           <Input
             type="search"
             placeholder="Search"

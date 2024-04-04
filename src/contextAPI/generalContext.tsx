@@ -297,7 +297,7 @@ export function UserProvider({ children }: UserProviderProps) {
       console.log(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ctx?.schoolId]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -394,7 +394,7 @@ export function UserProvider({ children }: UserProviderProps) {
         });
         if (res.status === 200) {
           const newData = res.data;
-          console.log(JSON.stringify(newData))
+          // console.log(JSON.stringify(newData))
           if (newData) {
            setFeesBySchool(newData.data);
           }
@@ -412,7 +412,7 @@ export function UserProvider({ children }: UserProviderProps) {
         });
         if (res.status === 200) {
           const newData = res.data;
-          console.log(JSON.stringify(newData))
+          // console.log(JSON.stringify(newData))
           if (newData) {
            setGradeBySchool(newData.data);
           }
@@ -439,27 +439,27 @@ export function UserProvider({ children }: UserProviderProps) {
     }
   };
 
-  useEffect(() => {
-    fetchOwnersData();
-    fetchSchoolData();
-    fetchSchoolById();
-    fetchStudentBySchoolId();
-    fetchTeacherBySchoolId();
-    fetchClassBySchoolId();
-    fetchSectionBySchoolId();
-    fetchStudentById(paramID);
-    fetchStudentBySchoolId();
-    fetchRoutineBySchoolId();
-    fetchNoticeBoardBySchoolId();
-    fetchNoticeBoardById(noticeID);
-    fetchTeacherById(paramID);
-    fetchCurrentSchoolById(paramID)
-    fetchSalariesBySchoolId()
-    fetchFeesBySchoolId()
-    fetchGradeBySchoolId()
-    fetchGradeById(paramID)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetchOwnersData();
+  //   fetchSchoolData();
+  //   fetchSchoolById();
+  //   fetchStudentBySchoolId();
+  //   fetchTeacherBySchoolId();
+  //   fetchClassBySchoolId();
+  //   fetchSectionBySchoolId();
+  //   fetchStudentById(paramID);
+  //   fetchStudentBySchoolId();
+  //   fetchRoutineBySchoolId();
+  //   fetchNoticeBoardBySchoolId();
+  //   fetchNoticeBoardById(noticeID);
+  //   fetchTeacherById(paramID);
+  //   fetchCurrentSchoolById(paramID)
+  //   fetchSalariesBySchoolId()
+  //   fetchFeesBySchoolId()
+  //   fetchGradeBySchoolId()
+  //   fetchGradeById(paramID)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     fetchOwnersData();
@@ -480,7 +480,7 @@ export function UserProvider({ children }: UserProviderProps) {
   fetchGradeBySchoolId()
   fetchGradeById(paramID)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [creating, paramID,ctx?.schoolId]);
+  }, [creating, paramID,ctx?.schoolId, ]);
 
   return (
     <UserContext.Provider

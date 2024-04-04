@@ -16,7 +16,7 @@ const Page = () => {
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
           <div className="flex gap-2 items-center">
             <Back />
-            <h4 className="text-[20px] font-Regular">Create Routine</h4>
+            <h4 className="text-[20px] font-Regular sm:block hidden">Create Routine</h4>
           </div>
           <Link href={"/dashboard/Routines/Create"}>
             <Button className="rounded-sm">Add Routine</Button>

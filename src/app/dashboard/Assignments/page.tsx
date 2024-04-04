@@ -7,7 +7,7 @@ const page = () => {
     <div className="p-5 h-full w-full overflow-y-auto no-scrollbar flex flex-col gap-5">
       <div className="w-full flex gap-5">
         <div className="w-full bg-white border justify-between  h-[70px] p-5 flex items-center gap-5 rounded-sm">
-          <h4 className="text-[20px] font-Regular">View Assignments</h4>
+          <h4 className="text-[20px] font-Regular sm:block hidden">View Assignments</h4>
           <Link href={"/dashboard/Assignments/Create"}>
             <Button className="rounded-sm">Add Assignment</Button>
           </Link>

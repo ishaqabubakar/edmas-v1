@@ -47,7 +47,7 @@ const NoticeTable = (props: any) => {
   return (
     <div className={`w-full flex flex-col rounded-sm h-full bg-white border p-0 overflow-clip ${!data && 'item-center justify-center'}`}>
       {data && (
-        <div className="flex justify-between items-center py-3 px-3">
+        <div className="flex justify-between items-center py-3 px-3 gap-2">
           <Input
             type="search"
             placeholder="Search"
