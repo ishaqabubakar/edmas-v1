@@ -1,14 +1,13 @@
 "use client";
 
-import Sidebar from "../(component)/sidebar";
+import { UserContext } from "@/contextAPI/generalContext";
 import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { UserContext } from "@/contextAPI/generalContext";
-import { Toaster } from "sonner";
+import Sidebar from "../(component)/sidebar";
 import MainHeader from "../(component)/(Header)/mainHeader";
-
+import { Toaster } from "sonner";
+import { cn } from "@/lib/utils";
 
 export const fontSans = Poppins({
   subsets: ["latin"],

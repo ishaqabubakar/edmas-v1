@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import Link from "next/link";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import truncateText from "@/helpers/Truncate";
 import { UserContext } from "@/contextAPI/generalContext";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function ViewSidebar() {
   const contextValue = useContext(UserContext);
