@@ -1,17 +1,16 @@
 "use client";
 
 import { MenuIcon } from "lucide-react";
-import MobileSidebar from "./mobileSidebar";
 import { ChevronDown } from "lucide-react";
 import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { UserContext } from "@/contextAPI/generalContext";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import Link from "next/link";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import truncateText from "@/helpers/Truncate";
+import { UserContext } from "@/contextAPI/generalContext";
 
 export function ViewSidebar() {
   const contextValue = useContext(UserContext);
