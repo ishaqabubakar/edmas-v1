@@ -3,11 +3,8 @@
 import { MailQuestion, X } from "lucide-react";
 
 import { Icon } from "@iconify/react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent } from "@/components/ui/dropdown-menu";
+import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 export function NotificationCenter() {
   return (

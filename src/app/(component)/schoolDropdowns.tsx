@@ -32,7 +32,7 @@ export function AllSchoolListData() {
   }, [userSession?.schoolId]);
 
   return (
-    <Select onValueChange={(newValue) => {
+    <Select onValueChange={(newValue: any) => {
       const selectedSchool = schoolData.find((school: any) => school?._id === newValue);
       if (selectedSchool) {
         handleSchoolChanged(selectedSchool?._id, selectedSchool?.fullname);

@@ -1,10 +1,5 @@
 "use client";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 import { MenuIcon } from "lucide-react";
 import MobileSidebar from "./mobileSidebar";
 import { ChevronDown } from "lucide-react";
@@ -16,6 +11,7 @@ import truncateText from "@/helpers/Truncate";
 import { UserContext } from "@/contextAPI/generalContext";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import Link from "next/link";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function ViewSidebar() {
   const contextValue = useContext(UserContext);
