@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -7,6 +6,7 @@ import { cn } from "@/lib/utils";
 import 'devextreme/dist/css/dx.light.css';
 import { Toaster } from "sonner";
 import { UserProvider } from "@/contextAPI/generalContext";
+import { Poppins } from "next/font/google";
 
 const fontSans = Poppins({
   subsets: ["latin"],

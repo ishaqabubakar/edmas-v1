@@ -7,11 +7,11 @@ import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import truncateText from "@/helpers/Truncate";
 import { UserContext } from "@/contextAPI/generalContext";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import Link from "next/link";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import truncateText from "@/helpers/Truncate";
 
 export function ViewSidebar() {
   const contextValue = useContext(UserContext);

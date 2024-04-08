@@ -1,17 +1,14 @@
 "use client";
-import type { Metadata } from "next";
+
 import Sidebar from "../(component)/sidebar";
-import MainHeader from "../(component)/(Header)/mainHeader";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { UserContext } from "@/contextAPI/generalContext";
-import { Toaster } from 'sonner';
-const metadata: Metadata = {
-  title: "EduApp",
-  description: "Modern school management system",
-};
+import { Toaster } from "sonner";
+import MainHeader from "../(component)/(Header)/mainHeader";
+
 export const fontSans = Poppins({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -26,21 +23,26 @@ export default function RootLayout({
   const router = useRouter();
   const pathName = usePathname();
   const userContext = useContext(UserContext);
-  
+
   useEffect(() => {
-    if (pathName ==='/dashboard') {
-      router.push('/dashboard/dashboard');
-    // } else if (!userContext?.userSession) {
-    //   router.push('/');
- }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    if (pathName === "/dashboard") {
+      router.push("/dashboard/dashboard");
+    }
+
+    if (!userContext?.userSession) {
+      router.push("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <html lang="en">
-        <head>
+      <head>
         <link rel="icon" type="image/png" href="/edmasLogo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
       </head>
       <body
         className={cn(
@@ -53,7 +55,7 @@ export default function RootLayout({
           <div className="flex flex-col w-full h-full">
             <MainHeader />
             {children}
-            <Toaster richColors position="top-right" expand={true}/>
+            <Toaster richColors position="top-right" expand={true} />
           </div>
         </main>
       </body>
