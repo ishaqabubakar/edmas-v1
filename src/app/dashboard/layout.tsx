@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import Sidebar from "../(component)/sidebar";
-import MainHeader from "../(component)/(Header)/mainHeader";
+import MainHeader from "@/app/(component)/(Header)/mainHeader";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 
