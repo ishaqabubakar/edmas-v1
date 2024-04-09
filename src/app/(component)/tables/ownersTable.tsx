@@ -15,7 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../../components/ui/table";
 import { UserContext } from "@/contextAPI/generalContext";
 import { Edit, Eye, MoreHorizontal, SortAsc, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
