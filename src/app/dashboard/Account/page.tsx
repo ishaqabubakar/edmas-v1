@@ -1,8 +1,8 @@
 "use client";
 
-import TableComponent from "@/app/(component)/tables/ownersTable";
-import { Button } from "@/components/ui/button";
-import { UserContext } from "@/contextAPI/generalContext";
+import TableComponent from "../../(component)/tables/ownersTable";
+import { Button } from "../../../components/ui/button";
+import { UserContext } from "../../../contextAPI/generalContext";
 import { useContext } from "react";
 import Link from "next/link";
 import ViewAndEditAccount from "@/app/(component)/(view)/view-edit-owner";
