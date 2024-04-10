@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { sidebarMenus } from "../../../public/data/sidebarData";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { SheetClose } from "@/components/ui/sheet";
 import { UserContext } from "@/contextAPI/generalContext";
 
 const MobileMainMenus = ({}) => {
