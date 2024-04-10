@@ -41,7 +41,7 @@ const MainHeader = () => {
           <p className="font-Medium hidden sm:block">{lastPathname} </p>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           {contextValue?.ctx?.role === "manager" && <AllSchoolListData />}
           <NotificationCenter />
           <UserProfile />
