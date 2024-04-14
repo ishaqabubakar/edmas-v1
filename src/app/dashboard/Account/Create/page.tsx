@@ -1,6 +1,6 @@
 "use client";
 
-import axiosInstance from "@/API/AXIOS";
+import { axiosInstance } from "@/API/AXIOS";
 import Back from "@/app/(component)/Back";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";

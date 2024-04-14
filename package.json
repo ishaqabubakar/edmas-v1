@@ -23,7 +23,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
     "@types/mongoose": "^5.11.97",
-    "axios": "^1.6.5",
+    "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "chart.js": "^4.4.1",
     "ckeditor5-custom-build": "^0.0.6",
