@@ -1,7 +1,7 @@
 const path = require('path');
 
 /** @type {import('next').NextConfig} */
-const corsOrigins = process.env.NODE_ENV === "production" ? 'https://edmasv1.netlify.app' : 'http://localhost:3000/'
+const corsOrigins = process.env.NODE_ENV === "production" ? 'https://dashboard.edmas.app' : 'http://localhost:3000/'
 
 const nextConfig = {
   typescript: {
