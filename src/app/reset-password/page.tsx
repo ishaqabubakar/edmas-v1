@@ -1,15 +1,8 @@
 "use client";
 
-import { CheckBox } from "@/components/ui/CheckBox";
+import { CheckBox } from "@/components/ui/CheckBox"
 import { Button } from "@/components/ui/button";
 import { InputField } from "@/components/ui/customInput";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
 
 const accessTpe = ["Admin", "Teacher", "Student", "Parent"];
@@ -36,7 +29,7 @@ export default function Home() {
                 defaultValue={undefined}
               />
             </div>
-            <Button className="w-full mt-[10px]" size={"lg"}>
+            <Button className="w-full mt-[10px]">
             Send
             </Button>
           </div>
