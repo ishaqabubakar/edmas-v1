@@ -41,7 +41,7 @@ const nextConfig = {
 
     return config;
   },
-  output: 'export', // This will output static files for GitHub Pages
+  // output: 'export', // This will output static files for GitHub Pages
 }
 
 module.exports = nextConfig
